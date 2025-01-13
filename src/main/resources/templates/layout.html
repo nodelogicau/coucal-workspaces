@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Coucal Workspaces - Layout</title>
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/tailwindcss/index.css}">
+<!--    <style>-->
+<!--        body {-->
+<!--            display: grid;-->
+<!--            grid-gap: 10px;-->
+<!--            grid-template-areas:-->
+<!--                "header header"-->
+<!--                "nav main"-->
+<!--                "footer footer";-->
+
+<!--            /* maximise content area */-->
+<!--            grid-template-columns: auto 1fr;-->
+<!--            grid-template-rows: auto 1fr auto;-->
+<!--        }-->
+<!--    </style>-->
+</head>
+
+<body class="grid gap-2.5 [grid-template-areas:'header_header''nav_main''footer_footer']">
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">HTMX + Spring Boot Demo</a>
+        <p class="navbar-text">Rendered at <!--suppress ThymeleafVariablesResolveInspection --> <span th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}"></span></p>
+    </div>
+</header>
+
+<nav layout:fragment="collections">
+    <p>Page controls go here</p>
+</nav>
+
+<main layout:fragment="content">
+    <p>Page content goes here</p>
+</main>
+
+<footer>
+    <img alt="Loading Indicator" class="htmx-indicator" src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
+</footer>
+</body>
+</html>

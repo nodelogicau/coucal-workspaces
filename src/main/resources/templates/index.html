@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Coucal Workspaces</title>
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+</head>
+
+<body>
+<nav layout:fragment="collections">
+    <h4>Collections</h4>
+    <ul th:replace="~{fragments/collections::listCollections}">
+        <li>
+            <a href="#">Collection 1</a>
+        </li>
+    </ul>
+    <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
+</nav>
+
+<main layout:fragment="content">
+    <ul>
+        <li><a href="#">Actions</a></li>
+        <li><a href="#">Availability</a></li>
+        <li><a href="#">Entities</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Issues</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Observances</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Requests</a></li>
+        <li><a href="#">All</a></li>
+    </ul>
+</main>
+</body>
+</html>

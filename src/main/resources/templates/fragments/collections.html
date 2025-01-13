@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+
+<body>
+
+<ul th:fragment="listCollections" id="collection-list">
+    <li th:each="collection : ${collections}">
+        <a href="#"
+           th:href="${collection.displayName}" th:text="${collection.displayName}">Collection 1</a>
+    </li>
+</ul>
+
+<form th:fragment="addCollection(target)"
+      hx-post="/addCollection" th:hx-target="${target}" hx-swap="outerHTML"
+      hx-on::after-request="if(event.detail.successful) this.reset()">
+    <label>
+        <input name="displayName" placeholder="Collection name..">
+    </label>
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
