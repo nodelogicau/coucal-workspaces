@@ -1,9 +1,25 @@
+<!--
+     Copyright 2025 Node Logic
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Coucal Workspaces</title>
-<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -18,7 +34,7 @@
 </nav>
 
 <main layout:fragment="content">
-    <ul>
+    <ul class="flex gap-3">
         <li><a href="#">Actions</a></li>
         <li><a href="#">Availability</a></li>
         <li><a href="#">Entities</a></li>

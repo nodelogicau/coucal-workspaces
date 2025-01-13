@@ -1,6 +1,9 @@
+import java.time.Year
+
 plugins {
     id 'java'
     id 'application'
+    id 'org.cadixdev.licenser' version '0.6.1'
 }
 
 repositories {
@@ -15,3 +18,20 @@ dependencies {
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
+
+application {
+    mainClass = 'au.nodelogic.coucal.workspaces.WorkspacesMain'
+}
+
+startScripts {
+    applicationName = 'coucal'
+}
+
+license {
+    header = project.file('HEADER.txt')
+//    skipExistingHeaders = true
+//    include '**/*.java,**/*.html'
+    properties {
+        year = Year.now().value
+    }
+}
