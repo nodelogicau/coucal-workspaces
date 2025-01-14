@@ -19,10 +19,12 @@ package au.nodelogic.coucal.workspaces.controller;
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.IOException;
 
@@ -48,6 +50,7 @@ public class CollectionsController {
      * @return
      */
     @PostMapping("/addCollection")
+    @ResponseStatus(HttpStatus.CREATED)
     public String add(@ModelAttribute("displayName") String collection, Model model) throws IOException {
         manager.addCollection(collection);
         return list(model);

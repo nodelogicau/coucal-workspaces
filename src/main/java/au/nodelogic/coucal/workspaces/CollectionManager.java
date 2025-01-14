@@ -62,4 +62,8 @@ public class CollectionManager {
         LocalCalendarCollection col = new LocalCalendarCollection(new File(workspaceRoot, id));
         col.delete();
     }
+
+    public <T> ObjectCollection<T> getCollection(String id) throws IOException {
+        return (ObjectCollection<T>) new LocalCalendarCollection(new File(workspaceRoot, id));
+    }
 }
