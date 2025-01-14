@@ -20,6 +20,8 @@
 <body>
 
 <div th:fragment="listContent" id="content-list">
+    <div th:replace="~{fragments/content::addContent(${collection.displayName})}"></div>
+
     <span th:if="${content.empty}">No data</span>
     <ul th:unless="${content.empty}">
         <li th:each="obj : ${content}">
@@ -29,7 +31,6 @@
         </li>
     </ul>
 
-    <div th:replace="~{fragments/content::addContent(${collection.displayName})}"></div>
 
 </div>
 
@@ -38,14 +39,30 @@
           th:hx-post="|/collections/${collection}|" hx-target="#content-list"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
+            <select name="concept">
+                <option value="semcal:concept:event">Event</option>
+                <option value="semcal:concept:observance">Observance</option>
+                <option value="semcal:concept:action">Action</option>
+                <option value="semcal:concept:issue">Issue</option>
+                <option value="semcal:concept:request">Request</option>
+                <option value="semcal:concept:note">Note</option>
+                <option value="semcal:concept:report">Report</option>
+                <option value="semcal:concept:availability">Availability</option>
+            </select>
+        </label>
+        <label>
             <input name="summary" placeholder="Summary..">
+        </label>
+        <label>
+            Date
+            <input type="date" name="dtstart" placeholder="Date">
         </label>
         <button type="submit">Add</button>
     </form>
 </div>
 
 <div th:fragment="renderContent(obj)">
-    <span th:text="${obj.ComponentList.getRequired('VEVENT').summary}">Content</span>
+    <span th:text="${obj.Components[0].summary}">Content</span>
 </div>
 </body>
 </html>

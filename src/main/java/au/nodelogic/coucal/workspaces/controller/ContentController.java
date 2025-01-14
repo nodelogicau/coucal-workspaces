@@ -17,10 +17,12 @@
 package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
-import au.nodelogic.coucal.workspaces.EventDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.component.VAvailability;
 import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VJournal;
+import net.fortuna.ical4j.model.component.VToDo;
 import net.fortuna.ical4j.util.Calendars;
 import net.fortuna.ical4j.util.RandomUidGenerator;
 import org.ical4j.connector.ObjectCollection;
@@ -34,6 +36,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ContentController {
@@ -67,9 +70,34 @@ public class ContentController {
                          @RequestBody MultiValueMap<String, String> data,
                          Model model) throws IOException, ObjectStoreException {
         ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
-        VEvent event = mapper.convertValue(data, VEvent.class);
-        event.add(new RandomUidGenerator().generateUid());
-        collection.add(Calendars.wrap(event));
+        switch (Objects.requireNonNull(data.getFirst("concept"))) {
+            case "semcal:concept:action":
+            case "semcal:concept:issue":
+            case "semcal:concept:request":
+                VToDo action = mapper.convertValue(data, VToDo.class);
+                action.add(new RandomUidGenerator().generateUid());
+                collection.add(Calendars.wrap(action));
+                break;
+            case "semcal:concept:event":
+            case "semcal:concept:observance":
+                VEvent event = mapper.convertValue(data, VEvent.class);
+                event.add(new RandomUidGenerator().generateUid());
+                collection.add(Calendars.wrap(event));
+                break;
+            case "semcal:concept:note":
+            case "semcal:concept:report":
+                VJournal note = mapper.convertValue(data, VJournal.class);
+                note.add(new RandomUidGenerator().generateUid());
+                collection.add(Calendars.wrap(note));
+                break;
+            case "semcal:concept:availability":
+                VAvailability availability = mapper.convertValue(data, VAvailability.class);
+                availability.add(new RandomUidGenerator().generateUid());
+                collection.add(Calendars.wrap(availability));
+                break;
+        }
+        // apply strategy
+//        event = new Meeting().withPrototype(event).get();
         return list(collectionId, model);
     }
 
