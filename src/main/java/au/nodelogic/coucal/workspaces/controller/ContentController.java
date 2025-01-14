@@ -16,25 +16,61 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
+import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.EventDeserializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.util.Calendars;
+import net.fortuna.ical4j.util.RandomUidGenerator;
+import org.ical4j.connector.ObjectCollection;
+import org.ical4j.connector.ObjectStoreException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class ContentController {
+
+    @Autowired
+    private CollectionManager manager;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     /**
      * List collection content.
      * @return
      */
-    public String list(String collection) {
-        return "";
+    @GetMapping("/collections/{id}")
+    public String list(@PathVariable(value="id") String collectionId, Model model) throws IOException {
+        ObjectCollection<?> collection = manager.getCollection(collectionId);
+        List<?> content = collection.getAll(collection.listObjectUIDs().toArray(new String[0]));
+        model.addAttribute("content", content);
+        model.addAttribute("collection", collection);
+        return "content-list";
     }
 
     /**
      * Save new content.
      * @return
      */
-    public String create(String collection) {
-        return "";
+    @PostMapping("/collections/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@PathVariable(value="id") String collectionId,
+                         @RequestBody MultiValueMap<String, String> data,
+                         Model model) throws IOException, ObjectStoreException {
+        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
+        VEvent event = mapper.convertValue(data, VEvent.class);
+        event.add(new RandomUidGenerator().generateUid());
+        collection.add(Calendars.wrap(event));
+        return list(collectionId, model);
     }
 
     /**
