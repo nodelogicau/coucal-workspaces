@@ -58,12 +58,14 @@ public class CollectionManager {
         newCol.setDisplayName(displayName);
     }
 
-    public void removeCollection(String id) throws IOException, ObjectStoreException {
-        LocalCalendarCollection col = new LocalCalendarCollection(new File(workspaceRoot, id));
+    public void removeCollection(String displayName) throws IOException, ObjectStoreException {
+        String dirSlug = Slugify.builder().build().slugify(displayName);
+        LocalCalendarCollection col = new LocalCalendarCollection(new File(workspaceRoot, dirSlug));
         col.delete();
     }
 
-    public <T> ObjectCollection<T> getCollection(String id) throws IOException {
-        return (ObjectCollection<T>) new LocalCalendarCollection(new File(workspaceRoot, id));
+    public <T> ObjectCollection<T> getCollection(String displayName) throws IOException {
+        String dirSlug = Slugify.builder().build().slugify(displayName);
+        return (ObjectCollection<T>) new LocalCalendarCollection(new File(workspaceRoot, dirSlug));
     }
 }

@@ -39,7 +39,7 @@
           th:hx-post="|/collections/${collection}|" hx-target="#content-list"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
-            <select name="concept">
+            <select id="typeSelect" name="concept" onchange="toggleInputs()">
                 <option value="semcal:concept:event">Event</option>
                 <option value="semcal:concept:observance">Observance</option>
                 <option value="semcal:concept:action">Action</option>
@@ -49,15 +49,49 @@
                 <option value="semcal:concept:report">Report</option>
                 <option value="semcal:concept:availability">Availability</option>
             </select>
+            <script>
+                function toggleInputs() {
+                    if (document.getElementById('typeSelect').value == 'semcal:concept:event') {
+                        document.getElementById('duration').style.display = 'inline;
+                    } else {
+                        document.getElementById('endDate').style.display = 'none';
+                    }
+                }
+            </script>
         </label>
         <label>
-            <input name="summary" placeholder="Summary..">
-        </label>
-        <label>
-            Date
-            <input type="date" name="dtstart" placeholder="Date">
+            <input name="summary" placeholder="Summary.." size="64" required>
         </label>
         <button type="submit">Add</button>
+        <br/>
+        <label>
+            Start
+            <input type="date" name="dtstart">
+        </label>
+        <label id="duration">
+            <select name="duration">
+                <option disabled selected>Select duration..</option>
+                <option value="PT30M">30m</option>
+                <option value="PT1H">1h</option>
+                <option value="PT1H30M">1.5h</option>
+                <option value="PT2H">2h</option>
+            </select>
+        </label>
+        <label id="due">
+            Due
+            <input type="datetime-local" name="due">
+        </label>
+        <label>
+            Repeats
+            <select name="rrule">
+                <option disabled selected>Select recurrence..</option>
+                <option value="FREQ=DAILY">Daily</option>
+                <option value="FREQ=WEEKLY">Weekly</option>
+                <option value="FREQ=WEEKLY;INTERVAL=2">Fortnightly</option>
+                <option value="FREQ=MONTHLY">Monthly</option>
+                <option value="FREQ=YEARLY">Annually</option>
+            </select>
+        </label>
     </form>
 </div>
 
