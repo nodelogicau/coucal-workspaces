@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<body>
+
+<ul th:fragment="listEntities" id="entity-list">
+    <li th:each="entity : ${entities}">
+        <a th:hx-get="|/entities/${entity.fn}|" hx-trigger="click"
+           hx-target="#content-list" th:hx-push-url="|/entities/${entity.fn}|"
+           th:text="${entity.fn}">Entity 1</a>
+    </li>
+</ul>
+
+<div th:fragment="editIndividual(entity)">
+    <h3>Individual</h3>
+    <form th:hx-post="|/entities/${entity.uid}|" hx-target="this" hx-swap="outerHtml">
+        <label>
+            <input name="fn" placeholder="Display name.." size="64" required>
+        </label>
+        <label>
+            Photo
+            <input type="file" name="photo" accept="image/png, image/gif, image/jpeg">
+        </label>
+        <br/>
+        <label>
+            <input name="title" placeholder="Title..">
+        </label>
+        <label>
+            <input name="org" placeholder="Organization..">
+        </label>
+        <br/>
+        <label>
+            <input type="email" name="email" placeholder="Email..">
+        </label>
+        <label>
+            <input type="tel" name="tel" placeholder="Phone..">
+        </label>
+        <br/>
+        <label>
+            <input name="categories" placeholder="Categories..">
+        </label>
+        <label>
+            Related
+            <input name="related" placeholder="URI">
+        </label>
+        <br/>
+        <label>
+            <textarea name="note" placeholder="Notes.."></textarea>
+        </label>
+
+    </form>
+</div>
+
+<div th:fragment="editGroup(entity)">
+    <h3>Group</h3>
+    <form th:hx-post="|/entities/${entity.uid}|" hx-target="this" hx-swap="outerHtml">
+        <label>
+            <input name="fn" placeholder="Display name.." size="64" required>
+        </label>
+        <label>
+            Logo
+            <input type="file" name="logo" accept="image/png, image/gif, image/jpeg">
+        </label>
+        <br/>
+        <label>
+            <input name="org" placeholder="Organization..">
+        </label>
+        <br/>
+        <label>
+            <input type="email" name="email" placeholder="Email..">
+        </label>
+        <br/>
+        <label>
+            <input name="categories" placeholder="Categories..">
+        </label>
+        <label>
+            Related
+            <input name="related" placeholder="URI">
+        </label>
+        <br/>
+        <label>
+            <textarea name="note" placeholder="Notes.."></textarea>
+        </label>
+    </form>
+</div>
+
+<div th:fragment="editOrganization(entity)">
+    <h3>Organization</h3>
+    <form th:hx-post="|/entities/${entity.uid}|" hx-target="this" hx-swap="outerHtml">
+        <label>
+            <input name="fn" placeholder="Display name.." size="64" required>
+        </label>
+        <label>
+            Logo
+            <input type="file" name="logo" accept="image/png, image/gif, image/jpeg">
+        </label>
+        <br/>
+        <label>
+            <input name="org" placeholder="Parent organization..">
+        </label>
+        <br/>
+        <label>
+            <input type="email" name="email" placeholder="Email..">
+        </label>
+        <label>
+            <input type="tel" name="tel" placeholder="Phone..">
+        </label>
+        <br/>
+        <label>
+            <input name="categories" placeholder="Categories..">
+        </label>
+        <label>
+            Related
+            <input name="related" placeholder="URI">
+        </label>
+        <br/>
+        <label>
+            <textarea name="note" placeholder="Notes.."></textarea>
+        </label>
+    </form>
+</div>
+
+<div th:fragment="editLocation(entity)">
+    <h3>Location</h3>
+    <form th:hx-post="|/entities/${entity.uid}|" hx-target="this" hx-swap="outerHtml">
+        <label>
+            <input name="fn" placeholder="Display name.." size="64" required>
+        </label>
+        <label>
+            Photo
+            <input type="file" name="photo" accept="image/png, image/gif, image/jpeg">
+        </label>
+        <br/>
+        <label>
+            <input name="categories" placeholder="Categories..">
+        </label>
+        <label>
+            Related
+            <input name="related" placeholder="URI">
+        </label>
+        <br/>
+        <label>
+            <textarea name="note" placeholder="Notes.."></textarea>
+        </label>
+    </form>
+</div>
+</body>
+</html>

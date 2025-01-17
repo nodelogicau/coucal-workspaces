@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+
+<div th:fragment="newAction(collection)">
+    <form th:hx-post="|/collections/${collection}|" hx-target="this" hx-swap="outerHtml">
+        <label>
+            <input name="summary" placeholder="Summary.." size="64" required>
+        </label>
+        <br/>
+        <label>
+            <textarea name="description" placeholder="Action description.."></textarea>
+        </label>
+        <br/>
+        <label id="due">
+            Due
+            <input type="date" name="due[value:date]">
+        </label>
+        <br/>
+        <label id="link">
+            Link
+            <select name="link[linkrel]">
+                <option>Alternate</option>
+                <option>External</option>
+                <option>Next</option>
+                <option>Prev</option>
+                <option>Related</option>
+                <option>Replies</option>
+            </select>
+            <input type="url" name="link" placeholder="URL">
+        </label>
+        <br/>
+        <label>
+            Assigned to
+            <input name="assignee" placeholder="Individuals..">
+        </label>
+        <label>
+            Priority
+            <select name="priority">
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
+        </label>
+        <br/>
+        <label>
+            Estimated duration
+            <select name="estimated-duration">
+                <option>1h</option>
+                <option>1d</option>
+                <option>1w</option>
+            </select>
+        </label>
+        <label>
+            <input name="categories" placeholder="Categories..">
+        </label>
+        <br/>
+        <label>
+            Parent
+            <input name="related_to[reltype:parent]" placeholder="URL/UID">
+        </label>
+        <br/>
+        <label>
+            Related
+            <select name="related-to.reltype">
+                <option value="child">Child</option>
+                <option value="first">First</option>
+                <option value="next">Next</option>
+                <option value="depends-on">Depends On</option>
+                <option value="refid">Reference</option>
+                <option value="concept">Concept</option>
+            </select>
+            <input name="related-to" placeholder="URL/UID">
+        </label>
+        <br/>
+        <label>
+            Backlog
+            <input name="refid" placeholder="Reference..">
+        </label>
+    </form>
+</div>
+
+<div th:fragment="editAction(collection, action)"></div>
+
+<div th:fragment="viewAction(collection, action)"></div>
+
+
+</body>
+</html>

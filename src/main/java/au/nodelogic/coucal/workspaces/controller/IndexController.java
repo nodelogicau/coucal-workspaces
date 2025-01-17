@@ -17,6 +17,7 @@
 package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,11 +32,15 @@ import java.io.IOException;
 public class IndexController {
 
     @Autowired
-    private CollectionManager manager;
+    private CollectionManager collectionManager;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @GetMapping("/")
     public String index(Model model) throws IOException {
-        model.addAttribute("collections", manager.getCollections());
+        model.addAttribute("collections", collectionManager.getCollections());
+        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
         return "index";
     }
 }

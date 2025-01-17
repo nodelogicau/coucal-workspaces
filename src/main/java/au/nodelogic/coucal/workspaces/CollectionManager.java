@@ -30,20 +30,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class CollectionManager {
-
-    private final File workspaceRoot;
+public class CollectionManager extends AbstractManager {
 
     public CollectionManager() {
         this(new File(System.getProperty("user.dir"), "build/collections"));
     }
 
     public CollectionManager(File workspaceRoot) {
-        this.workspaceRoot = workspaceRoot;
+        super(workspaceRoot);
     }
 
     public List<ObjectCollection<?>> getCollections() {
-        return Arrays.stream(Objects.requireNonNull(workspaceRoot.listFiles())).map(f -> {
+        return Arrays.stream(Objects.requireNonNull(getWorkspaceRoot().listFiles())).map(f -> {
             try {
                 return new LocalCalendarCollection(f);
             } catch (IOException e) {
@@ -54,18 +52,18 @@ public class CollectionManager {
 
     public void addCollection(String displayName) throws IOException {
         String dirSlug = Slugify.builder().build().slugify(displayName);
-        LocalCalendarCollection newCol = new LocalCalendarCollection(new File(workspaceRoot, dirSlug));
+        LocalCalendarCollection newCol = new LocalCalendarCollection(new File(getWorkspaceRoot(), dirSlug));
         newCol.setDisplayName(displayName);
     }
 
     public void removeCollection(String displayName) throws IOException, ObjectStoreException {
         String dirSlug = Slugify.builder().build().slugify(displayName);
-        LocalCalendarCollection col = new LocalCalendarCollection(new File(workspaceRoot, dirSlug));
+        LocalCalendarCollection col = new LocalCalendarCollection(new File(getWorkspaceRoot(), dirSlug));
         col.delete();
     }
 
     public <T> ObjectCollection<T> getCollection(String displayName) throws IOException {
         String dirSlug = Slugify.builder().build().slugify(displayName);
-        return (ObjectCollection<T>) new LocalCalendarCollection(new File(workspaceRoot, dirSlug));
+        return (ObjectCollection<T>) new LocalCalendarCollection(new File(getWorkspaceRoot(), dirSlug));
     }
 }
