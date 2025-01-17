@@ -1,5 +1,25 @@
-# coucal-workspaces
+# Coucal Workspaces
+
 Plan, track and record anything and everything
+
+## Introduction
+
+Coucal Workspaces is the ultimate tool for planning, tracking and linking everything in your life,
+whether it be at work, home or anywhere in between.
+
+Use Coucal to create events, actions, notes, and much more. The implicit ability to establish links
+between related entities and activities makes the tool even more powerful the more you add to it.
+
+## Entities
+
+Entities, such as people, places, things, etc., are automatically generated and stored from your events and
+other data. These entities are used for auto-complete fields and provide the basis for linking related
+data.
+
+The type of entities produced is dependent on the strategy employed. For example, the invitation list for
+a meeting (i.e. email addresses) will result in one or more entities of kind individual. Whereas for the
+same meeting a populated location will produce an entity of location kind. Similarly, meeting resources
+such as applications or devices will also use the corresponding kind for linked entities. 
 
 ## Quick Add
 
