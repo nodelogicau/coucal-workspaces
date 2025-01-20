@@ -16,7 +16,8 @@
 
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Coucal Workspaces - Layout</title>
@@ -52,11 +53,15 @@
             <p>[Page controls go here]</p>
         </nav>
 
+        <header layout:fragment="filters">
+            <p>[Collection filters go here]</p>
+        </header>
+
         <main layout:fragment="content">
             <p>[Page content goes here]</p>
         </main>
 
-        <aside layout:fragment="context">
+        <aside layout:fragment="entities">
             <p>[Page context goes here]</p>
         </aside>
     </div>

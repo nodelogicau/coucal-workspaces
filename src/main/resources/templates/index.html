@@ -33,6 +33,10 @@
     <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
 </nav>
 
+<header layout:fragment="filters">
+
+</header>
+
 <main layout:fragment="content">
 <!--    <ul class="flex gap-3">-->
 <!--        <li><a href="#">Actions</a></li>-->
@@ -52,7 +56,7 @@
     </ul>
 </main>
 
-<aside layout:fragment="context">
+<aside layout:fragment="entities">
     <h4>Entities</h4>
     <ul th:replace="~{fragments/entities::listEntities}">
         <li>

@@ -10,6 +10,10 @@ whether it be at work, home or anywhere in between.
 Use Coucal to create events, actions, notes, and much more. The implicit ability to establish links
 between related entities and activities makes the tool even more powerful the more you add to it.
 
+## Collections
+
+TBD.
+
 ## Entities
 
 Entities, such as people, places, things, etc., are automatically generated and stored from your events and
@@ -19,7 +23,22 @@ data.
 The type of entities produced is dependent on the strategy employed. For example, the invitation list for
 a meeting (i.e. email addresses) will result in one or more entities of kind individual. Whereas for the
 same meeting a populated location will produce an entity of location kind. Similarly, meeting resources
-such as applications or devices will also use the corresponding kind for linked entities. 
+such as applications or devices will also use the corresponding kind for linked entities.
+
+## Filters
+
+Filters provide the ability to focus on a specific subset of collection data. They are easily configurable
+using a custom query language that supports advanced property matching.
+
+For example, to filter on all incomplete actions in a collection you can use:
+
+    concept like "semcal:concept:action" and status in ["in_process", "not_started"]
+
+For meetings to be held in the next week:
+
+    concept = "semcal:concept:event:meeting" and dtstart > now() and dtstart < now(1w)
+
+
 
 ## Quick Add
 
