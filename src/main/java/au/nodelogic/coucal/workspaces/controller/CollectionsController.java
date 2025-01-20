@@ -17,6 +17,7 @@
 package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
+import jakarta.servlet.http.HttpServletResponse;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,8 @@ public class CollectionsController {
      * @param collection
      * @return
      */
-    public String update(String collection, Model model) {
+    public String update(String collection, Model model, HttpServletResponse response) {
+        response.addHeader("HX-Trigger", "collectionsRefresh");
         return list(model);
     }
 

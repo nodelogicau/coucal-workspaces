@@ -18,6 +18,7 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VAvailability;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -68,7 +69,7 @@ public class ContentController {
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@PathVariable(value="id") String collectionId,
                          @RequestBody MultiValueMap<String, String> data,
-                         Model model) throws IOException, ObjectStoreException {
+                         Model model, HttpServletResponse response) throws IOException, ObjectStoreException {
         ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
         switch (Objects.requireNonNull(data.getFirst("concept"))) {
             case "semcal:concept:action":
@@ -98,6 +99,7 @@ public class ContentController {
         }
         // apply strategy
 //        event = new Meeting().withPrototype(event).get();
+        response.addHeader("HX-Trigger", "entitiesRefresh");
         return list(collectionId, model);
     }
 
