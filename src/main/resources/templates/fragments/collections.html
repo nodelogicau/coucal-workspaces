@@ -24,14 +24,14 @@
 
 <ul th:fragment="listCollections" id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body">
     <li th:each="collection : ${collections}">
-        <a th:hx-get="|/collections/${collection.displayName}|" hx-trigger="click"
+        <a th:hx-get="|/view/collections/${collection.displayName}|" hx-trigger="click"
            hx-target="#content-list" th:hx-push-url="|/collections/${collection.displayName}|"
            th:text="${collection.displayName}">Collection 1</a>
     </li>
 </ul>
 
 <form th:fragment="addCollection(target)"
-      hx-post="/addCollection" th:hx-target="${target}" hx-swap="outerHTML"
+      hx-post="/collections/" th:hx-target="${target}" hx-swap="outerHTML"
       hx-on::after-request="if(event.detail.successful) this.reset()">
     <label>
         <input name="displayName" placeholder="Collection name..">

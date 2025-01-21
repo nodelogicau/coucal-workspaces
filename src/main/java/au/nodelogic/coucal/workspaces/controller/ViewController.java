@@ -17,42 +17,47 @@
 package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
-import au.nodelogic.coucal.workspaces.EntityManager;
-import net.fortuna.ical4j.model.Calendar;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.fortuna.ical4j.filter.FilterExpression;
 import org.ical4j.connector.ObjectCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.List;
 
-/**
- * Application entry controller.
- */
 @Controller
-public class IndexController {
+@RequestMapping("/view")
+public class ViewController {
 
     @Autowired
-    private CollectionManager collectionManager;
+    private CollectionManager manager;
 
     @Autowired
-    private EntityManager entityManager;
+    private ObjectMapper mapper;
 
-    @GetMapping("/")
-    public String index(Model model) throws IOException {
-        model.addAttribute("collections", collectionManager.getCollections());
-        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
-        return "index";
-    }
-
+    /**
+     * List collection content.
+     * @return
+     */
     @GetMapping("/collections/{id}")
-    public String viewCollection(@PathVariable(name = "id") String collectionId, Model model) throws IOException {
-        ObjectCollection<Calendar> collection = collectionManager.getCollection(collectionId);
-        model.addAttribute("collections", collectionManager.getCollections());
-        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
+    public String list(@PathVariable(value="id") String collectionId, @RequestParam(name = "filter", required = false) String filter,
+                       Model model) throws IOException {
+        ObjectCollection<?> collection = manager.getCollection(collectionId);
+        List<?> content;
+        if (filter != null) {
+            content = collection.query(FilterExpression.parse(filter));
+        } else {
+            content = collection.getAll(collection.listObjectUIDs().toArray(new String[0]));
+        }
+        model.addAttribute("content", content);
         model.addAttribute("collection", collection);
-        return "index";
+        return "collection-view";
     }
+
 }

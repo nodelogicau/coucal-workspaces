@@ -4,7 +4,7 @@
 <body>
 
 <div th:fragment="newAction(collection)">
-    <form th:hx-post="|/collections/${collection}|" hx-target="this" hx-swap="outerHtml">
+    <form th:hx-post="|/entries/${collection}|" hx-target="this" hx-swap="outerHtml">
         <label>
             <input name="summary" placeholder="Summary.." size="64" required>
         </label>

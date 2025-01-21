@@ -1,24 +1,9 @@
-/*
- *  Copyright 2025 Node Logic
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-
 package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
+import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VAvailability;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -36,10 +21,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 @Controller
+@RequestMapping("/entries/{collectionId}/")
 public class ContentController {
 
     @Autowired
@@ -48,15 +33,19 @@ public class ContentController {
     @Autowired
     private ObjectMapper mapper;
 
-    /**
-     * List collection content.
-     * @return
-     */
-    @GetMapping("/collections/{id}")
-    public String list(@PathVariable(value="id") String collectionId, Model model) throws IOException {
-        ObjectCollection<?> collection = manager.getCollection(collectionId);
-        List<?> content = collection.getAll(collection.listObjectUIDs().toArray(new String[0]));
-        model.addAttribute("content", content);
+    @GetMapping("/")
+    public String listContent(@PathVariable(name = "collectionId") String collectionId,
+                              @RequestParam(name = "concept", required = false) String[] concept,
+                              Model model) throws IOException {
+        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
+        if (concept.length > 0) {
+            model.addAttribute("content",
+                    collection.query(FilterExpression.parse(
+                            String.format("concept in [%s]", String.join(",", concept)))));
+        } else {
+            model.addAttribute("content",
+                    collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        }
         model.addAttribute("collection", collection);
         return "content-list";
     }
@@ -65,11 +54,11 @@ public class ContentController {
      * Save new content.
      * @return
      */
-    @PostMapping("/collections/{id}")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@PathVariable(value="id") String collectionId,
-                         @RequestBody MultiValueMap<String, String> data,
-                         Model model, HttpServletResponse response) throws IOException, ObjectStoreException {
+    public String addContent(@PathVariable String collectionId,
+                             @RequestBody MultiValueMap<String, String> data,
+                             Model model, HttpServletResponse response) throws IOException, ObjectStoreException {
         ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
         switch (Objects.requireNonNull(data.getFirst("concept"))) {
             case "semcal:concept:action":
@@ -100,14 +89,18 @@ public class ContentController {
         // apply strategy
 //        event = new Meeting().withPrototype(event).get();
         response.addHeader("HX-Trigger", "entitiesRefresh");
-        return list(collectionId, model);
+        model.addAttribute("content",
+                collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        model.addAttribute("collection", collection);
+        return "content-list";
     }
 
     /**
      * Update existing content.
      * @return
      */
-    public String update(String collection, String uid) {
+    @PostMapping("/{uid}")
+    public String updateContent(String collection, String uid) {
         return "";
     }
 
@@ -116,7 +109,8 @@ public class ContentController {
      * @param uid
      * @return
      */
-    public String delete(String collection, String uid) {
+    @DeleteMapping("/{uid}")
+    public String deleteContent(String collection, String uid) {
         return "";
     }
 }

@@ -15,8 +15,14 @@ dependencies {
     implementation libs.spring.boot.web, libs.spring.boot.json, libs.ical4j.connector,
             libs.ical4j.serializer, libs.slugify
 
+    implementation(libs.ical4j) {
+        capabilities {
+            requireCapability("org.mnode.ical4j:ical4j-filter-expressions")
+        }
+    }
+
     runtimeOnly libs.spring.boot.thymeleaf, libs.thymeleaf.layout, libs.spring.boot.actuator,
-            libs.spring.boot.devtools, libs.webjars, libs.htmx, libs.tailwind, libs.ical4j.template
+            libs.spring.boot.devtools, libs.webjars, libs.htmx, libs.tailwind//, libs.ical4j.template
 }
 
 sourceCompatibility = JavaVersion.VERSION_17

@@ -23,8 +23,6 @@
 <body>
 
 <div th:fragment="listContent" id="content-list">
-
-
     <nav class="flex" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
@@ -57,22 +55,23 @@
     </nav>
 
     <div th:replace="~{fragments/content::addContent(${collection.displayName})}"></div>
+    <div th:replace="~{fragments/content::contentView}"></div>
+</div>
 
+<div th:fragment="contentView" id="content-view">
     <span th:if="${content.empty}">No data</span>
     <ul th:unless="${content.empty}">
         <li th:each="obj : ${content}">
             <a href="#" th:href="${obj.uid}">
-                <span th:replace="~{ical4j/view/event::render(${obj})}">Object 1</span>
+                <span th:replace="~{fragments/content::renderContent(${obj})}">Object 1</span>
             </a>
         </li>
     </ul>
-
-
 </div>
 
 <div th:fragment="addContent(collection)">
     <form
-          th:hx-post="|/collections/${collection}|" hx-target="#content-list"
+          th:hx-post="|/entries/${collection}|" hx-target="#content-list"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
             <select id="typeSelect" name="concept" onchange="toggleInputs()">

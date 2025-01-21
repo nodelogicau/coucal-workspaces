@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Filters</title>
+</head>
+
+<body>
+
+<div th:fragment="fixedFilters(collection, target)">
+    <form id="filter-form" th:hx-get="|/entries/${collection.displayName}/|"
+          hx-trigger="submit" hx-target="#content-view">
+        <label>
+            All
+            <input type="checkbox" value="all">
+        </label>
+        <label>
+            Actions
+            <input type="checkbox" name="concept" value="semcal:concept:action">
+        </label>
+        <label>
+            Availability
+            <input type="checkbox" name="concept" value="semcal:concept:availability">
+        </label>
+        <label>
+            Events
+            <input type="checkbox" name="concept" value="semcal:concept:event">
+        </label>
+        <label>
+            Issues
+            <input type="checkbox" name="concept" value="semcal:concept:issue">
+        </label>
+        <label>
+            Notes
+            <input type="checkbox" name="concept" value="semcal:concept:note">
+        </label>
+        <label>
+            Observances
+            <input type="checkbox" name="concept" value="semcal:concept:observance">
+        </label>
+        <label>
+            Reports
+            <input type="checkbox" name="concept" value="semcal:concept:report">
+        </label>
+        <label>
+            Requests
+            <input type="checkbox" name="concept" value="semcal:concept:request">
+        </label>
+        <label>
+            Resources
+            <input type="checkbox" name="concept" value="semcal:concept:resource">
+        </label>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+    </form>
+    <script>
+        function buildFilter() {
+            var filter = "CONCEPT in [";
+            if (document.getElementById('filterAll').selected) {
+                return "";
+            } else if (document.getElementById('filterActions').selected) {
+                filter += "semcal:concept:action";
+            }
+            return filter + "]";
+        }
+    </script>
+
+</div>
+</body>
+</html>

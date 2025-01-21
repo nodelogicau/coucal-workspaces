@@ -23,13 +23,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/collections")
 public class CollectionsController {
 
     @Autowired
@@ -39,10 +38,10 @@ public class CollectionsController {
      * Return a list of available collections.
      * @return
      */
-    @PostMapping("/listCollections")
-    public String list(Model model) {
+    @GetMapping("/")
+    public String listCollections(Model model) {
         model.addAttribute("collections", manager.getCollections());
-        return "collection-list";
+        return "collections";
     }
 
     /**
@@ -50,11 +49,11 @@ public class CollectionsController {
      * @param collection
      * @return
      */
-    @PostMapping("/addCollection")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String add(@ModelAttribute("displayName") String collection, Model model) throws IOException {
+    public String addCollection(@ModelAttribute("displayName") String collection, Model model) throws IOException {
         manager.addCollection(collection);
-        return list(model);
+        return listCollections(model);
     }
 
     /**
@@ -62,19 +61,21 @@ public class CollectionsController {
      * @param collection
      * @return
      */
-    public String update(String collection, Model model, HttpServletResponse response) {
+    @PostMapping("/{id}")
+    public String updateCollection(String collection, Model model, HttpServletResponse response) {
         response.addHeader("HX-Trigger", "collectionsRefresh");
-        return list(model);
+        return listCollections(model);
     }
 
     /**
      * Delete a collection.
-     * @param collection
+     * @param collectionId
      * @return
      */
-    @PostMapping("/removeCollection")
-    public String delete(String collection, Model model) throws ObjectStoreException, IOException {
-        manager.removeCollection(collection);
-        return list(model);
+    @DeleteMapping("/{id}")
+    public String deleteCollection(@PathVariable(value="id") String collectionId, Model model) throws ObjectStoreException,
+            IOException {
+        manager.removeCollection(collectionId);
+        return listCollections(model);
     }
 }
