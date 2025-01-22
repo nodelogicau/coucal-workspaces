@@ -98,8 +98,14 @@
             id="drawer-navigation"
     >
         <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
-            <nav layout:fragment="collections">
-                <p>[Page controls go here]</p>
+            <nav>
+                <h4>Collections</h4>
+                <ul th:replace="~{fragments/collections::listCollections}">
+                    <li>
+                        <a href="#">Collection 1</a>
+                    </li>
+                </ul>
+                <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
             </nav>
         </div>
     </aside>

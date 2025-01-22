@@ -24,15 +24,6 @@
 </head>
 
 <body>
-<nav layout:fragment="collections">
-    <h4>Collections</h4>
-    <ul th:replace="~{fragments/collections::listCollections}">
-        <li>
-            <a href="#">Collection 1</a>
-        </li>
-    </ul>
-    <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
-</nav>
 
 <header layout:fragment="filters">
 
