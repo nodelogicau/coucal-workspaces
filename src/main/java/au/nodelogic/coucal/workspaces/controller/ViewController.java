@@ -33,7 +33,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/view")
-public class ViewController {
+/**
+ * The view controller serves html page rendering for the following:
+ * - Collections
+ * - Entries
+ * - Entities
+ */
+public class ViewController extends AbstractLayoutController {
 
     @Autowired
     private CollectionManager manager;
@@ -45,7 +51,7 @@ public class ViewController {
      * List collection content.
      * @return
      */
-    @GetMapping("/collections/{id}")
+    @GetMapping("/collection/{id}")
     public String list(@PathVariable(value="id") String collectionId, @RequestParam(name = "filter", required = false) String filter,
                        Model model) throws IOException {
         ObjectCollection<?> collection = manager.getCollection(collectionId);
@@ -57,7 +63,8 @@ public class ViewController {
         }
         model.addAttribute("content", content);
         model.addAttribute("collection", collection);
-        return "collection-view";
+        model.addAttribute("collections", manager.getCollections());
+        return "view/collection";
     }
 
 }

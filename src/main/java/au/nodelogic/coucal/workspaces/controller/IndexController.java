@@ -18,13 +18,10 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import au.nodelogic.coucal.workspaces.EntityManager;
-import net.fortuna.ical4j.model.Calendar;
-import org.ical4j.connector.ObjectCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 
@@ -32,7 +29,13 @@ import java.io.IOException;
  * Application entry controller.
  */
 @Controller
-public class IndexController {
+/**
+ * The index controller serves full html pages for the following:
+ * - application root
+ * - workspace options
+ * - profile settings
+ */
+public class IndexController extends AbstractLayoutController {
 
     @Autowired
     private CollectionManager collectionManager;
@@ -44,15 +47,6 @@ public class IndexController {
     public String index(Model model) throws IOException {
         model.addAttribute("collections", collectionManager.getCollections());
         model.addAttribute("entities", entityManager.getEntityCollection().getAll());
-        return "index";
-    }
-
-    @GetMapping("/collections/{id}")
-    public String viewCollection(@PathVariable(name = "id") String collectionId, Model model) throws IOException {
-        ObjectCollection<Calendar> collection = collectionManager.getCollection(collectionId);
-        model.addAttribute("collections", collectionManager.getCollections());
-        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
-        model.addAttribute("collection", collection);
         return "index";
     }
 }

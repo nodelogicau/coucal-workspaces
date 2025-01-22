@@ -18,6 +18,7 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import jakarta.servlet.http.HttpServletResponse;
+import org.ical4j.connector.ObjectCollection;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,10 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/collections")
+/**
+ * The collections controller serves partial html for collections and provides
+ * collection management features.
+ */
 public class CollectionsController {
 
     @Autowired
@@ -56,13 +61,21 @@ public class CollectionsController {
         return listCollections(model);
     }
 
+    @GetMapping("/{id}")
+    public String listEntries(@PathVariable(value="id") String collectionId, Model model) throws IOException {
+        ObjectCollection<?> collection = manager.getCollection(collectionId);
+        model.addAttribute("content", collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        model.addAttribute("collection", collection);
+        return "collection-view";
+    }
+
     /**
      * Update an existing collection.
-     * @param collection
+     * @param id
      * @return
      */
     @PostMapping("/{id}")
-    public String updateCollection(String collection, Model model, HttpServletResponse response) {
+    public String updateCollection(Model model, HttpServletResponse response, @PathVariable String id) {
         response.addHeader("HX-Trigger", "collectionsRefresh");
         return listCollections(model);
     }
