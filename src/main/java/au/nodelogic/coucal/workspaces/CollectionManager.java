@@ -27,10 +27,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CollectionManager extends AbstractManager {
+public class CollectionManager extends AbstractWorkspaceManager {
 
     public CollectionManager() {
         this(new File(System.getProperty("user.dir"), "build/collections"));
@@ -65,5 +66,9 @@ public class CollectionManager extends AbstractManager {
     public <T> ObjectCollection<T> getCollection(String displayName) throws IOException {
         String dirSlug = Slugify.builder().build().slugify(displayName);
         return (ObjectCollection<T>) new LocalCalendarCollection(new File(getWorkspaceRoot(), dirSlug));
+    }
+
+    public <T> ObjectCollection<T> getCollectionForUid(String uid) {
+        return (ObjectCollection<T>) getCollections().stream().filter(c -> c.listObjectUIDs().contains(uid)).findFirst().orElseThrow();
     }
 }

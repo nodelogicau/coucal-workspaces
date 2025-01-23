@@ -3,8 +3,8 @@
 
 <body>
 
-<div th:fragment="newAction(collection)">
-    <form th:hx-post="|/entries/${collection}|" hx-target="this" hx-swap="outerHtml">
+<div th:fragment="new(collection)">
+    <form th:hx-post="|/entries/${collection}/|" hx-target="this" hx-swap="outerHtml">
         <label>
             <input name="summary" placeholder="Summary.." size="64" required>
         </label>
@@ -81,10 +81,11 @@
     </form>
 </div>
 
-<div th:fragment="editAction(collection, action)"></div>
+<div th:fragment="edit(collection, action)"></div>
 
-<div th:fragment="viewAction(collection, action)"></div>
-
-
+<div th:fragment="view(action, collection)">
+    <nav th:replace="~{fragments/breadcrumb::collection(${collection})}"></nav>
+    <h1 th:text="${entry.Components[0].summary}">View Action</h1>
+</div>
 </body>
 </html>

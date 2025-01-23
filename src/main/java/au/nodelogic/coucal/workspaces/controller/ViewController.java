@@ -19,6 +19,7 @@ package au.nodelogic.coucal.workspaces.controller;
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.filter.FilterExpression;
+import net.fortuna.ical4j.model.Calendar;
 import org.ical4j.connector.ObjectCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,8 +53,9 @@ public class ViewController extends AbstractLayoutController {
      * @return
      */
     @GetMapping("/collection/{id}")
-    public String list(@PathVariable(value="id") String collectionId, @RequestParam(name = "filter", required = false) String filter,
-                       Model model) throws IOException {
+    public String viewCollection(@PathVariable(value="id") String collectionId,
+                                 @RequestParam(name = "filter", required = false) String filter,
+                                 Model model) throws IOException {
         ObjectCollection<?> collection = manager.getCollection(collectionId);
         List<?> content;
         if (filter != null) {
@@ -63,8 +65,42 @@ public class ViewController extends AbstractLayoutController {
         }
         model.addAttribute("content", content);
         model.addAttribute("collection", collection);
-        model.addAttribute("collections", manager.getCollections());
+        populateModelForLayout(model);
         return "view/collection";
     }
 
+    @GetMapping("/entries/{id}")
+    public String viewEntries(@PathVariable(name = "id") String collectionId,
+                              @RequestParam(name = "concept", required = false) String[] concept,
+                              Model model) throws IOException {
+        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
+        if (concept != null && concept.length > 0) {
+            model.addAttribute("content",
+                    collection.query(FilterExpression.parse(
+                            String.format("concept in [%s]", String.join(",", concept)))));
+        } else {
+            model.addAttribute("content",
+                    collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        }
+        model.addAttribute("collection", collection);
+        return "view/entries";
+    }
+
+    @GetMapping("/{concept}/{uid}")
+    public String viewEntry(@PathVariable(name = "concept") String concept,
+                            @PathVariable(name = "uid") String uid, Model model) throws IOException {
+        populateModelForLayout(model);
+        ObjectCollection<?> collection = manager.getCollectionForUid(uid);
+        model.addAttribute("collection", collection);
+        model.addAttribute("entry", collection.get(uid).orElseThrow());
+        return "view/" + concept.replaceAll(":", "/");
+    }
+
+    public String viewAction() {
+        return "view/action";
+    }
+
+    public String viewEntity() {
+        return "view/entity";
+    }
 }
