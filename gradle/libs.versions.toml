@@ -14,8 +14,8 @@ webjars = { group = "org.webjars", name = "webjars-locator-core", version = "0.5
 htmx = { group = "org.webjars.npm", name="htmx.org", version = "2.0.4"}
 tailwind = { group = "org.webjars.npm", name="tailwindcss", version = "4.0.0-beta.3"}
 
-ical4j = { group = "org.mnode.ical4j", name = "ical4j", version = "4.0.8"}
+ical4j = { group = "org.mnode.ical4j", name = "ical4j", version = "4.1.0"}
 ical4j-connector = { group = "org.ical4j", name = "ical4j-connector-api", version = "2.0.0-alpha6"}
-ical4j-serializer = { group = "org.ical4j", name = "ical4j-serializer", version = "0.4.0"}
+ical4j-serializer = { group = "org.ical4j", name = "ical4j-serializer", version = "0.4.1"}
 ical4j-template = { group = "org.ical4j", name = "ical4j-template", version = "0.2.3-develop-SNAPSHOT"}
 slugify = { group = "com.github.slugify", name = "slugify", version = "3.0.7"}

@@ -10,43 +10,43 @@
 <div th:fragment="fixedFilters(collection, target)">
     <form id="filter-form" th:hx-get="|/entries/${collection.displayName}/|"
           hx-trigger="submit" hx-target="#content-view">
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" onchange="toggleAllFilters(this.checked)">
             All
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:action">
             Actions
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:availability">
             Availability
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:event">
             Events
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:issue">
             Issues
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:note">
             Notes
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:observance">
             Observances
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:report">
             Reports
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:request">
             Requests
         </label>
-        <label>
+        <label class="dark:text-gray-400 dark:hover:text-white">
             <input type="checkbox" name="concept" value="semcal:concept:resource">
             Resources
         </label>

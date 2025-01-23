@@ -41,7 +41,7 @@
 
 <div th:fragment="addContent(collection)">
     <form
-          th:hx-post="|/entries/${collection}/|" hx-target="#content-list"
+          th:hx-post="|/entries/${collection}/|" hx-target="#content-view"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
             <select id="typeSelect" name="concept" onchange="toggleInputs()">
@@ -198,7 +198,7 @@
 </div>
 
 <div th:fragment="renderContent(obj)">
-    <span th:text="${obj.Components[0].summary}">Content</span>
+    <span th:text="${obj.Components[0].summary.value}" class="dark:text-gray-400 dark:hover:text-white">Content</span>
 </div>
 </body>
 </html>

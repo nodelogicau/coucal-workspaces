@@ -92,7 +92,7 @@ public class EntriesController {
         model.addAttribute("content",
                 collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         model.addAttribute("collection", collection);
-        return "content-list";
+        return "list/entries";
     }
 
     /**

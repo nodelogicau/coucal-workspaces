@@ -85,7 +85,7 @@
 
 <div th:fragment="view(action, collection)">
     <nav th:replace="~{fragments/breadcrumb::collection(${collection})}"></nav>
-    <h1 th:text="${entry.Components[0].summary}">View Action</h1>
+    <h1 th:text="${entry.Components[0].summary.value}">View Action</h1>
 </div>
 </body>
 </html>
