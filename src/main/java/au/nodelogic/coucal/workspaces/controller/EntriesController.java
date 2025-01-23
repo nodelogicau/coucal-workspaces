@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/entries/{collectionId}/")
-public class ContentController {
+public class EntriesController {
 
     @Autowired
     private CollectionManager manager;
@@ -34,11 +34,11 @@ public class ContentController {
     private ObjectMapper mapper;
 
     @GetMapping("/")
-    public String listContent(@PathVariable(name = "collectionId") String collectionId,
+    public String listEntries(@PathVariable(name = "collectionId") String collectionId,
                               @RequestParam(name = "concept", required = false) String[] concept,
                               Model model) throws IOException {
         ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
-        if (concept.length > 0) {
+        if (concept != null && concept.length > 0) {
             model.addAttribute("content",
                     collection.query(FilterExpression.parse(
                             String.format("concept in [%s]", String.join(",", concept)))));
@@ -47,7 +47,7 @@ public class ContentController {
                     collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         }
         model.addAttribute("collection", collection);
-        return "content-list";
+        return "list/entries";
     }
 
     /**
@@ -56,9 +56,9 @@ public class ContentController {
      */
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addContent(@PathVariable String collectionId,
-                             @RequestBody MultiValueMap<String, String> data,
-                             Model model, HttpServletResponse response) throws IOException, ObjectStoreException {
+    public String addEntry(@PathVariable(name = "collectionId") String collectionId,
+                           @RequestBody MultiValueMap<String, String> data,
+                           Model model, HttpServletResponse response) throws IOException, ObjectStoreException {
         ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
         switch (Objects.requireNonNull(data.getFirst("concept"))) {
             case "semcal:concept:action":
@@ -100,7 +100,7 @@ public class ContentController {
      * @return
      */
     @PostMapping("/{uid}")
-    public String updateContent(String collection, String uid) {
+    public String updateEntry(String collection, String uid) {
         return "";
     }
 
@@ -110,7 +110,7 @@ public class ContentController {
      * @return
      */
     @DeleteMapping("/{uid}")
-    public String deleteContent(String collection, String uid) {
+    public String deleteEntry(String collection, String uid) {
         return "";
     }
 }

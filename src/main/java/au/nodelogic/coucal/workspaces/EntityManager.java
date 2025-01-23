@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Service
-public class EntityManager extends AbstractManager {
+public class EntityManager extends AbstractWorkspaceManager {
 
     public EntityManager() {
         this(new File(System.getProperty("user.dir"), "build/collections"));
