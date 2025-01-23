@@ -24,8 +24,8 @@
 
 <ul th:fragment="listCollections" id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body">
     <li th:each="collection : ${collections}">
-        <a th:hx-get="|/collections/${collection.displayName}|" hx-trigger="click"
-           hx-target="#content-list" th:hx-push-url="|/collections/${collection.displayName}|"
+        <a th:hx-get="|/view/entries/${collection.displayName}|" hx-trigger="click"
+           hx-target="#content-list" th:hx-push-url="|/view/collection/${collection.displayName}|"
            th:text="${collection.displayName}">Collection 1</a>
     </li>
 </ul>

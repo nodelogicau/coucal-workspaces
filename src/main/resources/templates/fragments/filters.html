@@ -11,48 +11,52 @@
     <form id="filter-form" th:hx-get="|/entries/${collection.displayName}/|"
           hx-trigger="submit" hx-target="#content-view">
         <label>
+            <input type="checkbox" onchange="toggleAllFilters(this.checked)">
             All
-            <input type="checkbox" value="all">
         </label>
         <label>
-            Actions
             <input type="checkbox" name="concept" value="semcal:concept:action">
+            Actions
         </label>
         <label>
-            Availability
             <input type="checkbox" name="concept" value="semcal:concept:availability">
+            Availability
         </label>
         <label>
-            Events
             <input type="checkbox" name="concept" value="semcal:concept:event">
+            Events
         </label>
         <label>
-            Issues
             <input type="checkbox" name="concept" value="semcal:concept:issue">
+            Issues
         </label>
         <label>
-            Notes
             <input type="checkbox" name="concept" value="semcal:concept:note">
+            Notes
         </label>
         <label>
-            Observances
             <input type="checkbox" name="concept" value="semcal:concept:observance">
+            Observances
         </label>
         <label>
-            Reports
             <input type="checkbox" name="concept" value="semcal:concept:report">
+            Reports
         </label>
         <label>
-            Requests
             <input type="checkbox" name="concept" value="semcal:concept:request">
+            Requests
         </label>
         <label>
-            Resources
             <input type="checkbox" name="concept" value="semcal:concept:resource">
+            Resources
         </label>
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
     </form>
     <script>
+        function toggleAllFilters(checked) {
+            document.getElementsByName('concept').forEach(c => c.checked = checked);
+        }
+
         function buildFilter() {
             var filter = "CONCEPT in [";
             if (document.getElementById('filterAll').selected) {
