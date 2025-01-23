@@ -45,8 +45,7 @@ public class IndexController extends AbstractLayoutController {
 
     @GetMapping("/")
     public String index(Model model) throws IOException {
-        model.addAttribute("collections", collectionManager.getCollections());
-        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
+        populateModelForLayout(model);
         return "index";
     }
 }

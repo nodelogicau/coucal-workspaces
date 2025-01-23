@@ -18,7 +18,6 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import jakarta.servlet.http.HttpServletResponse;
-import org.ical4j.connector.ObjectCollection;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,7 @@ public class CollectionsController {
     @GetMapping("/")
     public String listCollections(Model model) {
         model.addAttribute("collections", manager.getCollections());
-        return "collections";
+        return "list/collections";
     }
 
     /**
@@ -61,13 +60,13 @@ public class CollectionsController {
         return listCollections(model);
     }
 
-    @GetMapping("/{id}")
-    public String listEntries(@PathVariable(value="id") String collectionId, Model model) throws IOException {
-        ObjectCollection<?> collection = manager.getCollection(collectionId);
-        model.addAttribute("content", collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
-        model.addAttribute("collection", collection);
-        return "collection-view";
-    }
+//    @GetMapping("/{id}")
+//    public String listEntries(@PathVariable(value="id") String collectionId, Model model) throws IOException {
+//        ObjectCollection<?> collection = manager.getCollection(collectionId);
+//        model.addAttribute("content", collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+//        model.addAttribute("collection", collection);
+//        return "collection-view";
+//    }
 
     /**
      * Update an existing collection.
