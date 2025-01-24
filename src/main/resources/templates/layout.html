@@ -117,21 +117,20 @@
                         <span class="ml-3">Inbox</span>
                     </a>
                 </li>
-            <nav>
-                <h4>Collections</h4>
-                <ul th:replace="~{fragments/collections::listCollections}">
-                    <li>
-                        <a href="#">Collection 1</a>
-                    </li>
-                </ul>
-                <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
-            </nav>
+            </ul>
+            <h4>Collections</h4>
+            <ul th:replace="~{fragments/collections::listCollections}">
+                <li>
+                    <a href="#">Collection 1</a>
+                </li>
+            </ul>
+            <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
         </div>
     </aside>
 
-    <header layout:fragment="filters">
-        <p>[Collection filters go here]</p>
-    </header>
+<!--    <header layout:fragment="filters">-->
+<!--        <p>[Collection filters go here]</p>-->
+<!--    </header>-->
 
     <main class="p-4 md:ml-64 h-auto pt-24">
         <div class="flex gap-4 mb-4">
@@ -141,8 +140,38 @@
         </div>
     </main>
 
-    <aside layout:fragment="entities">
-        <p>[Page context goes here]</p>
+
+    <aside layout:fragment="entities"
+           class="fixed top-0 right-0 z-40 w-32 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    >
+<!--        <h4>Entities</h4>-->
+<!--        <ul th:replace="~{fragments/entities::listEntities}">-->
+<!--            <li>-->
+<!--                <a href="#">Entity 1</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+        <form>
+            <ul>
+                <li>
+                    <button>Applications</button>
+                </li>
+                <li>
+                    <button>Devices</button>
+                </li>
+                <li>
+                    <button>Groups</button>
+                </li>
+                <li>
+                    <button>Locations</button>
+                </li>
+                <li>
+                    <button>Organizations</button>
+                </li>
+                <li>
+                    <button>Participants</button>
+                </li>
+            </ul>
+        </form>
     </aside>
 
     <footer>
