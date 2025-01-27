@@ -13,6 +13,7 @@ import net.fortuna.ical4j.util.Calendars;
 import net.fortuna.ical4j.util.RandomUidGenerator;
 import org.ical4j.connector.ObjectCollection;
 import org.ical4j.connector.ObjectStoreException;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,7 @@ public class EntriesController {
                     collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         }
         model.addAttribute("collection", collection);
+        model.addAttribute("dateFormatter", new PrettyTime());
         return "list/entries";
     }
 
@@ -92,6 +94,7 @@ public class EntriesController {
         model.addAttribute("content",
                 collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         model.addAttribute("collection", collection);
+        model.addAttribute("dateFormatter", new PrettyTime());
         return "list/entries";
     }
 

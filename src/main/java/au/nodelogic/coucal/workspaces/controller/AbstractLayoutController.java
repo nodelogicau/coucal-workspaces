@@ -2,6 +2,7 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import au.nodelogic.coucal.workspaces.EntityManager;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
@@ -25,5 +26,6 @@ public abstract class AbstractLayoutController {
     protected void populateModelForLayout(Model model) throws IOException {
         model.addAttribute("collections", collectionManager.getCollections());
         model.addAttribute("entities", entityManager.getEntityCollection().getAll());
+        model.addAttribute("dateFormatter", new PrettyTime());
     }
 }

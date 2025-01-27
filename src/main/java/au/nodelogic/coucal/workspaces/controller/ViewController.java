@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;
 import org.ical4j.connector.ObjectCollection;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +88,7 @@ public class ViewController extends AbstractLayoutController {
                     collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         }
         model.addAttribute("collection", collection);
+        model.addAttribute("dateFormatter", new PrettyTime());
         return "view/entries";
     }
 
