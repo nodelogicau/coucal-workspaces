@@ -10,6 +10,9 @@
         </label>
         <br/>
         <label>
+            Description
+            <button type="button" th:replace="~{fragments/ui/button::button('Generate')}">Generate</button>
+            <br/>
             <textarea name="description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Action description.."></textarea>
         </label>
         <br/>
@@ -84,8 +87,29 @@
 <div th:fragment="edit(collection, action)"></div>
 
 <div th:fragment="view(action, collection)">
-    <nav th:replace="~{fragments/breadcrumb::collection(${collection})}"></nav>
-    <h1 th:text="${entry.Components[0].summary.value}">View Action</h1>
+    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
+    <h1 th:replace="~{ical4j/fragments/component/summary::h2(${entry.Components[0]})}">View Action</h1>
+    <div class="flex">
+        <div class="flex-auto">
+            <h4>Details</h4>
+            <h4>Recurrences</h4>
+            <h4>Notifications</h4>
+        </div>
+        <div class="flex-none">
+            <h4>Participants</h4>
+            <ul>
+                <li>Example 1</li>
+            </ul>
+            <h4>Related</h4>
+            <ul>
+                <li>Parent: None</li>
+            </ul>
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>
