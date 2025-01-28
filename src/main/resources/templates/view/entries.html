@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
 
 <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
 </form>

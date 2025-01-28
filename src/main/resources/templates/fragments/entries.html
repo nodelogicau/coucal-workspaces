@@ -18,14 +18,16 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <title></title>
 </head>
 
 <body>
 
 <div th:fragment="listContent" id="content-list">
-    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
-    <div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
-    <div th:replace="~{fragments/entries::contentView}"></div>
+<!--    <div th:replace="~{fragments/ui/container::card(~{::addContent(${collection.displayName})})}">-->
+
+    <div th:replace="~{::addContent(${collection.displayName})}"></div>
+    <div th:replace="~{::contentView}"></div>
 </div>
 
 <div th:fragment="contentView" id="content-view">
@@ -82,7 +84,7 @@
             <tr th:each="obj : ${content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <a href="#" th:href="|/view/${obj.components[0].propertyList.getRequired('CONCEPT').value}/${obj.uid.value}|">
-                        <span th:replace="~{fragments/entries::renderContent(${obj})}">Object 1</span>
+                        <span th:replace="~{::renderContent(${obj})}">Object 1</span>
                     </a>
                 </th>
                 <td class="px-6 py-4">
@@ -97,7 +99,7 @@
                 <td class="px-6 py-4">
                     Tentative
                 </td>
-                <td class="px-6 py-4 text-right">
+                <td class="px-6 py-4 text-right" nowrap>
                     <a th:href="|/edit/${obj.components[0].propertyList.getRequired('CONCEPT').value}/${obj.uid.value}|"
                        href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
                     <button

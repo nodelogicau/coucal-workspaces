@@ -16,7 +16,8 @@
 
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Coucal Workspaces - Layout</title>
@@ -45,46 +46,9 @@
     <nav class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
         <div class="flex flex-wrap justify-between items-center">
             <div class="flex justify-start items-center">
-                <button
-                        data-drawer-target="drawer-navigation"
-                        data-drawer-toggle="drawer-navigation"
-                        aria-controls="drawer-navigation"
-                        class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                    <svg
-                            aria-hidden="true"
-                            class="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                                fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                clip-rule="evenodd"
-                        ></path>
-                    </svg>
-                    <svg
-                            aria-hidden="true"
-                            class="hidden w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                                fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                        ></path>
-                    </svg>
-                    <span class="sr-only">Toggle sidebar</span>
-                </button>
+                <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
                 <a href="/" class="flex items-center justify-between mr-4">
-                    <img
-                            src="/images/coucal-logo.png"
-                            class="mr-3 h-16"
-                            alt="Coucal Logo"
-                    />
+                    <img src="/images/coucal-logo.png" class="mr-3 h-16" alt="Coucal Logo"/>
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Coucal Workspaces</span>
                 </a>
             </div>
@@ -92,31 +56,10 @@
     </nav>
     <!-- Sidebar -->
 
-    <aside
-            class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-            aria-label="Sidenav"
-            id="drawer-navigation"
-    >
-        <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
-            <ul class="space-y-2 font-medium">
-                <li>
-                    <a
-                            href="#"
-                            class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                    >
-                        <svg class="w-[24px] h-[24px] text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17 6h-2V5h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2h-.541A5.965 5.965 0 0 1 14 10v4a1 1 0 1 1-2 0v-4c0-2.206-1.794-4-4-4-.075 0-.148.012-.22.028C7.686 6.022 7.596 6 7.5 6A4.505 4.505 0 0 0 3 10.5V16a1 1 0 0 0 1 1h7v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3h5a1 1 0 0 0 1-1v-6c0-2.206-1.794-4-4-4Zm-9 8.5H7a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2Z"/>
-                        </svg>
-                        <span class="ml-3">Inbox</span>
-                    </a>
-                </li>
-            </ul>
-<!--            <h4>Collections</h4>-->
-            <ul th:replace="~{fragments/collections::listCollections}">
-                <li>
-                    <a href="#">Collection 1</a>
-                </li>
-            </ul>
+    <aside th:replace="~{fragments/ui/sidebar::left(navigation, ~{::div#left-nav})}">
+        <div id="left-nav">
+            <th:block th:replace="~{fragments/mail::inbox}"></th:block>
+            <th:block th:replace="~{fragments/collections::listCollections}"></th:block>
             <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
         </div>
     </aside>
@@ -132,7 +75,6 @@
             </main>
         </div>
     </main>
-
 
     <aside layout:fragment="entities"
            class="fixed top-0 right-0 z-40 w-20 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -150,74 +92,43 @@
                 <li>
                     <button data-tooltip-target="tooltip-applications" data-tooltip-placement="left"
                             type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M4.857 3A1.857 1.857 0 0 0 3 4.857v4.286C3 10.169 3.831 11 4.857 11h4.286A1.857 1.857 0 0 0 11 9.143V4.857A1.857 1.857 0 0 0 9.143 3H4.857Zm10 0A1.857 1.857 0 0 0 13 4.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 21 9.143V4.857A1.857 1.857 0 0 0 19.143 3h-4.286Zm-10 10A1.857 1.857 0 0 0 3 14.857v4.286C3 20.169 3.831 21 4.857 21h4.286A1.857 1.857 0 0 0 11 19.143v-4.286A1.857 1.857 0 0 0 9.143 13H4.857Zm10 0A1.857 1.857 0 0 0 13 14.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 21 19.143v-4.286A1.857 1.857 0 0 0 19.143 13h-4.286Z" clip-rule="evenodd"/>
-                        </svg>
+                        <th:block th:replace="~{fragments/ui/icon::applications}"></th:block>
                     </button>
-                    <div id="tooltip-applications" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                        Applications
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(applications, 'Applications')}"></div>
                 </li>
                 <li>
                     <button data-tooltip-target="tooltip-devices" data-tooltip-placement="left"
                             type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z" clip-rule="evenodd"/>
-                        </svg>
+                        <th:block th:replace="~{fragments/ui/icon::devices}"></th:block>
                     </button>
-                    <div id="tooltip-devices" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                        Devices
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(devices, 'Devices')}"></div>
                 </li>
                 <li>
                     <button data-tooltip-target="tooltip-groups" data-tooltip-placement="left"
                             type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z" clip-rule="evenodd"/>
-                        </svg>
+                        <th:block th:replace="~{fragments/ui/icon::groups}"></th:block>
                     </button>
-                    <div id="tooltip-groups" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                        Groups
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(groups, 'Groups')}"></div>
                 </li>
                 <li>
                     <button data-tooltip-target="tooltip-locations" data-tooltip-placement="left"
                             type="button" class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M5 9a7 7 0 1 1 8 6.93V21a1 1 0 1 1-2 0v-5.07A7.001 7.001 0 0 1 5 9Zm5.94-1.06A1.5 1.5 0 0 1 12 7.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.398.158-.78.44-1.06Z" clip-rule="evenodd"/>
-                        </svg>
+                        <th:block th:replace="~{fragments/ui/icon::locations}"></th:block>
                     </button>
-                    <div id="tooltip-locations" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                        Locations
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(locations, 'Locations')}"></div>
                 </li>
                 <li>
-                    <button data-tooltip-target="tooltip-orgs" data-tooltip-placement="left"
-                            type="button" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z" clip-rule="evenodd"/>
-                        </svg>
-                    </button>
-                    <div id="tooltip-orgs" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                    <button th:replace="~{fragments/ui/button::icon(~{fragments/ui/icon::orgs}, orgs, left)}">
                         Organizations
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(orgs, 'Organizations')}"></div>
                 </li>
                 <li>
                     <button data-tooltip-target="tooltip-individuals" data-tooltip-placement="left"
                             type="button" class="text-white bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
-                        <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H6Zm7.25-2.095c.478-.86.75-1.85.75-2.905a5.973 5.973 0 0 0-.75-2.906 4 4 0 1 1 0 5.811ZM15.466 20c.34-.588.535-1.271.535-2v-1a5.978 5.978 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2h-4.535Z" clip-rule="evenodd"/>
-                        </svg>
+                        <th:block th:replace="~{fragments/ui/icon::individuals}"></th:block>
                     </button>
-                    <div id="tooltip-individuals" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                        Individuals
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(individuals, 'Individuals')}"></div>
                 </li>
 <!--                <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Red to Yellow</button>-->
             </ul>

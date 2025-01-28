@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div th:fragment="tooltip(id, text)" th:id="|tooltip-${id}|" role="tooltip"
+     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+    <th:block th:text="${text}">[Tooltip]</th:block>
+    <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
+
+</body>
+</html>

@@ -24,18 +24,18 @@
 
 <ul th:fragment="listCollections" id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body"
     class="pt-4 mt-4 space-y-1 font-medium border-t border-gray-200 dark:border-gray-700">
-    <li th:each="collection : ${collections}">
+    <li th:each="collection, iStat : ${collections}">
         <a href="#" th:hx-get="|/view/entries/${collection.displayName}|" hx-trigger="click"
            hx-target="#content-list" th:hx-push-url="|/view/collection/${collection.displayName}|"
+           th:id="|collection-${iStat.index}|" th:data-tooltip-target="|tooltip-collection-${iStat.index}|" data-tooltip-placement="right"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg class="w-[24px] h-[24px] text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"/>
-            </svg>
-            <span th:text="${collection.displayName}" class="flex-1 ms-3 whitespace-nowrap">Collection 1</span>
+            <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
+            <span th:text="${#strings.abbreviate(collection.displayName, 13)}" class="flex-1 ms-3 whitespace-nowrap">Collection 1</span>
             <span th:if="${!#lists.isEmpty(collection.listObjectUIDs())}"
                   th:text="${#lists.size(collection.listObjectUIDs())}"
                   class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
         </a>
+        <th:block th:replace="~{fragments/ui/tooltip::tooltip(|collection-${iStat.index}|, ${collection.displayName})}"></th:block>
     </li>
 </ul>
 
