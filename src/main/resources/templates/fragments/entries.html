@@ -24,9 +24,6 @@
 <body>
 
 <div th:fragment="listContent" id="content-list">
-<!--    <div th:replace="~{fragments/ui/container::card(~{::addContent(${collection.displayName})})}">-->
-
-    <div th:replace="~{::addContent(${collection.displayName})}"></div>
     <div th:replace="~{::contentView}"></div>
 </div>
 
@@ -112,8 +109,8 @@
     </div>
 </div>
 
-<div th:fragment="addContent(collection)">
-    <form
+<div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::card(~{::form#add-content})}">
+    <form id="add-content"
           th:hx-post="|/entries/${collection}/|" hx-target="#content-view"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>

@@ -13,7 +13,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
+
+<div class="flex gap-4">
+    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
+
+    <button th:hx-get="|/edit/collection/${collection.displayName}|" hx-trigger="click"
+            hx-target="#content-list" th:hx-push-url="|/edit/collection/${collection.displayName}|"
+            class="text-blue-600 dark:text-blue-500 hover:underline">
+        Edit
+    </button>
+</div>
+
+<div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
 
 <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
 </form>

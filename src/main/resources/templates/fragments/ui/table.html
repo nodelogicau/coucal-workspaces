@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<table th:fragment="table(headers, rows)" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr th:replace="${headers}">
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:replace="${rows}">
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
