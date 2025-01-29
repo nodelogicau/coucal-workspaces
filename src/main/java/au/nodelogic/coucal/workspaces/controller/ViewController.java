@@ -53,6 +53,12 @@ public class ViewController extends AbstractLayoutController {
     @Autowired
     private ObjectMapper mapper;
 
+    @GetMapping("/workspace")
+    public String viewWorkspace(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "view/workspace";
+    }
+
     /**
      * List collection content.
      * @return
