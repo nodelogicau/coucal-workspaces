@@ -26,7 +26,7 @@
 <body>
 
 <main layout:fragment="content">
-    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
+    <nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
     <div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
     <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
     </form>

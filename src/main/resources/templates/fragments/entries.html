@@ -88,13 +88,13 @@
                     Hotspur Way
                 </td>
                 <td class="px-6 py-4">
-                    Lifestyle
+                    <span th:replace="~{/fragments/ui/badge::default('Lifestyle')}"></span>
                 </td>
                 <td th:text="${dateFormatter.format(obj.components[0].propertyList.getRequired('DTSTAMP').date)}" class="px-6 py-4">
                     Today
                 </td>
                 <td class="px-6 py-4">
-                    Tentative
+                    <span th:replace="~{/fragments/ui/badge::default('Tentative')}"></span>
                 </td>
                 <td class="px-6 py-4 text-right" nowrap>
                     <a th:href="|/edit/${obj.components[0].propertyList.getRequired('CONCEPT').value}/${obj.uid.value}|"

@@ -87,7 +87,7 @@
 <div th:fragment="edit(collection, action)"></div>
 
 <div th:fragment="view(action, collection)">
-    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
+    <nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
     <h1 th:replace="~{ical4j/fragments/component/summary::h2(${entry.Components[0]})}">View Action</h1>
     <div class="flex">
         <div class="flex-auto">

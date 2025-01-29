@@ -4,32 +4,55 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-100">
 
-<nav th:fragment="collection(collection)" class="flex" aria-label="Breadcrumb">
-    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-        <li class="inline-flex items-center">
-            <a href="#" class="inline-flex items-center text-lg font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                <th:block th:replace="~{fragments/ui/icon::home}"></th:block>
-                Home
-            </a>
-        </li>
-<!--        <li>-->
-<!--            <div class="flex items-center">-->
-<!--                <th:block th:replace="~{fragments/ui/icon::separator}"></th:block>-->
-<!--                <a href="#" class="ms-1 text-lg font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Collections</a>-->
-<!--            </div>-->
-<!--        </li>-->
-        <li aria-current="page">
-            <div class="flex items-center">
-                <th:block th:replace="~{fragments/ui/icon::separator}"></th:block>
-                <span class="ms-1 text-lg font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                    <th:block th:text="${collection.displayName}">[COLLECTION NAME]</th:block>
+<div th:fragment="default" class="flex gap-4">
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-lg font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <th:block th:replace="~{fragments/ui/icon::home}"></th:block>
+                    Home
+                </a>
+            </li>
+            <!--        <li>-->
+            <!--            <div class="flex items-center">-->
+            <!--                <th:block th:replace="~{fragments/ui/icon::separator}"></th:block>-->
+            <!--                <a href="#" class="ms-1 text-lg font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Collections</a>-->
+            <!--            </div>-->
+            <!--        </li>-->
+            <li aria-current="page">
+                <div class="flex items-center">
+                    <a th:href="|/view/collection/${collection.displayName}|"
+                       class="inline-flex items-center text-lg font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                        <th:block th:replace="~{fragments/ui/icon::separator}"></th:block>
+                        <th:block th:text="${collection.displayName}"></th:block>
+                    </a>
+                </div>
+            </li>
+            <li aria-current="page" th:if="${entry}">
+                <div class="flex items-center">
+                    <th:block th:replace="~{fragments/ui/icon::separator}"></th:block>
+                    <span class="ms-1 text-lg font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                    <th:block th:replace="~{ical4j/fragments/component/summary::text(${entry.Components[0]})}">[ENTRY]</th:block>
                 </span>
-            </div>
-        </li>
-    </ol>
-</nav>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+    <button th:unless="${entry}" th:hx-get="|/edit/collection/${collection.displayName}|" hx-trigger="click"
+            hx-target="#content" th:hx-push-url="|/edit/collection/${collection.displayName}|"
+            class="text-blue-600 dark:text-blue-500 hover:underline">
+        Edit
+    </button>
+    <button th:if="${entry}" th:hx-get="|/edit/${entry.components[0].propertyList.getRequired('CONCEPT').value}/${entry.uid.value}|" hx-trigger="click"
+            hx-target="#content" th:hx-push-url="|/edit/${entry.components[0].propertyList.getRequired('CONCEPT').value}/${entry.uid.value}|"
+            class="text-blue-600 dark:text-blue-500 hover:underline">
+        Edit
+    </button>
+</div>
+
 
 </body>
 </html>

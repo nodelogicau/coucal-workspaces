@@ -14,15 +14,7 @@
      limitations under the License.
 -->
 
-<div class="flex gap-4">
-    <nav th:replace="~{fragments/ui/breadcrumb::collection(${collection})}"></nav>
-
-    <button th:hx-get="|/edit/collection/${collection.displayName}|" hx-trigger="click"
-            hx-target="#content-list" th:hx-push-url="|/edit/collection/${collection.displayName}|"
-            class="text-blue-600 dark:text-blue-500 hover:underline">
-        Edit
-    </button>
-</div>
+<nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
 
 <div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
 

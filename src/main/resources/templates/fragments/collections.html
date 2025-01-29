@@ -26,7 +26,7 @@
     class="pt-4 mt-4 space-y-1 font-medium border-t border-gray-200 dark:border-gray-700">
     <li th:each="collection, iStat : ${collections}">
         <a href="#" th:hx-get="|/view/entries/${collection.displayName}|" hx-trigger="click"
-           hx-target="#content-list" th:hx-push-url="|/view/collection/${collection.displayName}|"
+           hx-target="#content" th:hx-push-url="|/view/collection/${collection.displayName}|"
            th:id="|collection-${iStat.index}|" th:data-tooltip-target="|tooltip-collection-${iStat.index}|" data-tooltip-placement="right"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
