@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 public class CollectionManager extends AbstractWorkspaceManager {
 
     public CollectionManager() {
-        this(new File(System.getProperty("user.dir"), "build/collections"));
+        this(new File(System.getProperty("user.home"), ".coucal/workspaces/default"));
     }
 
     public CollectionManager(File workspaceRoot) {
