@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     implementation libs.spring.boot.web, libs.spring.boot.json, libs.ical4j.connector,
-            libs.ical4j.serializer, libs.slugify, libs.prettytime
+            libs.ical4j.serializer, libs.slugify, libs.prettytime, libs.jakarta.mail
 
     implementation(libs.ical4j) {
         capabilities {
