@@ -27,13 +27,52 @@
         >
             <th:block th:replace="~{fragments/ui/icon::inbox}"></th:block>
             <span class="ml-3">Inbox</span>
+            <span th:text="${inboxMessageCount}"
+                  class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
         </a>
     </li>
 </ul>
 
 <div th:fragment="overview">
     <h1 class="text-2xl">Inbox</h1>
-    Nothing to do here!
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">
+                Subject
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Sender
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Date
+            </th>
+            <th scope="col" class="px-6 py-3">
+                <span class="sr-only">Edit</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="message : ${inboxMessages}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th:block th:text="${#strings.abbreviate(message.subject, 64)}"></th:block>
+            </th>
+            <td class="px-6 py-4">
+                <th:block th:text="${message.from[0].personal}"></th:block>
+            </td>
+            <td th:text="${dateFormatter.format(message.receivedDate)}" class="px-6 py-4">
+                Today
+            </td>
+            <td class="px-6 py-4 text-right" nowrap>
+                <button
+                        data-modal-target="delete-modal" data-modal-toggle="delete-modal"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 </div>
 
 </body>
