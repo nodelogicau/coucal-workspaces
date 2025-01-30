@@ -78,10 +78,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="obj : ${content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr th:each="node : ${content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <a href="#" th:href="|/view/${obj.components[0].propertyList.getRequired('CONCEPT').value}/${obj.uid.value}|">
-                        <span th:replace="~{::renderContent(${obj})}">Object 1</span>
+                    <a href="#" th:href="|/view/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|">
+                        <span th:replace="~{::renderContent(${node})}">Node 1</span>
                     </a>
                 </th>
                 <td class="px-6 py-4">
@@ -90,14 +90,14 @@
                 <td class="px-6 py-4">
                     <span th:replace="~{/fragments/ui/badge::default('Lifestyle')}"></span>
                 </td>
-                <td th:text="${dateFormatter.format(obj.components[0].propertyList.getRequired('DTSTAMP').date)}" class="px-6 py-4">
+                <td th:text="${dateFormatter.format(node.components[0].propertyList.getRequired('DTSTAMP').date)}" class="px-6 py-4">
                     Today
                 </td>
                 <td class="px-6 py-4">
                     <span th:replace="~{/fragments/ui/badge::default('Tentative')}"></span>
                 </td>
                 <td class="px-6 py-4 text-right" nowrap>
-                    <a th:href="|/edit/${obj.components[0].propertyList.getRequired('CONCEPT').value}/${obj.uid.value}|"
+                    <a th:href="|/edit/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|"
                        href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
                     <button
                        data-modal-target="delete-modal" data-modal-toggle="delete-modal"
