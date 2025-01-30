@@ -59,6 +59,12 @@ public class ViewController extends AbstractLayoutController {
         return "view/workspace";
     }
 
+    @GetMapping("/inbox")
+    public String viewInbox(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "view/inbox";
+    }
+
     /**
      * List collection content.
      * @return
