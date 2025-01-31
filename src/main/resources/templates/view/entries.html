@@ -18,8 +18,11 @@
 
 <div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
 
-<form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
-</form>
+<div class="flex justify-between p-2">
+    <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
+    </form>
+    <div th:replace="~{fragments/ui/button-group::default}"></div>
+</div>
 
 <ul th:replace="~{fragments/entries::listContent}">
     <li>
