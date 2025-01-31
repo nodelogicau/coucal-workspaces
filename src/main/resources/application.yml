@@ -25,6 +25,14 @@ spring:
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:memory:myDb?cache=shared
+    username: sa
+    password: sa
+
 server:
   error:
     whitelabel:
@@ -51,3 +59,7 @@ logging:
 external:
   server:
     address: http://localhost:8080 # Do not include trailing slash
+
+hibernate:
+  hbm2ddl.auto: create-drop
+  show_sql: true
