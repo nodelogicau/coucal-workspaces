@@ -269,7 +269,8 @@
 </div>
 
 <div th:fragment="renderContent(entry)" class="flex">
-    <img th:replace="~{ical4j/fragments/component/concept::icon(${entry.Components[0]})}">
+<!--    <img th:replace="~{ical4j/fragments/component/concept::icon(${entry.Components[0]})}">-->
+    <img th:replace="~{/fragments/ui/icon::action}">
     <th:block th:replace="~{ical4j/fragments/component/summary::text(${entry.Components[0]})}" class="dark:text-gray-400 dark:hover:text-white">Content</th:block>
 </div>
 </body>
