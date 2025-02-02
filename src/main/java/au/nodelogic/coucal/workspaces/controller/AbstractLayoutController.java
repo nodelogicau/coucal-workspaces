@@ -31,6 +31,6 @@ public abstract class AbstractLayoutController {
         model.addAttribute("collections", collectionManager.getCollections());
         model.addAttribute("entities", entityManager.getEntityCollection().getAll());
         model.addAttribute("dateFormatter", new PrettyTime());
-        model.addAttribute("inboxMessageCount", imapService.getMessageCount());
+        model.addAttribute("inboxMessageCount", -1); //imapService.getMessageCount());
     }
 }
