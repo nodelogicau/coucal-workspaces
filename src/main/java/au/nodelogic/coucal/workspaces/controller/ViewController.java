@@ -114,6 +114,13 @@ public class ViewController extends AbstractLayoutController {
         return "view/" + concept.replaceAll(":", "/");
     }
 
+    @GetMapping("/entities/{kind}")
+    public String viewEntities(@PathVariable(name = "kind") String kind, Model model) throws IOException {
+        model.addAttribute("entities", entityManager.getEntityCollection().getAll());
+        populateModelForLayout(model);
+        return "view/entities";
+    }
+
     @GetMapping("/entity/{uid}")
     public String viewEntity(@PathVariable(name = "uid") String uid, Model model) throws IOException {
         model.addAttribute("entity", entityManager.getEntityCollection().get(uid).orElseThrow());
