@@ -20,7 +20,7 @@
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Coucal Workspaces - Layout</title>
+    <title th:text="${title}">Coucal Workspaces - Layout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 <!--    <link rel="stylesheet" th:href="@{/webjars/tailwindcss/index.css}">-->
@@ -49,8 +49,8 @@
                 <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
                 <a href="/" class="flex items-center justify-between mr-4">
                     <img src="/images/coucal-logo.png" class="mr-3 h-12 rounded-full" alt="Coucal Logo"/>
-                    <span class="self-center text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
                 </a>
+                <span th:text="${title}" class="self-center text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
             </div>
             <div class="pr-4">
                 <a href="https://www.coucal.org/workspaces" target="_blank" alt="Coucal Support">

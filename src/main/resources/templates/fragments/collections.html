@@ -43,7 +43,7 @@
       hx-post="/collections/" th:hx-target="${target}" hx-swap="outerHTML"
       hx-on::after-request="if(event.detail.successful) this.reset()">
     <label>
-        <input name="displayName" placeholder="Collection name.." required>
+        <input name="displayName" placeholder="Collection name.." pattern="(?i)^(?!inbox|entities).*$" required>
     </label>
     <button type="submit"  th:replace="~{fragments/ui/button::submit('Add')}">Add</button>
 </form>
