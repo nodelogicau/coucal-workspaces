@@ -1,6 +1,6 @@
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.IMAPService;
+import au.nodelogic.coucal.workspaces.InboxManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +14,13 @@ import java.io.IOException;
 public class InboxController extends AbstractLayoutController {
 
     @Autowired
-    IMAPService imapService;
+//    IMAPService imapService;
+    InboxManager inboxManager;
 
     @GetMapping("/")
     public String listInbox(Model model) throws IOException {
-        populateModelForLayout(model);
-        model.addAttribute("inboxMessages", imapService.fetchMessages());
+        populateModelForLayout("Coucal Inbox", model);
+        model.addAttribute("inboxMessages", inboxManager.getInboxCollection().getAll());
         return "list/inbox";
     }
 }

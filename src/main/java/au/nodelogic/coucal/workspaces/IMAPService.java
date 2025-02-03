@@ -24,7 +24,7 @@ public class IMAPService {
     private final String password;
 
     public IMAPService() {
-        this("", "");
+        this("benfortuna@outlook.com", "bwuqpqczyvnzkpco");
     }
 
     public IMAPService(String username, String password) {
@@ -39,7 +39,8 @@ public class IMAPService {
 
         // IMAP
         this.properties.put("mail.store.protocol", "imaps");
-        this.properties.put("mail.imap.host", "imap.gmail.com");
+//        this.properties.put("mail.imap.host", "imap.gmail.com");
+        this.properties.put("mail.imap.host", "imap-mail.outlook.com");
         this.properties.put("mail.imap.port", "993");
 
         this.username = Objects.requireNonNull(username);
