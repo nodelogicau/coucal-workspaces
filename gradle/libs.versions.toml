@@ -16,15 +16,18 @@ htmx = { group = "org.webjars.npm", name="htmx.org", version = "2.0.4"}
 tailwind = { group = "org.webjars.npm", name="tailwindcss", version = "4.0.0-beta.3"}
 flowbite = { group = "org.webjars.npm", name="flowbite", version = "2.5.2"}
 tiptap = { group = "org.webjars.npm", name="tiptap", version = "1.27.1"}
+simple-datatables = { group = "org.webjars.npm", name="simple-datatables", version = "9.1.0"}
 
 ical4j = { group = "org.mnode.ical4j", name = "ical4j", version = "4.1.0"}
 ical4j-connector = { group = "org.ical4j", name = "ical4j-connector-api", version = "2.0.0-alpha6"}
 ical4j-serializer = { group = "org.ical4j", name = "ical4j-serializer", version = "0.4.1"}
 ical4j-template = { group = "org.ical4j", name = "ical4j-template", version = "0.3.0-develop-SNAPSHOT"}
+ical4j-integration-mail = { group = "org.ical4j", name = "ical4j-integration-mail", version = "0.3.3-develop-SNAPSHOT"}
+
 slugify = { group = "com.github.slugify", name = "slugify", version = "3.0.7"}
 prettytime = {group = 'org.ocpsoft.prettytime', name='prettytime', version='5.0.9.Final'}
 
-jakarta-mail = {group = 'jakarta.mail', name = 'jakarta.mail-api', version = '2.1.3'}
+#jakarta-mail = {group = 'jakarta.mail', name = 'jakarta.mail-api', version = '2.1.3'}
 angus-mail = {group = 'org.eclipse.angus', name = 'angus-mail', version='2.0.3'}
 
 sqlite = {group = 'org.xerial', name = 'sqlite-jdbc', version = '3.48.0.0'}

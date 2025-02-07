@@ -16,8 +16,8 @@ repositories {
 
 dependencies {
     implementation libs.spring.boot.web, libs.spring.boot.json, libs.ical4j.connector,
-            libs.ical4j.serializer, libs.slugify, libs.prettytime,
-            libs.jakarta.mail, libs.angus.mail,
+            libs.ical4j.serializer, libs.ical4j.integration.mail, libs.angus.mail,
+            libs.slugify, libs.prettytime,
             libs.sqlite, libs.hibernate.community.dialects, libs.spring.boot.data.jpa
 
     implementation(libs.ical4j) {
@@ -28,7 +28,7 @@ dependencies {
 
     runtimeOnly libs.spring.boot.thymeleaf, libs.thymeleaf.layout, libs.spring.boot.actuator,
             libs.spring.boot.devtools, libs.webjars, libs.htmx, libs.tailwind, libs.flowbite, libs.tiptap,
-            libs.ical4j.template
+            libs.simple.datatables, libs.ical4j.template
 }
 
 sourceCompatibility = JavaVersion.VERSION_17

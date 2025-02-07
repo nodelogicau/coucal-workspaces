@@ -5,16 +5,42 @@
 </head>
 <body>
 
-<table th:fragment="table(headers, rows)" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-    <tr th:replace="${headers}">
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:replace="${rows}">
-    </tr>
-    </tbody>
-</table>
-
+<div th:fragment="default(id, rows)">
+    <table th:id="|table-${id}|" class="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+        <thead>
+        <tr>
+            <th th:each="column : ${columnHeadings}" scope="col" class="px-4 py-2">
+                <span class="flex items-center">
+                    <th:block th:text="${column}">[COLUMN]</th:block>
+                    <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                    </svg>
+                </span>
+            </th>
+            <th scope="col" class="px-4 py-2">
+                <span class="sr-only">Edit</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody th:replace="${rows}">
+        <tr>
+            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">Flowbite</td>
+            <td>2021/25/09</td>
+            <td>269000</td>
+            <td>49%</td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:inline="javascript">
+        if (document.getElementById([[|table-${id}|]]) && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable([[|#table-${id}|]], {
+                searchable: false,
+                paging: true,
+                perPage: 10,
+                // perPageSelect: [10, 50, 100]
+            });
+        }
+    </script>
+</div>
 </body>
 </html>

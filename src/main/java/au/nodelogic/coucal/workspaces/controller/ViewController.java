@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -62,6 +63,7 @@ public class ViewController extends AbstractLayoutController {
     @GetMapping("/inbox")
     public String viewInbox(Model model) throws IOException {
         populateModelForLayout(model);
+        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
         return "view/inbox";
     }
 
@@ -101,6 +103,7 @@ public class ViewController extends AbstractLayoutController {
         }
         model.addAttribute("collection", collection);
         model.addAttribute("dateFormatter", new PrettyTime());
+        model.addAttribute("columnHeadings", Arrays.asList("Summary", "Location", "Categories", "Date", "Status"));
         return "view/entries";
     }
 

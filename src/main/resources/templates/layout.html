@@ -39,6 +39,9 @@
 <!--            grid-template-rows: auto 1fr auto;-->
 <!--        }-->
 <!--    </style>-->
+    <script th:src="@{/webjars/simple-datatables/dist/umd/simple-datatables.js}"
+            src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <link rel="stylesheet" th:href="@{/webjars/simple-datatables/dist/style.css}">
 </head>
 
 <body>
@@ -157,8 +160,8 @@
 </div>
 
 <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
-
 <script th:src="@{/webjars/flowbite/dist/flowbite.min.js}"
         src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.js/flowbite.min.js"></script>
+
 </body>
 </html>
