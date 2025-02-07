@@ -25,7 +25,7 @@ public abstract class AbstractLayoutController {
     private InboxManager inboxManager;
 
     protected void populateModelForLayout(Model model) throws IOException {
-        this("Coucal Workspaces", model);
+        populateModelForLayout("Coucal Workspaces", model);
     }
 
     /**
@@ -38,6 +38,6 @@ public abstract class AbstractLayoutController {
         model.addAttribute("entities", entityManager.getEntityCollection().getAll());
         model.addAttribute("dateFormatter", new PrettyTime());
 //        model.addAttribute("inboxMessageCount", -1); //imapService.getMessageCount());
-        model.addAttribute("inbox", inboxManager.getInboxCollection());
+        model.addAttribute("inbox", inboxManager.getInboxCollection().getAll());
     }
 }
