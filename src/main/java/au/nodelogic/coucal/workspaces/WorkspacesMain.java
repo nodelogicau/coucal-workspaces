@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.File;
 
@@ -28,6 +29,7 @@ import java.io.File;
 @EnableCaching
 @EnableAsync
 @ConfigurationPropertiesScan
+@EnableScheduling
 public class WorkspacesMain {
 
     public static void main(String[] args) {

@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.function.Consumer;
 
 @Service
 public class IMAPService {
@@ -24,7 +28,7 @@ public class IMAPService {
     private final String password;
 
     public IMAPService() {
-        this("benfortuna@outlook.com", "bwuqpqczyvnzkpco");
+        this("", "");
     }
 
     public IMAPService(String username, String password) {
@@ -39,8 +43,8 @@ public class IMAPService {
 
         // IMAP
         this.properties.put("mail.store.protocol", "imaps");
-//        this.properties.put("mail.imap.host", "imap.gmail.com");
-        this.properties.put("mail.imap.host", "imap-mail.outlook.com");
+        this.properties.put("mail.imap.host", "imap.gmail.com");
+//        this.properties.put("mail.imap.host", "imap-mail.outlook.com");
         this.properties.put("mail.imap.port", "993");
 
         this.username = Objects.requireNonNull(username);
@@ -78,14 +82,15 @@ public class IMAPService {
         }
     }
 
-    public List<Message> fetchMessages() {
+    public void fetchMessages(Consumer<Message> messageConsumer) {
         try (Store store = getStore()) {
             connectStore(store);
 
             Folder emailFolder = store.getFolder(INBOX_FOLDER_NAME);
             emailFolder.open(Folder.READ_ONLY);
 
-            Message[] messages = fetchNewMessages(emailFolder);
+//            Message[] messages = fetchNewMessages(emailFolder);
+            Message[] messages = emailFolder.getMessages(31, 40);
 //            List<MimeMessage> convertedMessages = new ArrayList<>();
 //
 //            for (Message msg : messages) {
@@ -95,21 +100,24 @@ public class IMAPService {
             FetchProfile fp = new FetchProfile();
             fp.add(FetchProfile.Item.ENVELOPE);
             fp.add("Subject");
+            fp.add("List-Id");
             emailFolder.fetch(messages, fp);
+
+            Arrays.stream(messages).forEach(messageConsumer::accept);
 
             emailFolder.close(false);
 
-            return Arrays.stream(messages).toList();
+//            return Arrays.stream(messages).toList();
         } catch (MessagingException e) {
             logger.error("Error fetching emails", e);
-            return Collections.emptyList();
+//            return Collections.emptyList();
         }
     }
 
     private Message[] fetchNewMessages(Folder emailFolder) throws MessagingException {
         Message[] messages;
 
-        LocalDate localDate = LocalDate.now().minusDays(30);
+        LocalDate localDate = LocalDate.now().minusDays(1);
         SearchTerm newer = new SentDateTerm(ComparisonTerm.GE,
                 Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         messages = emailFolder.search(newer);

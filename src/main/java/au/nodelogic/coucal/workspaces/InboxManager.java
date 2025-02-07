@@ -10,15 +10,18 @@ import java.io.IOException;
 @Service
 public class InboxManager extends AbstractWorkspaceManager {
 
-    public InboxManager() {
+    private final CalendarCollection inboxCollection;
+
+    public InboxManager() throws IOException {
         this(new File(System.getProperty("user.dir"), "build/collections"));
     }
 
-    public InboxManager(File workspaceRoot) {
+    public InboxManager(File workspaceRoot) throws IOException {
         super(workspaceRoot);
+        this.inboxCollection = new LocalCalendarCollection(new File(getWorkspaceRoot(), "inbox"));
     }
 
     public CalendarCollection getInboxCollection() throws IOException {
-        return new LocalCalendarCollection(new File(getWorkspaceRoot(), "inbox"));
+        return inboxCollection;
     }
 }
