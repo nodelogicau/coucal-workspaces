@@ -29,7 +29,8 @@ spring:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
   datasource:
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:memory:myDb?cache=shared
+#    url: jdbc:sqlite:memory:myDb?cache=shared
+    url: jdbc:sqlite:index.db
     username: sa
     password: sa
 

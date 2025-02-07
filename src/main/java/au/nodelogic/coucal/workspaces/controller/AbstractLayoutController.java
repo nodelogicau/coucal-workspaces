@@ -1,8 +1,8 @@
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.CollectionManager;
-import au.nodelogic.coucal.workspaces.EntityManager;
-import au.nodelogic.coucal.workspaces.InboxManager;
+import au.nodelogic.coucal.workspaces.data.CollectionManager;
+import au.nodelogic.coucal.workspaces.data.EntityManager;
+import au.nodelogic.coucal.workspaces.data.InboxManager;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

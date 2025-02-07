@@ -1,4 +1,4 @@
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.data;
 
 import java.io.File;
 

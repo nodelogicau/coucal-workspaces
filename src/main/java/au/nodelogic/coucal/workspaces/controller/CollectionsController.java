@@ -16,7 +16,7 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.data.CollectionManager;
 import jakarta.servlet.http.HttpServletResponse;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;

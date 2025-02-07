@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.data;
 
 import com.github.slugify.Slugify;
 import org.ical4j.connector.ObjectCollection;
@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

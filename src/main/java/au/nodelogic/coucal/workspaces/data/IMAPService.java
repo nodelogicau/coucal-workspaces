@@ -1,4 +1,4 @@
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.data;
 
 import jakarta.mail.*;
 import jakarta.mail.search.ComparisonTerm;

@@ -1,6 +1,6 @@
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.data.CollectionManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import net.fortuna.ical4j.filter.FilterExpression;

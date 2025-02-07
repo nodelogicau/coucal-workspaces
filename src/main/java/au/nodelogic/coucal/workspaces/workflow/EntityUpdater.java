@@ -1,5 +1,7 @@
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.workflow;
 
+import au.nodelogic.coucal.workspaces.data.EntityManager;
+import au.nodelogic.coucal.workspaces.data.InboxManager;
 import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Property;

@@ -16,8 +16,8 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.CollectionManager;
-import au.nodelogic.coucal.workspaces.EntityManager;
+import au.nodelogic.coucal.workspaces.data.CollectionManager;
+import au.nodelogic.coucal.workspaces.data.EntityManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;

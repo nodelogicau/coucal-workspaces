@@ -1,4 +1,4 @@
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.data;
 
 import org.ical4j.connector.CalendarCollection;
 import org.ical4j.connector.local.LocalCalendarCollection;

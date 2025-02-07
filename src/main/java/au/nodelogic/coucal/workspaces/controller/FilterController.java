@@ -1,6 +1,6 @@
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.data.CollectionManager;
 import org.ical4j.connector.ObjectCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

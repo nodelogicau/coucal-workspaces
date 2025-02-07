@@ -1,5 +1,9 @@
-package au.nodelogic.coucal.workspaces;
+package au.nodelogic.coucal.workspaces.workflow;
 
+import au.nodelogic.coucal.workspaces.data.IMAPService;
+import au.nodelogic.coucal.workspaces.data.InboxManager;
+import au.nodelogic.coucal.workspaces.data.Message;
+import au.nodelogic.coucal.workspaces.data.MessageRepository;
 import jakarta.mail.MessagingException;
 import net.fortuna.ical4j.data.ContentHandler;
 import net.fortuna.ical4j.data.DefaultContentHandler;
@@ -25,11 +29,14 @@ public class InboxUpdater {
     private IMAPService imapService;
 
     @Autowired
-    private InboxManager inboxManager;
+//    private InboxManager inboxManager;
+    private MessageRepository messageRepository;
 
 //    @Scheduled(fixedRate = 60 * 60 * 1000)
     public void refreshInbox() throws MessagingException, IOException, ObjectStoreException, FailedOperationException {
+
         imapService.fetchMessages(message -> {
+            /*
             AtomicReference<Calendar> calendar = new AtomicReference<>();
             ContentHandler handler = new DefaultContentHandler(calendar::set,
                     TimeZoneRegistryFactory.getInstance().createRegistry());
@@ -40,6 +47,10 @@ public class InboxUpdater {
 //                throw new RuntimeException(e);
                 LOG.warn("Unexpected error", e);
             }
+
+             */
+            Message m = new Message();
+            messageRepository.save(m);
         });
     }
 }
