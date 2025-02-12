@@ -67,6 +67,20 @@ public class ViewController extends AbstractLayoutController {
         return "view/inbox";
     }
 
+    @GetMapping("/feeds")
+    public String viewFeeds(Model model) throws IOException {
+        populateModelForLayout(model);
+//        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
+        return "view/feeds";
+    }
+
+    @GetMapping("/chat")
+    public String viewChat(Model model) throws IOException {
+        populateModelForLayout(model);
+//        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
+        return "view/chat";
+    }
+
     /**
      * List collection content.
      * @return
