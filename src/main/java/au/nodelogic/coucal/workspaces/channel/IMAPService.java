@@ -1,4 +1,4 @@
-package au.nodelogic.coucal.workspaces.data;
+package au.nodelogic.coucal.workspaces.channel;
 
 import jakarta.mail.*;
 import jakarta.mail.search.ComparisonTerm;
@@ -28,7 +28,7 @@ public class IMAPService {
     private final String password;
 
     public IMAPService() {
-        this("", "");
+        this("benfortuna@gmail.com", "exwg jeid qrcy byuu");
     }
 
     public IMAPService(String username, String password) {
@@ -90,7 +90,7 @@ public class IMAPService {
             emailFolder.open(Folder.READ_ONLY);
 
 //            Message[] messages = fetchNewMessages(emailFolder);
-            Message[] messages = emailFolder.getMessages(31, 40);
+            var messages = emailFolder.getMessages();
 //            List<MimeMessage> convertedMessages = new ArrayList<>();
 //
 //            for (Message msg : messages) {
@@ -101,6 +101,7 @@ public class IMAPService {
             fp.add(FetchProfile.Item.ENVELOPE);
             fp.add("Subject");
             fp.add("List-Id");
+            fp.add("In-Reply-To");
             emailFolder.fetch(messages, fp);
 
             Arrays.stream(messages).forEach(messageConsumer::accept);
