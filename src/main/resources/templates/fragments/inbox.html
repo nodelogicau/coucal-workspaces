@@ -27,7 +27,7 @@
         >
             <th:block th:replace="~{fragments/ui/icon::inbox}"></th:block>
             <span class="flex-1 ml-3">Inbox</span>
-            <span th:text="${inboxMessageCount > 99 ? '99+' : inboxMessageCount}"
+            <span th:text="${inboxMessageCount}"
                   class="inline-flex items-center justify-center h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-red-100 rounded-full dark:bg-red-900 dark:text-blue-300">3</span>
         </a>
     </li>
@@ -40,12 +40,12 @@
         <tbody id="rows">
             <tr th:each="message : ${inbox}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <th:block th:text="${#strings.abbreviate(message.components[0].summary, 64)}"></th:block>
+                    <th:block th:text="${#strings.abbreviate(message.subject, 64)}"></th:block>
                 </th>
                 <td class="px-3 py-2">
-                    <th:block th:text="${message.components[0].organizer}"></th:block>
+                    <th:block th:text="${message.sender.personal}"></th:block>
                 </td>
-                <td th:text="${dateFormatter.format(message.components[0].propertyList.getRequired('DTSTAMP').date)}" class="px-6 py-4">
+                <td th:text="${dateFormatter.format(message.receivedDate)}" class="px-6 py-4">
                     Today
                 </td>
                 <td class="px-3 py-2 text-right" nowrap>

@@ -29,8 +29,8 @@
            hx-target="#content" th:hx-push-url="|/view/collection/${collection.displayName}|"
            th:id="|collection-${iStat.index}|" th:data-tooltip-target="|tooltip-collection-${iStat.index}|" data-tooltip-placement="right"
            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
-            <span th:text="${#strings.abbreviate(collection.displayName, 14)}" class="flex-1 ms-1 whitespace-nowrap">Collection 1</span>
+            <th:block th:replace="~{fragments/ui/icon::hashtag}"></th:block>
+            <span th:text="${#strings.abbreviate(collection.displayName, 14)}" class="flex-1 ml-3 whitespace-nowrap">Collection 1</span>
             <span th:if="${!#lists.isEmpty(collection.listObjectUIDs())}"
                   th:text="${colSize  > 99 ? '99+' : colSize}" th:with="colSize = ${#lists.size(collection.listObjectUIDs())}"
                   class="inline-flex items-center justify-center h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
