@@ -28,7 +28,7 @@ public class IMAPService {
     private final String password;
 
     public IMAPService() {
-        this("benfortuna@gmail.com", "exwg jeid qrcy byuu");
+        this("", "");
     }
 
     public IMAPService(String username, String password) {
