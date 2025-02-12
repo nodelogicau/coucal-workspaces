@@ -1,24 +1,23 @@
 package au.nodelogic.coucal.workspaces.workflow;
 
-import au.nodelogic.coucal.workspaces.data.IMAPService;
-import au.nodelogic.coucal.workspaces.data.InboxManager;
-import au.nodelogic.coucal.workspaces.data.Message;
-import au.nodelogic.coucal.workspaces.data.MessageRepository;
+import au.nodelogic.coucal.workspaces.channel.IMAPService;
+import au.nodelogic.coucal.workspaces.data.*;
 import jakarta.mail.MessagingException;
-import net.fortuna.ical4j.data.ContentHandler;
-import net.fortuna.ical4j.data.DefaultContentHandler;
-import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.ical4j.connector.FailedOperationException;
 import org.ical4j.connector.ObjectStoreException;
-import org.ical4j.integration.mail.data.MimeMessageParserImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class InboxUpdater {
@@ -29,12 +28,20 @@ public class InboxUpdater {
     private IMAPService imapService;
 
     @Autowired
+    private EmailAddressRepository emailAddressRepository;
+
+    @Autowired
+    private MailingListRepository mailingListRepository;
+
+    @Autowired
 //    private InboxManager inboxManager;
-    private MessageRepository messageRepository;
+    private EmailMessageRepository emailMessageRepository;
 
 //    @Scheduled(fixedRate = 60 * 60 * 1000)
     public void refreshInbox() throws MessagingException, IOException, ObjectStoreException, FailedOperationException {
-
+        List<EmailMessage> emailMessages = new ArrayList<>();
+        List<EmailAddress> addresses = new ArrayList<>();
+        List<MailingList> mailingLists = new ArrayList<>();
         imapService.fetchMessages(message -> {
             /*
             AtomicReference<Calendar> calendar = new AtomicReference<>();
@@ -49,8 +56,75 @@ public class InboxUpdater {
             }
 
              */
-            Message m = new Message();
-            messageRepository.save(m);
+            MimeMessage mimeMessage = (MimeMessage) message;
+            try {
+                EmailMessage m = new EmailMessage();
+                m.setMessageId(mimeMessage.getMessageID());
+                m.setSubject(mimeMessage.getSubject());
+                if (message.getFrom().length > 0) {
+                    InternetAddress internetAddress = (InternetAddress) mimeMessage.getFrom()[0];
+                    EmailAddress sender = new EmailAddress();
+                    sender.setAddress(internetAddress.getAddress());
+                    sender.setPersonal(internetAddress.getPersonal());
+                    addresses.add(sender);
+                    m.setSender(sender);
+                }
+                if (message.getRecipients(MimeMessage.RecipientType.TO) != null) {
+                    Set<EmailAddress> recipients = Arrays.stream(mimeMessage.getRecipients(MimeMessage.RecipientType.TO)).map(a -> {
+                        InternetAddress internetAddress = (InternetAddress) a;
+                        EmailAddress recipient = new EmailAddress();
+                        recipient.setAddress(internetAddress.getAddress());
+                        recipient.setPersonal(internetAddress.getPersonal());
+                        return recipient;
+                    }).collect(Collectors.toSet());
+                    addresses.addAll(recipients);
+                    m.setTo(recipients);
+                }
+                if (message.getRecipients(MimeMessage.RecipientType.CC) != null) {
+                    Set<EmailAddress> recipients = Arrays.stream(mimeMessage.getRecipients(MimeMessage.RecipientType.CC)).map(a -> {
+                        InternetAddress internetAddress = (InternetAddress) a;
+                        EmailAddress recipient = new EmailAddress();
+                        recipient.setAddress(internetAddress.getAddress());
+                        recipient.setPersonal(internetAddress.getPersonal());
+                        return recipient;
+                    }).collect(Collectors.toSet());
+                    addresses.addAll(recipients);
+                    m.setCc(recipients);
+                }
+                if (message.getRecipients(MimeMessage.RecipientType.BCC) != null) {
+                    Set<EmailAddress> recipients = Arrays.stream(mimeMessage.getRecipients(MimeMessage.RecipientType.BCC)).map(a -> {
+                        InternetAddress internetAddress = (InternetAddress) a;
+                        EmailAddress recipient = new EmailAddress();
+                        recipient.setAddress(internetAddress.getAddress());
+                        recipient.setPersonal(internetAddress.getPersonal());
+                        return recipient;
+                    }).collect(Collectors.toSet());
+                    addresses.addAll(recipients);
+                    m.setBcc(recipients);
+                }
+                if (mimeMessage.getHeader("In-Reply-To") != null) {
+                    EmailMessage inReplyTo = new EmailMessage();
+                    inReplyTo.setMessageId(mimeMessage.getHeader("In-Reply-To")[0]);
+                    emailMessages.add(inReplyTo);
+                    m.setInReplyTo(inReplyTo);
+                }
+                if (mimeMessage.getHeader("List-ID") != null) {
+                    MailingList mailingList = new MailingList();
+                    mailingList.setId(mimeMessage.getHeader("List-ID")[0]);
+//                    mailingList.setOwner(mimeMessage.getHeader("List-Owner")[0]);
+//                    mailingList.setArchive(mimeMessage.getHeader("List-Archive")[0]);
+                    mailingLists.add(mailingList);
+                    m.setMailingList(mailingList);
+                }
+                m.setReceivedDate(mimeMessage.getReceivedDate());
+                m.setSentDate(mimeMessage.getSentDate());
+                emailMessages.add(m);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
         });
+        emailAddressRepository.saveAll(addresses);
+        mailingListRepository.saveAll(mailingLists);
+        emailMessageRepository.saveAll(emailMessages);
     }
 }
