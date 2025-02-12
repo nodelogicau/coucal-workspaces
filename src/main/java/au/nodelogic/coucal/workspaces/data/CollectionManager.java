@@ -32,6 +32,8 @@ import java.util.stream.Collectors;
 @Service
 public class CollectionManager extends AbstractWorkspaceManager {
 
+    private static final List<String> IGNORE_DIRS = Arrays.asList(".DStore");
+
     public CollectionManager() {
         this(new File(System.getProperty("user.home"), ".coucal/workspaces/default"));
     }
@@ -41,7 +43,8 @@ public class CollectionManager extends AbstractWorkspaceManager {
     }
 
     public List<ObjectCollection<?>> getCollections() {
-        return Arrays.stream(Objects.requireNonNull(getWorkspaceRoot().listFiles())).map(f -> {
+        return Arrays.stream(Objects.requireNonNull(getWorkspaceRoot().listFiles(f ->
+                f.isDirectory() && !IGNORE_DIRS.contains(f.getName())))).map(f -> {
             try {
                 return new LocalCalendarCollection(f);
             } catch (IOException e) {
