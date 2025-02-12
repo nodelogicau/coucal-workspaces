@@ -27,10 +27,14 @@ spring:
     prefix: classpath:/templates/
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+#      hbm2ddl.auto: create-drop
+      ddl-auto: create
+      show_sql: true
   datasource:
     driver-class-name: org.sqlite.JDBC
 #    url: jdbc:sqlite:memory:myDb?cache=shared
-    url: jdbc:sqlite:index.db
+    url: jdbc:sqlite:inbox.db
     username: sa
     password: sa
 
@@ -60,7 +64,3 @@ logging:
 external:
   server:
     address: http://localhost:8080 # Do not include trailing slash
-
-hibernate:
-  hbm2ddl.auto: create-drop
-  show_sql: true
