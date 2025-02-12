@@ -18,7 +18,8 @@ dependencies {
     implementation libs.spring.boot.web, libs.spring.boot.json, libs.ical4j.connector,
             libs.ical4j.serializer, libs.ical4j.integration.mail, libs.angus.mail,
             libs.slugify, libs.prettytime,
-            libs.sqlite, libs.hibernate.community.dialects, libs.spring.boot.data.jpa
+            libs.sqlite, libs.hibernate.community.dialects, libs.spring.boot.data.jpa,
+            libs.rome, libs.smack, libs.smack.extensions, libs.smack.im, libs.smack.tcp
 
     implementation(libs.ical4j) {
         capabilities {
