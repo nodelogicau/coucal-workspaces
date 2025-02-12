@@ -1,0 +1,37 @@
+<!--
+     Copyright 2025 Node Logic
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!doctype html>
+<html lang="en">
+<body>
+
+<ul th:fragment="navitem" class="space-y-2 font-medium">
+    <li>
+        <a
+                href="#" hx-get="/chat/" hx-trigger="click"
+                hx-target="#content" hx-push-url="/view/chat"
+                class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+            <th:block th:replace="~{fragments/ui/icon::chat}"></th:block>
+            <span class="flex-1 ml-3">Chat</span>
+            <span
+                  class="inline-flex items-center justify-center h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-red-100 rounded-full dark:bg-red-900 dark:text-blue-300">0</span>
+        </a>
+    </li>
+</ul>
+
+</body>
+</html>

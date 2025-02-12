@@ -67,6 +67,8 @@
     <aside th:replace="~{fragments/ui/sidebar::left(navigation, ~{::div#left-nav})}">
         <div id="left-nav">
             <th:block th:replace="~{fragments/inbox::inbox}"></th:block>
+            <th:block th:replace="~{fragments/feeds::navitem}"></th:block>
+            <th:block th:replace="~{fragments/chat::navitem}"></th:block>
             <th:block th:replace="~{fragments/collections::listCollections}"></th:block>
             <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
         </div>
