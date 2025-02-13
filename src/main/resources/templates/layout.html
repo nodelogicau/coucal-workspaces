@@ -52,13 +52,16 @@
                 <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
                 <a href="/" class="flex items-center justify-between mr-4">
                     <img src="/images/coucal-logo.png" class="mr-3 h-12 rounded-full" alt="Coucal Logo"/>
+                    <span th:text="${title}" class="self-center text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
                 </a>
-                <span th:text="${title}" class="self-center text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
             </div>
-            <div class="pr-4">
-                <a href="https://www.coucal.org/workspaces" target="_blank" alt="Coucal Support">
-                    <th:block th:replace="~{fragments/ui/icon::help}"></th:block>
-                </a>
+            <div class="flex">
+                <div class="p-2">
+                    <a href="https://www.coucal.org/workspaces" target="_blank" alt="Coucal Support">
+                        <th:block th:replace="~{fragments/ui/icon::help}"></th:block>
+                    </a>
+                </div>
+                <th:block th:replace="~{fragments/workspace::switcher}"></th:block>
             </div>
         </div>
     </nav>
