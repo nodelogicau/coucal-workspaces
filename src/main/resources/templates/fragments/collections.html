@@ -15,29 +15,48 @@
 -->
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
 
-<ul th:fragment="listCollections" id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body"
-    class="pt-4 mt-4 space-y-1 font-medium border-t border-gray-200 dark:border-gray-700">
-    <li th:each="collection, iStat : ${collections}">
-        <a href="#" th:hx-get="|/view/entries/${collection.displayName}|" hx-trigger="click"
-           hx-target="#content" th:hx-push-url="|/view/collection/${collection.displayName}|"
-           th:id="|collection-${iStat.index}|" th:data-tooltip-target="|tooltip-collection-${iStat.index}|" data-tooltip-placement="right"
-           class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <th:block th:replace="~{fragments/ui/icon::hashtag}"></th:block>
-            <span th:text="${#strings.abbreviate(collection.displayName, 14)}" class="flex-1 ml-3 whitespace-nowrap">Collection 1</span>
-            <span th:if="${!#lists.isEmpty(collection.listObjectUIDs())}"
-                  th:text="${colSize  > 99 ? '99+' : colSize}" th:with="colSize = ${#lists.size(collection.listObjectUIDs())}"
-                  class="inline-flex items-center justify-center h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-        </a>
-        <th:block th:replace="~{fragments/ui/tooltip::tooltip(|collection-${iStat.index}|, ${collection.displayName})}"></th:block>
-    </li>
-</ul>
+<th:block th:fragment="listCollections">
+    <ul id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body"
+        class="pt-4 mt-4 space-y-1 font-medium border-t border-gray-200 dark:border-gray-700">
+        <li th:each="collection, iStat : ${collections}">
+            <a href="#" th:hx-get="|/view/entries/${collection.displayName}|" hx-trigger="click"
+               hx-target="#content" th:hx-push-url="|/view/collection/${collection.displayName}|"
+               th:id="|collection-${iStat.index}|" th:data-tooltip-target="|tooltip-collection-${iStat.index}|" data-tooltip-placement="right"
+               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <th:block th:replace="~{fragments/ui/icon::hashtag}"></th:block>
+                <span th:text="${#strings.abbreviate(collection.displayName, 14)}" class="flex-1 ml-2 whitespace-nowrap">Collection 1</span>
+                <span th:if="${!#lists.isEmpty(collection.listObjectUIDs())}"
+                      th:text="${colSize  > 99 ? '99+' : colSize}" th:with="colSize = ${#lists.size(collection.listObjectUIDs())}"
+                      class="inline-flex items-center justify-center h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+            </a>
+            <th:block th:replace="~{fragments/ui/tooltip::tooltip(|collection-${iStat.index}|, ${collection.displayName})}"></th:block>
+        </li>
+    </ul>
+    <script>
+        var container = document.getElementById("collection-list");
+        var btns = container.getElementsByTagName("a");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function() {
+              var current = document.getElementsByClassName("bg-sky-200");
+
+              // If there's no active class
+              if (current.length > 0) {
+                current[0].className = current[0].className.replace(" bg-sky-200", "");
+              }
+
+              // Add the active class to the current/clicked button
+              this.className += " bg-sky-200";
+          });
+        }
+    </script>
+</th:block>
 
 <form th:fragment="addCollection(target)"
       hx-post="/collections/" th:hx-target="${target}" hx-swap="outerHTML"

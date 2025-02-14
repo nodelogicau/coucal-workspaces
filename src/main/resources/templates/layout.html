@@ -48,12 +48,18 @@
 <div class="antialiased bg-gray-50 dark:bg-gray-900">
     <nav class="bg-black border-b border-gray-200 p-2 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
         <div class="flex flex-wrap justify-between items-center">
-            <div class="flex justify-start items-center">
+            <div class="flex justify-start items-center gap-2">
                 <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
                 <a href="/" class="flex items-center justify-between mr-4">
                     <img src="/images/coucal-logo.png" class="mr-3 h-12 rounded-full" alt="Coucal Logo"/>
                     <span th:text="${title}" class="self-center text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
                 </a>
+                <button onclick="history.back()" class="text-gray-400 hover:text-white">
+                    <th:block th:replace="~{fragments/ui/icon::chevron-left}"></th:block>
+                </button>
+                <button onclick="history.forward()" class="text-gray-400 hover:text-white">
+                    <th:block th:replace="~{fragments/ui/icon::chevron}" th:classappend="hover:text-white"></th:block>
+                </button>
             </div>
             <div class="flex">
                 <div class="p-2">
