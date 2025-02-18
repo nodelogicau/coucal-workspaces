@@ -88,7 +88,7 @@
     </div>
 </div>
 
-<div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::card(~{::form#add-content})}">
+<div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::panel(~{::form#add-content})}">
     <form id="add-content"
           th:hx-post="|/entries/${collection}/|" hx-target="#content-view"
           hx-on::after-request="if(event.detail.successful) this.reset()">
