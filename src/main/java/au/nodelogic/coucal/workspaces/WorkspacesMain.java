@@ -29,6 +29,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.sql.DataSource;
 import java.io.File;
+import java.util.Objects;
 
 @SpringBootApplication
 @EnableCaching
@@ -36,13 +37,17 @@ import java.io.File;
 @ConfigurationPropertiesScan
 @EnableScheduling
 public class WorkspacesMain {
-    @Autowired
-    Environment env;
+
+    private final Environment env;
+
+    public WorkspacesMain(@Autowired Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+        dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("spring.datasource.driver-class-name")));
         dataSource.setUrl(env.getProperty("spring.datasource.url"));
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
@@ -53,6 +58,13 @@ public class WorkspacesMain {
         if (new File(System.getProperty("user.dir"), "build/collections").mkdirs()) {
             
         }
+//        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+//            try {
+//                Desktop.getDesktop().browse(new URI("http://localhost:8080"));
+//            } catch (IOException | URISyntaxException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
         SpringApplication.run(WorkspacesMain.class, args);
     }
 }

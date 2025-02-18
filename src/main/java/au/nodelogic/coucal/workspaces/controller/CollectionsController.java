@@ -16,7 +16,7 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.data.CollectionManager;
+import au.nodelogic.coucal.workspaces.CollectionManager;
 import jakarta.servlet.http.HttpServletResponse;
 import org.ical4j.connector.ObjectStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,11 @@ import java.io.IOException;
  */
 public class CollectionsController {
 
-    @Autowired
-    private CollectionManager manager;
+    private final CollectionManager manager;
+
+    public CollectionsController(@Autowired CollectionManager manager) {
+        this.manager = manager;
+    }
 
     /**
      * Return a list of available collections.

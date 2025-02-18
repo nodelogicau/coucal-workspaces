@@ -1,3 +1,19 @@
+/*
+ *  Copyright 2025 Node Logic
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package au.nodelogic.coucal.workspaces.workflow;
 
 import au.nodelogic.coucal.workspaces.channel.IMAPService;
@@ -24,20 +40,25 @@ public class InboxUpdater {
 
     private static final Logger LOG = LoggerFactory.getLogger(InboxUpdater.class);
 
-    @Autowired
-    private IMAPService imapService;
+    private final IMAPService imapService;
 
-    @Autowired
-    private EmailAddressRepository emailAddressRepository;
+    private final EmailAddressRepository emailAddressRepository;
 
-    @Autowired
-    private MailingListRepository mailingListRepository;
+    private final MailingListRepository mailingListRepository;
 
-    @Autowired
-//    private InboxManager inboxManager;
-    private EmailMessageRepository emailMessageRepository;
+    //    private InboxManager inboxManager;
+    private final EmailMessageRepository emailMessageRepository;
 
-//    @Scheduled(fixedRate = 60 * 60 * 1000)
+    public InboxUpdater(@Autowired IMAPService imapService, @Autowired EmailAddressRepository emailAddressRepository,
+                        @Autowired MailingListRepository mailingListRepository,
+                        @Autowired EmailMessageRepository emailMessageRepository) {
+        this.imapService = imapService;
+        this.emailAddressRepository = emailAddressRepository;
+        this.mailingListRepository = mailingListRepository;
+        this.emailMessageRepository = emailMessageRepository;
+    }
+
+    //    @Scheduled(fixedRate = 60 * 60 * 1000)
     public void refreshInbox() throws MessagingException, IOException, ObjectStoreException, FailedOperationException {
         List<EmailMessage> emailMessages = new ArrayList<>();
         List<EmailAddress> addresses = new ArrayList<>();

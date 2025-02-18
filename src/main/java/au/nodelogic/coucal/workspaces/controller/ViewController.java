@@ -16,8 +16,8 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.data.CollectionManager;
-import au.nodelogic.coucal.workspaces.data.EntityManager;
+import au.nodelogic.coucal.workspaces.CollectionManager;
+import au.nodelogic.coucal.workspaces.EntityManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;
@@ -45,14 +45,18 @@ import java.util.List;
  */
 public class ViewController extends AbstractLayoutController {
 
-    @Autowired
-    private CollectionManager manager;
+    private final CollectionManager manager;
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    @Autowired
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
+
+    public ViewController(@Autowired CollectionManager manager, @Autowired EntityManager entityManager,
+                          @Autowired ObjectMapper mapper) {
+        this.manager = manager;
+        this.entityManager = entityManager;
+        this.mapper = mapper;
+    }
 
     @GetMapping("/workspace")
     public String viewWorkspace(Model model) throws IOException {

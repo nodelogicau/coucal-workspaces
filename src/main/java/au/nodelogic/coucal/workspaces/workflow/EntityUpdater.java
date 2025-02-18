@@ -1,7 +1,23 @@
+/*
+ *  Copyright 2025 Node Logic
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package au.nodelogic.coucal.workspaces.workflow;
 
-import au.nodelogic.coucal.workspaces.data.EntityManager;
-import au.nodelogic.coucal.workspaces.data.InboxManager;
+import au.nodelogic.coucal.workspaces.EntityManager;
+import au.nodelogic.coucal.workspaces.InboxManager;
 import net.fortuna.ical4j.filter.FilterExpression;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Property;
@@ -29,14 +45,13 @@ import java.util.Optional;
 @Component
 public class EntityUpdater {
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     private InboxManager inboxManager;
 
     private final UidGenerator uidGenerator;
 
-    public EntityUpdater(@Autowired InboxManager inboxManager) throws IOException {
+    public EntityUpdater(@Autowired InboxManager inboxManager, @Autowired EntityManager entityManager) throws IOException {
         this.inboxManager = inboxManager;
         this.uidGenerator = new RandomUidGenerator();
         inboxManager.getInboxCollection().addObjectCollectionListener(new ObjectCollectionListener<Calendar>() {
@@ -82,5 +97,6 @@ public class EntityUpdater {
 
             }
         });
+        this.entityManager = entityManager;
     }
 }
