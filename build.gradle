@@ -1,3 +1,5 @@
+import com.github.jk1.license.render.InventoryHtmlReportRenderer
+
 import java.time.Year
 
 plugins {
@@ -5,6 +7,7 @@ plugins {
     id 'groovy'
     id 'application'
     id 'org.cadixdev.licenser' version '0.6.1'
+    id 'com.github.jk1.dependency-license-report' version '2.9'
 }
 
 repositories {
@@ -57,4 +60,9 @@ license {
     properties {
         year = Year.now().value
     }
+}
+
+licenseReport {
+    unionParentPomLicenses = false
+    renderers = [new InventoryHtmlReportRenderer()]
 }
