@@ -64,3 +64,6 @@ logging:
 external:
   server:
     address: http://localhost:8080 # Do not include trailing slash
+
+keystore:
+  path: ".secrets"
