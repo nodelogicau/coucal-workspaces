@@ -1,11 +1,18 @@
 {
   "name": "frontend",
   "private": true,
+  "main": "main.js",
   "scripts": {
-    "build": "npx @tailwindcss/cli -i ./main.css -o ../resources/public/main.css"
+    "build": "npx @tailwindcss/cli -i ./main.css -o ../resources/public/main.css",
+    "electron":  "npx electron main.js"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.6",
+    "electron": "^34.2.0",
     "tailwindcss": "^4.0.6"
+  },
+  "dependencies": {
+    "minimal-request-promise": "^1.5.0",
+    "tree-kill": "^1.2.2"
   }
 }
