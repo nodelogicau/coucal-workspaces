@@ -1,0 +1,131 @@
+<!--
+     Copyright 2025 Node Logic
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<nav th:fragment="navbar" class="bg-black border-b border-gray-200 p-2 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+    <div class="flex flex-wrap justify-between items-center">
+        <div class="flex justify-start items-center gap-2">
+            <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
+            <a href="/" class="flex items-center justify-between mr-4">
+                <img src="/images/coucal-logo.png" class="mr-3 h-12 rounded-full" alt="Coucal Logo"/>
+                <span th:text="${title}" class="self-center hidden md:inline text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
+            </a>
+            <button onclick="history.back()" class="text-gray-400 hover:text-white">
+                <th:block th:replace="~{fragments/ui/icon::chevron-left}"></th:block>
+            </button>
+            <button onclick="history.forward()" class="text-gray-400 hover:text-white">
+                <th:block th:replace="~{fragments/ui/icon::chevron}" th:classappend="hover:text-white"></th:block>
+            </button>
+        </div>
+        <div class="flex">
+            <div class="p-2">
+                <a href="https://www.coucal.org/workspaces" target="_blank" alt="Coucal Support">
+                    <th:block th:replace="~{fragments/ui/icon::help}"></th:block>
+                </a>
+            </div>
+            <th:block th:replace="~{fragments/workspace::switcher}"></th:block>
+        </div>
+    </div>
+</nav>
+
+<aside th:fragment="sidebar" th:replace="~{fragments/ui/sidebar::left(navigation, ~{::div#left-nav})}">
+    <div id="left-nav">
+        <th:block th:replace="~{fragments/inbox::inbox}"></th:block>
+        <th:block th:replace="~{fragments/feeds::navitem}"></th:block>
+        <th:block th:replace="~{fragments/chat::navitem}"></th:block>
+        <th:block th:replace="~{fragments/collections::listCollections}"></th:block>
+        <form th:replace="~{fragments/collections::addCollection('#collection-list')}"></form>
+    </div>
+</aside>
+
+<aside th:fragment="speed-dial"
+       class="fixed top-0 right-0 z-40 w-20 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+>
+    <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+
+        <!--        <h4>Entities</h4>-->
+        <!--        <ul th:replace="~{fragments/entities::listEntities}">-->
+        <!--            <li>-->
+        <!--                <a href="#">Entity 1</a>-->
+        <!--            </li>-->
+        <!--        </ul>-->
+        <form>
+            <ul>
+                <li>
+                    <button data-tooltip-target="tooltip-applications" data-tooltip-placement="left"
+                            type="button" hx-get="/view/entities/applications" hx-trigger="click"
+                            hx-target="#content" hx-push-url="/view/entities/applications"
+                            class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
+                        <th:block th:replace="~{fragments/ui/icon::applications}"></th:block>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(applications, 'Applications')}"></div>
+                </li>
+                <li>
+                    <button data-tooltip-target="tooltip-devices" data-tooltip-placement="left"
+                            type="button" hx-get="/view/entities/devices" hx-trigger="click"
+                            hx-target="#content" hx-push-url="/view/entities/devices"
+                            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
+                        <th:block th:replace="~{fragments/ui/icon::devices}"></th:block>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(devices, 'Devices')}"></div>
+                </li>
+                <li>
+                    <button data-tooltip-target="tooltip-groups" data-tooltip-placement="left"
+                            type="button" hx-get="/view/entities/groups" hx-trigger="click"
+                            hx-target="#content" hx-push-url="/view/entities/groups"
+                            class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
+                        <th:block th:replace="~{fragments/ui/icon::groups}"></th:block>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(groups, 'Groups')}"></div>
+                </li>
+                <li>
+                    <button data-tooltip-target="tooltip-locations" data-tooltip-placement="left"
+                            type="button" hx-get="/view/entities/locations" hx-trigger="click"
+                            hx-target="#content" hx-push-url="/view/entities/locations"
+                            class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
+                        <th:block th:replace="~{fragments/ui/icon::locations}"></th:block>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(locations, 'Locations')}"></div>
+                </li>
+                <li>
+                    <button th:replace="~{fragments/ui/button::icon(~{fragments/ui/icon::orgs}, orgs, left)}">
+                        Organizations
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(orgs, 'Organizations')}"></div>
+                </li>
+                <li>
+                    <button data-tooltip-target="tooltip-individuals" data-tooltip-placement="left"
+                            type="button" hx-get="/view/entities/individuals" hx-trigger="click"
+                            hx-target="#content" hx-push-url="/view/entities/individuals"
+                            class="text-white bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-3 py-3 text-center me-2 mb-2">
+                        <th:block th:replace="~{fragments/ui/icon::individuals}"></th:block>
+                    </button>
+                    <div th:replace="~{fragments/ui/tooltip::tooltip(individuals, 'Individuals')}"></div>
+                </li>
+                <!--                <button type="button" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Red to Yellow</button>-->
+            </ul>
+        </form>
+    </div>
+</aside>
+
+</body>
+</html>
