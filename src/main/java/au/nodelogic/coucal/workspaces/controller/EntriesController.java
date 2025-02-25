@@ -68,7 +68,7 @@ public class EntriesController {
         }
         model.addAttribute("collection", collection);
         model.addAttribute("dateFormatter", new PrettyTime());
-        return "list/entries";
+        return "entries/list";
     }
 
     /**
@@ -114,7 +114,7 @@ public class EntriesController {
                 collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
         model.addAttribute("collection", collection);
         model.addAttribute("dateFormatter", new PrettyTime());
-        return "list/entries";
+        return "entries/list";
     }
 
     /**

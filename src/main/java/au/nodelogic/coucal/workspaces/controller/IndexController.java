@@ -49,6 +49,6 @@ public class IndexController extends AbstractLayoutController {
     @GetMapping("/")
     public String index(Model model) throws IOException {
         populateModelForLayout(model);
-        return "index";
+        return "view/workspace";
     }
 }

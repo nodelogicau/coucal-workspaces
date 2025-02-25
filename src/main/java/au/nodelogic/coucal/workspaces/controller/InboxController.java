@@ -40,6 +40,6 @@ public class InboxController extends AbstractLayoutController {
     public String listInbox(Model model) throws IOException {
         populateModelForLayout("Coucal Inbox", model);
         model.addAttribute("inboxMessages", inboxManager.getInboxCollection().getAll());
-        return "list/inbox";
+        return "inbox/list";
     }
 }

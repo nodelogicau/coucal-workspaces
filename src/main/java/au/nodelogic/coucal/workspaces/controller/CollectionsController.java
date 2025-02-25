@@ -18,7 +18,11 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.CollectionManager;
 import jakarta.servlet.http.HttpServletResponse;
+import net.fortuna.ical4j.filter.FilterExpression;
+import net.fortuna.ical4j.model.Calendar;
+import org.ical4j.connector.ObjectCollection;
 import org.ical4j.connector.ObjectStoreException;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/collections")
@@ -48,7 +53,26 @@ public class CollectionsController {
     @GetMapping("/")
     public String listCollections(Model model) {
         model.addAttribute("collections", manager.getCollections());
-        return "list/collections";
+        return "collections/list";
+    }
+
+    @GetMapping("/{id}")
+    public String viewEntries(@PathVariable(name = "id") String collectionId,
+                              @RequestParam(name = "concept", required = false) String[] concept,
+                              Model model) throws IOException {
+        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
+        if (concept != null && concept.length > 0) {
+            model.addAttribute("content",
+                    collection.query(FilterExpression.parse(
+                            String.format("concept in [%s]", String.join(",", concept)))));
+        } else {
+            model.addAttribute("content",
+                    collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        }
+        model.addAttribute("collection", collection);
+        model.addAttribute("dateFormatter", new PrettyTime());
+        model.addAttribute("columnHeadings", Arrays.asList("Summary", "Location", "Categories", "Date", "Status"));
+        return "collections/entries";
     }
 
     /**

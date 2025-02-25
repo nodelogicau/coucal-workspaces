@@ -20,9 +20,7 @@ import au.nodelogic.coucal.workspaces.CollectionManager;
 import au.nodelogic.coucal.workspaces.EntityManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.fortuna.ical4j.filter.FilterExpression;
-import net.fortuna.ical4j.model.Calendar;
 import org.ical4j.connector.ObjectCollection;
-import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,21 +66,21 @@ public class ViewController extends AbstractLayoutController {
     public String viewInbox(Model model) throws IOException {
         populateModelForLayout(model);
         model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/inbox";
+        return "view/channel/inbox";
     }
 
     @GetMapping("/feeds")
     public String viewFeeds(Model model) throws IOException {
         populateModelForLayout(model);
 //        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/feeds";
+        return "view/channel/feeds";
     }
 
     @GetMapping("/chat")
     public String viewChat(Model model) throws IOException {
         populateModelForLayout(model);
 //        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/chat";
+        return "view/channel/chat";
     }
 
     /**
@@ -104,25 +102,6 @@ public class ViewController extends AbstractLayoutController {
         model.addAttribute("collection", collection);
         populateModelForLayout(model);
         return "view/collection";
-    }
-
-    @GetMapping("/entries/{id}")
-    public String viewEntries(@PathVariable(name = "id") String collectionId,
-                              @RequestParam(name = "concept", required = false) String[] concept,
-                              Model model) throws IOException {
-        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
-        if (concept != null && concept.length > 0) {
-            model.addAttribute("content",
-                    collection.query(FilterExpression.parse(
-                            String.format("concept in [%s]", String.join(",", concept)))));
-        } else {
-            model.addAttribute("content",
-                    collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
-        }
-        model.addAttribute("collection", collection);
-        model.addAttribute("dateFormatter", new PrettyTime());
-        model.addAttribute("columnHeadings", Arrays.asList("Summary", "Location", "Categories", "Date", "Status"));
-        return "view/entries";
     }
 
     @GetMapping("/{concept}/{uid}")

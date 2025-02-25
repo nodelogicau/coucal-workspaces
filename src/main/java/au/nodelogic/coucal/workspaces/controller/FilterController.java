@@ -23,10 +23,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/filters")
 public class FilterController {
 
     private final CollectionManager manager;
@@ -35,10 +37,10 @@ public class FilterController {
         this.manager = manager;
     }
 
-    @GetMapping("/filters/{id}")
+    @GetMapping("/{id}")
     public String fixedFilters(@PathVariable(value="id") String collectionId, Model model) throws IOException {
         ObjectCollection<?> collection = manager.getCollection(collectionId);
         model.addAttribute("collection", collection);
-        return "filters";
+        return "filters/list";
     }
 }
