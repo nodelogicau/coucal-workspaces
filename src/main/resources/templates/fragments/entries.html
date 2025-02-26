@@ -23,11 +23,11 @@
 
 <body>
 
-<div th:fragment="listContent" id="content-list">
+<div th:fragment="listContent" id="entry-list">
     <div th:replace="~{::contentView}"></div>
 </div>
 
-<div th:fragment="contentView" id="content-view">
+<div th:fragment="contentView" id="entry-view">
     <div class="relative overflow-x-auto sm:rounded-lg">
 
         <div id="delete-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -90,7 +90,7 @@
 
 <div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::panel(~{::form#add-content})}">
     <form id="add-content"
-          th:hx-post="|/entries/${collection}/|" hx-target="#content-view"
+          th:hx-post="|/entries/${collection}/|" hx-target="#entry-view"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
             <select id="typeSelect" name="concept" onchange="toggleInputs()">

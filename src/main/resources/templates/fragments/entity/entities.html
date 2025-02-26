@@ -25,7 +25,7 @@
 <ul th:fragment="listEntities" id="entity-list" hx-get="/entities" hx-trigger="entitiesRefresh from:body">
     <li th:each="entity : ${entities}">
         <a th:hx-get="|/entities/${entity.fn}|" hx-trigger="click"
-           hx-target="#content" th:hx-push-url="|/entities/${entity.fn}|"
+           hx-target="#content-root" th:hx-push-url="|/entities/${entity.fn}|"
            th:text="${entity.fn}">Entity 1</a>
     </li>
 </ul>

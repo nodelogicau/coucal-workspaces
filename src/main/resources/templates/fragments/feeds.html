@@ -15,7 +15,7 @@
 -->
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -25,7 +25,7 @@
     <li>
         <a
                 href="#" hx-get="/feeds/" hx-trigger="click"
-                hx-target="#content" hx-push-url="/view/feeds"
+                hx-target="#content-root" hx-push-url="/view/feeds"
                 class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
             <th:block th:replace="~{fragments/ui/icon::feed}"></th:block>

@@ -58,12 +58,12 @@
     </nav>
 
     <button th:unless="${entry}" th:hx-get="|/edit/collection/${collection.displayName}|" hx-trigger="click"
-            hx-target="#content" th:hx-push-url="|/edit/collection/${collection.displayName}|"
+            hx-target="#content-root" th:hx-push-url="|/edit/collection/${collection.displayName}|"
             class="text-blue-600 dark:text-blue-500 hover:underline">
         Edit
     </button>
     <button th:if="${entry}" th:hx-get="|/edit/${entry.components[0].propertyList.getRequired('CONCEPT').value}/${entry.uid.value}|" hx-trigger="click"
-            hx-target="#content" th:hx-push-url="|/edit/${entry.components[0].propertyList.getRequired('CONCEPT').value}/${entry.uid.value}|"
+            hx-target="#content-root" th:hx-push-url="|/edit/${entry.components[0].propertyList.getRequired('CONCEPT').value}/${entry.uid.value}|"
             class="text-blue-600 dark:text-blue-500 hover:underline">
         Edit
     </button>

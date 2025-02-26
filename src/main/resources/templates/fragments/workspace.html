@@ -15,7 +15,7 @@
 -->
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 
 <div th:fragment="overview">
@@ -69,10 +69,10 @@
 
 <div th:fragment="switcher">
     <!-- Apps -->
-    <button
-            type="button"
+    <button type="button"
             data-dropdown-toggle="apps-dropdown"
             class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            hx-get="/workspaces/recent" hx-trigger="click" hx-target="#recent-workspaces"
     >
         <span class="sr-only">View notifications</span>
         <!-- Icon -->
@@ -83,66 +83,10 @@
             class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
             id="apps-dropdown"
     >
-        <div
-                class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300"
-        >
+        <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
             Recent Workspaces
         </div>
-        <div class="grid grid-cols-3 gap-4 p-4">
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Home
-                </div>
-            </a>
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Work
-                </div>
-            </a>
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Volunteering
-                </div>
-            </a>
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Private
-                </div>
-            </a>
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Learning
-                </div>
-            </a>
-            <a
-                    href="#"
-                    class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group"
-            >
-                <th:block th:replace="~{fragments/ui/icon::archive}"></th:block>
-                <div class="text-sm text-gray-900 dark:text-white">
-                    Legal
-                </div>
-            </a>
+        <div class="grid grid-cols-3 gap-4 p-4" id="recent-workspaces">
         </div>
     </div>
 </div>

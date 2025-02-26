@@ -15,14 +15,14 @@
 -->
 
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 
 <ul th:fragment="navitem" class="space-y-2 font-medium">
     <li>
         <a
                 href="#" hx-get="/chat/" hx-trigger="click"
-                hx-target="#content" hx-push-url="/view/chat"
+                hx-target="#content-root" hx-push-url="/view/chat"
                 class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
             <th:block th:replace="~{fragments/ui/icon::chat}"></th:block>

@@ -13,19 +13,29 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav th:replace="~{fragments/ui/breadcrumb::default}">
+        Home > Project X
+    </nav>
 
-<nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
+    <div th:replace="~{fragments/entries::addContent(${collection.displayName})}">
+        [ADD CONTENT FORM]
+    </div>
 
-<div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
+    <div class="flex justify-between p-2">
+        <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
+            [FILTERS]
+        </form>
+        <div th:replace="~{fragments/ui/button-group::default}">
+            [VIEWS]
+        </div>
+    </div>
 
-<div class="flex justify-between p-2">
-    <form th:replace="~{fragments/filters::fixedFilters(${collection}, '#collection-list')}">
-    </form>
-    <div th:replace="~{fragments/ui/button-group::default}"></div>
+    <ul th:replace="~{fragments/entries::listContent}">
+        <li>
+            <a href="#">Progress Meeting (Series)</a>
+            <a href="#" title="Edit">Edit</a>
+            <a href="#" title="Cancel">Cancel</a>
+        </li>
+    </ul>
 </div>
-
-<ul th:replace="~{fragments/entries::listContent}">
-    <li>
-        <a href="#">Node 1</a>
-    </li>
-</ul>
