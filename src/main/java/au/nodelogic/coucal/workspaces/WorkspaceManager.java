@@ -36,7 +36,7 @@ public class WorkspaceManager {
         return workspaceRepository.findAll();
     }
 
-    public Workspace getWorkspace(String name) {
-        return workspaceRepository.getReferenceById(name);
+    public Workspace getWorkspace(int id) {
+        return workspaceRepository.getReferenceById(id);
     }
 }

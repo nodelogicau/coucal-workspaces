@@ -104,6 +104,11 @@
 
 <div th:fragment="view(action, collection)">
     <nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
+
+    <h1 class="text-4xl" th:text="${entry.Components[0].summary?.value ?: '<Untitled>'}"></h1>
+    <h3 class="text-2xl" th:text="${entry.Components[0].description?.value}"></h3>
+    <h3 class="text-2xl" th:text="|From ${entry.Components[0].dateStart?.value ?: '<Undefined>'} To ${entry.Components[0].dateEnd?.value ?: '<Undefined>'}|"></h3>
+
     <h1 th:replace="~{ical4j/fragments/component/summary::h2(${entry.Components[0]})}">View Action</h1>
     <div class="flex">
         <div class="flex-auto">

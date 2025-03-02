@@ -66,21 +66,27 @@ public class ViewController extends AbstractLayoutController {
     public String viewInbox(Model model) throws IOException {
         populateModelForLayout(model);
         model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/channel/inbox";
+        return "view/inbox";
     }
 
     @GetMapping("/feeds")
     public String viewFeeds(Model model) throws IOException {
         populateModelForLayout(model);
 //        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/channel/feeds";
+        return "view/feeds";
     }
 
     @GetMapping("/chat")
     public String viewChat(Model model) throws IOException {
         populateModelForLayout(model);
 //        model.addAttribute("columnHeadings", Arrays.asList("Subject", "From", "Date"));
-        return "view/channel/chat";
+        return "view/chat";
+    }
+
+    @GetMapping("/chat/{topic}")
+    public String viewChatTopic(@PathVariable(value="topic") String topic, Model model) throws IOException {
+        populateModelForLayout(model);
+        return "view/chat-topic";
     }
 
     /**

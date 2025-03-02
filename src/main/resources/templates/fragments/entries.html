@@ -93,7 +93,7 @@
           th:hx-post="|/entries/${collection}/|" hx-target="#entry-view"
           hx-on::after-request="if(event.detail.successful) this.reset()">
         <label>
-            <select id="typeSelect" name="concept" onchange="toggleInputs()">
+            <select id="typeSelect" name="concept" hx-trigger="change" hx-get="/create/">
                 <option disabled selected value> -- select a type -- </option>
                 <optgroup label="Actions">
                     <option value="semcal:concept:action">Action</option>

@@ -110,11 +110,7 @@ public class EntriesController {
         // apply strategy
 //        event = new Meeting().withPrototype(event).get();
         response.addHeader("HX-Trigger", "entitiesRefresh");
-        model.addAttribute("content",
-                collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
-        model.addAttribute("collection", collection);
-        model.addAttribute("dateFormatter", new PrettyTime());
-        return "entries/list";
+        return listEntries(collectionId, null, model);
     }
 
     /**
