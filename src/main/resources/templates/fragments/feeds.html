@@ -42,9 +42,9 @@
 </div>
 
 <div th:fragment="addFeed" th:replace="~{fragments/ui/container::panel(~{::form#add-feed})}">
-    <form id="add-feed">
+    <form id="add-feed" hx-post="/feeds/">
         <h3>Add Feed</h3>
-        <input type="url" placeholder="URL">
+        <input type="url" name="feedUrl" placeholder="URL">
     </form>
 </div>
 

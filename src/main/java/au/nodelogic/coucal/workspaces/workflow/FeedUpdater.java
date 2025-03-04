@@ -21,19 +21,21 @@ import au.nodelogic.coucal.workspaces.data.Feed;
 import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.data.FeedRepository;
-import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class FeedUpdater {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeedUpdater.class);
 
     private final FeedService feedService;
 
@@ -54,16 +56,8 @@ public class FeedUpdater {
         List<FeedItem> feedItems = new ArrayList<>();
         feeds.forEach(feed -> {
             try {
-                SyndFeed syndFeed = feedService.getFeed(feed.getSource());
-                feed.setTitle(syndFeed.getTitle());
-                feed.setDescription(syndFeed.getDescription());
-                feed.setLink(URI.create(syndFeed.getLink()).toURL());
-                syndFeed.getEntries().forEach(entry -> {
-                    FeedItem item = new FeedItem();
-                    item.setUri(entry.getUri());
-                    item.setFeed(feed);
-                    feedItems.add(item);
-                });
+                feedService.refreshFeed(feed.getSource(),
+                        new FeedConsumer(feed, feedRepository, feedItemRepository));
             } catch (FeedException | IOException e) {
                 throw new RuntimeException(e);
             }

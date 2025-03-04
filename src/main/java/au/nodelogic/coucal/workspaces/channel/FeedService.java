@@ -30,13 +30,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 @Service
 public class FeedService {
-
-    public SyndFeed getFeed(URL url) throws IOException, FeedException {
-        return new SyndFeedInput().build(new XmlReader(url.openStream()));
-    }
 
     public List<String> resolveFeeds(String url) throws IOException {
         List<String> feedUrls = new ArrayList<>();
@@ -52,4 +49,12 @@ public class FeedService {
         return feedUrls;
     }
 
+    public void refreshFeed(URL source, Consumer<SyndFeed> consumer) throws IOException, FeedException {
+        SyndFeed syndFeed = getFeed(source);
+        consumer.accept(syndFeed);
+    }
+
+    private SyndFeed getFeed(URL url) throws IOException, FeedException {
+        return new SyndFeedInput().build(new XmlReader(url.openStream()));
+    }
 }

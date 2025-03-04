@@ -18,7 +18,12 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.channel.FeedService;
 import au.nodelogic.coucal.workspaces.data.Feed;
+import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.data.FeedRepository;
+import au.nodelogic.coucal.workspaces.workflow.FeedConsumer;
+import com.rometools.rome.io.FeedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -26,8 +31,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +40,19 @@ import java.util.List;
 @RequestMapping("/feeds")
 public class FeedController extends AbstractLayoutController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeedController.class);
+
     private final FeedService feedService;
 
     private final FeedRepository feedRepository;
 
-    public FeedController(@Autowired FeedService feedService, @Autowired FeedRepository feedRepository) {
+    private final FeedItemRepository feedItemRepository;
+
+    public FeedController(@Autowired FeedService feedService, @Autowired FeedRepository feedRepository,
+                          FeedItemRepository feedItemRepository) {
         this.feedService = feedService;
         this.feedRepository = feedRepository;
+        this.feedItemRepository = feedItemRepository;
     }
 
     @GetMapping("/")
@@ -53,15 +64,18 @@ public class FeedController extends AbstractLayoutController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addFeed(@ModelAttribute("url") String url, Model model) throws IOException {
+    public String addFeed(@ModelAttribute("feedUrl") String url, Model model) throws IOException {
         List<String> feedUrls = feedService.resolveFeeds(url);
         List<Feed> feeds = new ArrayList<>();
         feedUrls.forEach(feedUrl -> {
             try {
+                URL source = URI.create(feedUrl).toURL();
                 Feed feed = new Feed();
-                feed.setSource(URI.create(feedUrl).toURL());
-                feeds.add(feed);
-            } catch (MalformedURLException e) {
+                feed.setUri(feedUrl);
+                feed.setSource(source);
+                feedService.refreshFeed(source,
+                        new FeedConsumer(feed, feedRepository, feedItemRepository));
+            } catch (FeedException | IOException e) {
                 throw new RuntimeException(e);
             }
         });
