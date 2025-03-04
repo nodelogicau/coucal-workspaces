@@ -35,6 +35,8 @@ public class Feed {
 
     private URL link;
 
+    private URL icon;
+
     public String getUri() {
         return uri;
     }
@@ -73,5 +75,18 @@ public class Feed {
 
     public void setLink(URL link) {
         this.link = link;
+    }
+
+    public URL getIcon() {
+        return icon;
+    }
+
+    public void setIcon(URL icon) {
+        this.icon = icon;
+    }
+
+    public Feed withUri(String uri) {
+        setUri(uri);
+        return this;
     }
 }

@@ -20,12 +20,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class FeedItem {
 
     @Id
     private String uri;
+
+    private String link;
+
+    private String title;
+
+    private String description;
+
+    @ColumnDefault("false")
+    private Boolean read;
 
     @ManyToOne
     @JoinColumn(name = "feed_uri")
@@ -45,5 +55,42 @@ public class FeedItem {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean isRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
+
+    public FeedItem withFeed(Feed feed) {
+        setFeed(feed);
+        return this;
     }
 }

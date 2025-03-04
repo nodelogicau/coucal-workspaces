@@ -18,6 +18,7 @@ package au.nodelogic.coucal.workspaces.controller;
 
 import au.nodelogic.coucal.workspaces.channel.FeedService;
 import au.nodelogic.coucal.workspaces.data.Feed;
+import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.data.FeedRepository;
 import au.nodelogic.coucal.workspaces.workflow.FeedConsumer;
@@ -25,6 +26,7 @@ import com.rometools.rome.io.FeedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +61,7 @@ public class FeedController extends AbstractLayoutController {
     public String listFeeds(Model model) throws IOException {
         populateModelForLayout("Coucal Feeds", model);
         model.addAttribute("feeds", feedRepository.findAll());
+        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())));
         return "feeds/list";
     }
 

@@ -17,11 +17,15 @@
 package au.nodelogic.coucal.workspaces.channel;
 
 import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.feed.synd.SyndImage;
+import com.rometools.rome.feed.synd.SyndImageImpl;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -35,16 +39,26 @@ import java.util.function.Consumer;
 @Service
 public class FeedService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FeedService.class);
+
     public List<String> resolveFeeds(String url) throws IOException {
         List<String> feedUrls = new ArrayList<>();
-        if (URI.create(url).toURL().getHost().endsWith("reddit.com")) {
+        URL source = URI.create(url).toURL();
+        if (source.getHost().endsWith("reddit.com")) {
             feedUrls.add(url.replaceAll("/$", "") + ".rss");
+        } else if (source.getHost().endsWith("theguardian.com")) {
+            feedUrls.add(url.replaceAll("/$", "") + "/rss");
         } else {
-            Document doc = Jsoup.connect(url).followRedirects(true).get();
-            doc.select("link[type=application/rss+xml], link[type=application/atom+xml]").forEach(element -> {
-                feedUrls.add(URI.create(url).resolve(
-                        Objects.requireNonNull(element.attribute("href")).getValue()).toString());
-            });
+            try {
+                SyndFeed feed = getFeed(source);
+                feedUrls.add(url);
+            } catch (IOException | FeedException e) {
+                Document doc = Jsoup.connect(url).followRedirects(true).get();
+                doc.select("link[type=application/rss+xml], link[type=application/atom+xml]").forEach(element -> {
+                    feedUrls.add(URI.create(url).resolve(
+                            Objects.requireNonNull(element.attribute("href")).getValue()).toString());
+                });
+            }
         }
         return feedUrls;
     }
@@ -55,6 +69,22 @@ public class FeedService {
     }
 
     private SyndFeed getFeed(URL url) throws IOException, FeedException {
-        return new SyndFeedInput().build(new XmlReader(url.openStream()));
+        SyndFeed feed = new SyndFeedInput().build(new XmlReader(url.openStream()));
+        if (feed.getIcon() == null) {
+            try {
+                SyndImage icon = new SyndImageImpl();
+                icon.setUrl(getIcon(feed.getLink()));
+                feed.setIcon(icon);
+            } catch (Exception e) {
+                LOGGER.warn("Unable to load icon: {}", feed.getLink());
+            }
+        }
+        return feed;
+    }
+
+    private String getIcon(String url) throws IOException {
+        Document doc = Jsoup.connect(url).followRedirects(true).get();
+            return URI.create(url).resolve(Objects.requireNonNull(doc.select("link[rel=icon], link[rel=shortcut icon]").stream()
+                    .findFirst().orElseThrow().attribute("href")).getValue()).toString();
     }
 }

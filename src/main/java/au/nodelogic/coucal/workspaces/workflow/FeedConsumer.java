@@ -42,10 +42,20 @@ public class FeedConsumer implements Consumer<SyndFeed> {
         } catch (MalformedURLException e) {
             LOGGER.warn("Invalid feed link {}", syndFeed.getLink());
         }
+        if (syndFeed.getIcon() != null) {
+            try {
+                feed.setIcon(URI.create(syndFeed.getIcon().getUrl()).toURL());
+            } catch (MalformedURLException e) {
+                LOGGER.warn("Invalid icon link {}", syndFeed.getIcon().getUrl());
+            }
+        }
         List<FeedItem> feedItems = new ArrayList<>();
         syndFeed.getEntries().forEach(entry -> {
             FeedItem item = new FeedItem();
             item.setUri(entry.getUri());
+            item.setTitle(entry.getTitle());
+            item.setLink(entry.getLink());
+            item.setDescription(item.getDescription());
             item.setFeed(feed);
             feedItems.add(item);
         });

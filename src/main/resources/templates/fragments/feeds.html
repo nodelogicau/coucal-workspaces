@@ -39,6 +39,15 @@
 <div th:fragment="overview">
     <h1 class="text-2xl">Feeds</h1>
     <div th:replace="~{::addFeed}"></div>
+
+    <ul>
+        <li th:each="feedItem : ${feedItems}">
+            <img src="#" th:src="${feedItem.feed.icon}" class="inline size-8">
+            <span th:text="${feedItem.feed.title}"></span>
+            -
+            <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:title="${feedItem.description}"></a>
+        </li>
+    </ul>
 </div>
 
 <div th:fragment="addFeed" th:replace="~{fragments/ui/container::panel(~{::form#add-feed})}">
