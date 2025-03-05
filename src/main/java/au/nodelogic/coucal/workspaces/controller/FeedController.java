@@ -61,7 +61,7 @@ public class FeedController extends AbstractLayoutController {
     public String listFeeds(Model model) throws IOException {
         populateModelForLayout("Coucal Feeds", model);
         model.addAttribute("feeds", feedRepository.findAll());
-        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())));
+        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())).reversed());
         return "feeds/list";
     }
 

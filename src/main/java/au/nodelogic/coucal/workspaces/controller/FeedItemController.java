@@ -25,7 +25,7 @@ public class FeedItemController {
 
     @GetMapping("/")
     public String listFeedItems(Model model) throws IOException {
-        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())));
+        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())).reversed());
         return "feedItems/list";
     }
 
@@ -33,7 +33,7 @@ public class FeedItemController {
     public String listFeedItems(@PathVariable(value="feedUri") String feedUri, Model model) throws IOException {
         model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(
                 new FeedItem().withFeed(new Feed().withUri(feedUri))
-        )));
+        )).reversed());
         return "feedItems/list";
     }
 }
