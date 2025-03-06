@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/feedItems")
@@ -25,15 +27,18 @@ public class FeedItemController {
 
     @GetMapping("/")
     public String listFeedItems(Model model) throws IOException {
-        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())).reversed());
+        List<FeedItem> feedItems = feedItemRepository.findAll(Example.of(new FeedItem()));
+        Collections.reverse(feedItems);
+        model.addAttribute("feedItems", feedItems);
         return "feedItems/list";
     }
 
     @GetMapping("/{feedUri}")
     public String listFeedItems(@PathVariable(value="feedUri") String feedUri, Model model) throws IOException {
-        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(
-                new FeedItem().withFeed(new Feed().withUri(feedUri))
-        )).reversed());
+        List<FeedItem> feedItems = feedItemRepository.findAll(Example.of(
+                new FeedItem().withFeed(new Feed().withUri(feedUri))));
+        Collections.reverse(feedItems);
+        model.addAttribute("feedItems", feedItems);
         return "feedItems/list";
     }
 }

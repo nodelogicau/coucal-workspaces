@@ -71,12 +71,19 @@ public class FeedService {
     private SyndFeed getFeed(URL url) throws IOException, FeedException {
         SyndFeed feed = new SyndFeedInput().build(new XmlReader(url.openStream()));
         if (feed.getIcon() == null) {
+            SyndImage icon = new SyndImageImpl();
             try {
-                SyndImage icon = new SyndImageImpl();
                 icon.setUrl(getIcon(feed.getLink()));
                 feed.setIcon(icon);
             } catch (Exception e) {
-                LOGGER.warn("Unable to load icon: {}", feed.getLink());
+                // some feeds provide a "self" link which doesn't include an icon.. try again without URL path..
+                try {
+                    URL root = new URI(url.getProtocol(), null, url.getHost(), url.getPort(), null, null, null).toURL();
+                    icon.setUrl(getIcon(root.toString()));
+                    feed.setIcon(icon);
+                } catch (Exception e2) {
+                    LOGGER.warn("Unable to load icon: {}", feed.getLink());
+                }
             }
         }
         return feed;
@@ -84,7 +91,7 @@ public class FeedService {
 
     private String getIcon(String url) throws IOException {
         Document doc = Jsoup.connect(url).followRedirects(true).get();
-            return URI.create(url).resolve(Objects.requireNonNull(doc.select("link[rel=icon], link[rel=shortcut icon]").stream()
+            return URI.create(url).resolve(Objects.requireNonNull(doc.select("link[rel=icon], link[rel=shortcut icon], link[rel=icon shortcut]").stream()
                     .findFirst().orElseThrow().attribute("href")).getValue()).toString();
     }
 }

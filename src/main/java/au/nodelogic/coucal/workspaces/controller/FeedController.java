@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -61,7 +62,9 @@ public class FeedController extends AbstractLayoutController {
     public String listFeeds(Model model) throws IOException {
         populateModelForLayout("Coucal Feeds", model);
         model.addAttribute("feeds", feedRepository.findAll());
-        model.addAttribute("feedItems", feedItemRepository.findAll(Example.of(new FeedItem())).reversed());
+        List<FeedItem> feedItems = feedItemRepository.findAll(Example.of(new FeedItem()));
+        Collections.reverse(feedItems);
+        model.addAttribute("feedItems", feedItems);
         return "feeds/list";
     }
 
