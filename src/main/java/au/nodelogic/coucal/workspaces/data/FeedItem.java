@@ -22,6 +22,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.Date;
+
 @Entity
 public class FeedItem {
 
@@ -36,6 +38,8 @@ public class FeedItem {
 
     @ColumnDefault("false")
     private Boolean read;
+
+    private Date publishedDate;
 
     @ManyToOne
     @JoinColumn(name = "feed_uri")
@@ -87,6 +91,14 @@ public class FeedItem {
 
     public void setRead(Boolean read) {
         this.read = read;
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
     }
 
     public FeedItem withFeed(Feed feed) {

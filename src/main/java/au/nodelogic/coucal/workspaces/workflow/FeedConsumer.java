@@ -55,7 +55,10 @@ public class FeedConsumer implements Consumer<SyndFeed> {
             item.setUri(entry.getUri());
             item.setTitle(entry.getTitle());
             item.setLink(entry.getLink());
-            item.setDescription(item.getDescription());
+            if (entry.getDescription() != null) {
+                item.setDescription(entry.getDescription().getValue());
+            }
+            item.setPublishedDate(entry.getPublishedDate());
             item.setFeed(feed);
             feedItems.add(item);
         });

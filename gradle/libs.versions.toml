@@ -14,9 +14,9 @@ thymeleaf-layout = { group = "nz.net.ultraq.thymeleaf", name = "thymeleaf-layout
 
 webjars = { group = "org.webjars", name = "webjars-locator-core", version = "0.59" }
 htmx = { group = "org.webjars.npm", name="htmx.org", version = "2.0.4"}
-tailwind = { group = "org.webjars.npm", name="tailwindcss", version = "4.0.0-beta.3"}
+tailwind = { group = "org.webjars.npm", name="tailwindcss", version = "4.0.6"}
 flowbite = { group = "org.webjars.npm", name="flowbite", version = "2.5.2"}
-tiptap = { group = "org.webjars.npm", name="tiptap", version = "1.27.1"}
+tiptap = { group = "org.webjars.npm", name="tiptap", version = "1.32.2"}
 simple-datatables = { group = "org.webjars.npm", name="simple-datatables", version = "9.1.0"}
 
 ical4j = { group = "org.mnode.ical4j", name = "ical4j", version = "4.1.0"}
