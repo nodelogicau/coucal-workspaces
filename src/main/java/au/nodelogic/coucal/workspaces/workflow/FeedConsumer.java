@@ -5,6 +5,8 @@ import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.data.FeedRepository;
 import com.rometools.rome.feed.synd.SyndFeed;
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,10 +26,13 @@ public class FeedConsumer implements Consumer<SyndFeed> {
 
     private final FeedItemRepository feedItemRepository;
 
+    private final PolicyFactory htmlSanitizerPolicy;
+
     public FeedConsumer(Feed feed, FeedRepository feedRepository, FeedItemRepository feedItemRepository) {
         this.feed = feed;
         this.feedRepository = feedRepository;
         this.feedItemRepository = feedItemRepository;
+        this.htmlSanitizerPolicy = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
     }
 
     @Override
@@ -56,7 +61,7 @@ public class FeedConsumer implements Consumer<SyndFeed> {
             item.setTitle(entry.getTitle());
             item.setLink(entry.getLink());
             if (entry.getDescription() != null) {
-                item.setDescription(entry.getDescription().getValue());
+                item.setDescription(htmlSanitizerPolicy.sanitize(entry.getDescription().getValue()));
             }
             item.setPublishedDate(entry.getPublishedDate());
             item.setFeed(feed);
