@@ -18,6 +18,7 @@ package au.nodelogic.coucal.workspaces.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 import java.net.URL;
 
@@ -36,6 +37,9 @@ public class Feed {
     private URL link;
 
     private URL icon;
+
+    @OneToOne
+    private FeedCredentials credentials;
 
     public String getUri() {
         return uri;
@@ -83,6 +87,14 @@ public class Feed {
 
     public void setIcon(URL icon) {
         this.icon = icon;
+    }
+
+    public FeedCredentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(FeedCredentials credentials) {
+        this.credentials = credentials;
     }
 
     public Feed withUri(String uri) {
