@@ -26,7 +26,6 @@ import com.rometools.rome.io.FeedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +61,7 @@ public class FeedController extends AbstractLayoutController {
     public String listFeeds(Model model) throws IOException {
         populateModelForLayout("Coucal Feeds", model);
         model.addAttribute("feeds", feedRepository.findAll());
-        List<FeedItem> feedItems = feedItemRepository.findAll(Example.of(new FeedItem()));
+        List<FeedItem> feedItems = feedItemRepository.findAllByOrderByPublishedDate();
         Collections.reverse(feedItems);
         model.addAttribute("feedItems", feedItems);
         return "feeds/list";
