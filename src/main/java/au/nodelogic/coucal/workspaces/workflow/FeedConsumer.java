@@ -49,7 +49,7 @@ public class FeedConsumer implements Consumer<SyndFeed> {
         }
         if (syndFeed.getIcon() != null) {
             try {
-                feed.setIcon(URI.create(syndFeed.getIcon().getUrl()).toURL());
+                feed.setIcon(URI.create(syndFeed.getLink()).resolve(syndFeed.getIcon().getUrl()).toURL());
             } catch (MalformedURLException e) {
                 LOGGER.warn("Invalid icon link {}", syndFeed.getIcon().getUrl());
             }

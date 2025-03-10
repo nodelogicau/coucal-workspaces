@@ -73,7 +73,7 @@ public class FeedService {
         if (feed.getIcon() == null) {
             SyndImage icon = new SyndImageImpl();
             try {
-                icon.setUrl(getIcon(feed.getLink()));
+                icon.setUrl(getIcon(url.toURI().resolve(feed.getLink()).toString()));
                 feed.setIcon(icon);
             } catch (Exception e) {
                 // some feeds provide a "self" link which doesn't include an icon.. try again without URL path..
