@@ -43,16 +43,16 @@
     <ul>
         <li th:each="feedItem, iStat : ${feedItems}">
             <img src="#" th:src="${feedItem.feed.icon}" class="inline size-8">
-            <span th:text="${feedItem.feed.title}"></span>
+            <span th:text="${#strings.abbreviate(feedItem.feed.title, 14)}"></span>
             -
-            <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feedItem-${iStat.index}|"
-               th:data-popover-target="|popover-feedItem-${iStat.index}|"></a>
+            <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feed-item${iStat.index}|"
+               th:data-popover-target="|popover-feed-item${iStat.index}|"></a>
             <span th:text="${dateFormatter.format(feedItem.publishedDate)}"
-                  th:data-popover-target="|popover-feedItem-${iStat.index}|" class="px-6 py-4">
+                  th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-trigger="hover" class="px-6 py-4">
                 Today
             </span>
 
-            <div data-popover th:id="|popover-feedItem-${iStat.index}|" role="tooltip"
+            <div data-popover th:id="|popover-feed-item${iStat.index}|" role="tooltip"
                  class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                 <div class="p-3">
                     <th:block th:utext="${feedItem.description}"></th:block>
