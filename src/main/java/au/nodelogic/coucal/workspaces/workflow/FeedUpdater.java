@@ -18,7 +18,6 @@ package au.nodelogic.coucal.workspaces.workflow;
 
 import au.nodelogic.coucal.workspaces.channel.FeedService;
 import au.nodelogic.coucal.workspaces.data.Feed;
-import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.data.FeedRepository;
 import com.rometools.rome.io.FeedException;
@@ -29,7 +28,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -53,7 +51,6 @@ public class FeedUpdater {
     @Scheduled(fixedRate = 60 * 60 * 1000)
     public void refreshFeeds() {
         List<Feed> feeds = feedRepository.findAll();
-        List<FeedItem> feedItems = new ArrayList<>();
         feeds.forEach(feed -> {
             try {
                 feedService.refreshFeed(feed.getSource(),
@@ -62,7 +59,5 @@ public class FeedUpdater {
                 throw new RuntimeException(e);
             }
         });
-        feedRepository.saveAll(feeds);
-        feedItemRepository.saveAll(feedItems);
     }
 }
