@@ -101,6 +101,11 @@ public class FeedItem {
         this.publishedDate = publishedDate;
     }
 
+    public FeedItem withUri(String uri) {
+        setUri(uri);
+        return this;
+    }
+
     public FeedItem withFeed(Feed feed) {
         setFeed(feed);
         return this;

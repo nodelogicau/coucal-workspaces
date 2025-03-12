@@ -46,9 +46,8 @@
             <span th:text="${#strings.abbreviate(feedItem.feed.title, 14)}"></span>
             -
             <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feed-item${iStat.index}|"
-               th:data-popover-target="|popover-feed-item${iStat.index}|"></a>
-            <span th:text="${dateFormatter.format(feedItem.publishedDate)}"
-                  th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-trigger="hover" class="px-6 py-4">
+               th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-placement="right"></a>
+            <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-6 py-4">
                 Today
             </span>
 
@@ -61,6 +60,7 @@
             </div>
         </li>
     </ul>
+    <script>initFlowbite();</script>
 </div>
 
 <div th:fragment="addFeed" th:replace="~{fragments/ui/container::panel(~{::form#add-feed})}">
