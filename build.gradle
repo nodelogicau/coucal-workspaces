@@ -37,7 +37,7 @@ dependencies {
             libs.spring.boot.devtools, libs.webjars, libs.htmx, libs.tailwind, libs.flowbite, libs.tiptap,
             libs.simple.datatables, libs.ical4j.template
 
-    testImplementation platform(libs.spock.bom), libs.spock.core
+    testImplementation platform(libs.spock.bom), libs.spock.core, libs.spring.boot.test
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
