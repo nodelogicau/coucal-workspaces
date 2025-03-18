@@ -58,13 +58,6 @@ public class WorkspacesMain {
         if (new File(System.getProperty("user.dir"), "build/collections").mkdirs()) {
             
         }
-//        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-//            try {
-//                Desktop.getDesktop().browse(new URI("http://localhost:8080"));
-//            } catch (IOException | URISyntaxException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
         SpringApplication.run(WorkspacesMain.class, args);
     }
 }
