@@ -64,7 +64,7 @@
                                th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-placement="right"></a>
                         </td>
                         <td class="px-2 py-1">
-                        <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-2 py-1">
+                        <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-2 py-1 text-nowrap">
                             Published Date
                         </span>
                         </td>
@@ -95,7 +95,9 @@
             <h2 th:replace="~{fragments/ui/accordion::aheading('feed-yesterday', ~{::span#title-yesterday})}">
                 <span id="title-yesterday">Yesterday</span>
             </h2>
-            <div id="accordion-body-feed-yesterday"></div>
+            <div id="accordion-body-feed-yesterday">
+                
+            </div>
             <h2 th:replace="~{fragments/ui/accordion::aheading('feed-older', ~{::span#title-older})}">
                 <span id="title-older">Older Items</span>
             </h2>
