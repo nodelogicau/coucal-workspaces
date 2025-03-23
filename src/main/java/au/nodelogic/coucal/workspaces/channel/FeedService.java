@@ -16,14 +16,13 @@
 
 package au.nodelogic.coucal.workspaces.channel;
 
+import au.nodelogic.coucal.workspaces.util.HtmlParser;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.feed.synd.SyndImage;
 import com.rometools.rome.feed.synd.SyndImageImpl;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,6 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 @Service
@@ -53,11 +51,7 @@ public class FeedService {
                 SyndFeed feed = getFeed(source);
                 feedUrls.add(url);
             } catch (IOException | FeedException e) {
-                Document doc = Jsoup.connect(url).followRedirects(true).get();
-                doc.select("link[type=application/rss+xml], link[type=application/atom+xml]").forEach(element -> {
-                    feedUrls.add(URI.create(url).resolve(
-                            Objects.requireNonNull(element.attribute("href")).getValue()).toString());
-                });
+                feedUrls.addAll(HtmlParser.getFeeds(url));
             }
         }
         return feedUrls;
@@ -73,13 +67,13 @@ public class FeedService {
         if (feed.getIcon() == null) {
             SyndImage icon = new SyndImageImpl();
             try {
-                icon.setUrl(getIcon(url.toURI().resolve(feed.getLink()).toString()));
+                icon.setUrl(HtmlParser.getIcon(url.toURI().resolve(feed.getLink()).toString()));
                 feed.setIcon(icon);
             } catch (Exception e) {
                 // some feeds provide a "self" link which doesn't include an icon.. try again without URL path..
                 try {
                     URL root = new URI(url.getProtocol(), null, url.getHost(), url.getPort(), null, null, null).toURL();
-                    icon.setUrl(getIcon(root.toString()));
+                    icon.setUrl(HtmlParser.getIcon(root.toString()));
                     feed.setIcon(icon);
                 } catch (Exception e2) {
                     LOGGER.warn("Unable to load icon: {}", feed.getLink());
@@ -87,11 +81,5 @@ public class FeedService {
             }
         }
         return feed;
-    }
-
-    private String getIcon(String url) throws IOException {
-        Document doc = Jsoup.connect(url).followRedirects(true).get();
-            return URI.create(url).resolve(Objects.requireNonNull(doc.select("link[rel=icon], link[rel=shortcut icon], link[rel=icon shortcut]").stream()
-                    .findFirst().orElseThrow().attribute("href")).getValue()).toString();
     }
 }
