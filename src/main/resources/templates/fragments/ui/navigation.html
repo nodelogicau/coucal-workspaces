@@ -25,14 +25,16 @@
     <div class="flex flex-wrap justify-between items-center">
         <div class="flex justify-start items-center gap-2">
             <button th:replace="~{fragments/ui/button::toggle_drawer(navigation)}">Toggle sidebar</button>
-            <a href="/" class="flex items-center justify-between mr-4">
-                <img src="/images/coucal-logo.png" class="mr-3 h-12 rounded-full" alt="Coucal Logo"/>
-                <span th:text="${title}" class="self-center hidden md:inline text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
-            </a>
-            <button onclick="history.back()" class="text-gray-400 hover:text-white">
+            <button onclick="history.go(0)" title="Refresh">
+                <img src="/images/coucal-logo.png" class="h-12 rounded-full" alt="Coucal Logo"/>
+            </button>
+            <button onclick="history.back()" title="Back" class="text-gray-400 hover:text-white">
                 <th:block th:replace="~{fragments/ui/icon::chevron-left}"></th:block>
             </button>
-            <button onclick="history.forward()" class="text-gray-400 hover:text-white">
+            <a href="/" title="Home">
+                <span th:text="${title}" class="self-center hidden md:inline text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
+            </a>
+            <button onclick="history.forward()" title="Forward" class="text-gray-400 hover:text-white">
                 <th:block th:replace="~{fragments/ui/icon::chevron}" th:classappend="hover:text-white"></th:block>
             </button>
         </div>
@@ -40,6 +42,11 @@
             <div class="p-2">
                 <a href="https://www.coucal.org/workspaces" target="_blank" alt="Coucal Support">
                     <th:block th:replace="~{fragments/ui/icon::help}"></th:block>
+                </a>
+            </div>
+            <div class="p-2">
+                <a href="#" target="_blank" alt="Settings">
+                    <th:block th:replace="~{fragments/ui/icon::settings}"></th:block>
                 </a>
             </div>
             <th:block th:replace="~{fragments/workspace::switcher}"></th:block>
