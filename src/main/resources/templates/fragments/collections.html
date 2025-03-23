@@ -23,8 +23,11 @@
 <body>
 
 <th:block th:fragment="listCollections">
+    <h2 class="inline-block p-4 mt-4 border-t border-gray-200 dark:border-gray-700 text-2xl"
+        th:text="${#strings.abbreviate('My Workspace', 14)}">[WORKSPACE]</h2>
+    <div th:replace="~{fragments/workspace::add}"></div>
     <ul id="collection-list" hx-get="/collections" hx-trigger="collectionsRefresh from:body"
-        class="pt-4 mt-4 space-y-1 font-medium border-t border-gray-200 dark:border-gray-700">
+        class="space-y-1 font-medium">
         <li th:each="collection, iStat : ${collections}">
             <a href="#" th:hx-get="|/collections/${collection.displayName}|" hx-trigger="click"
                hx-target="#content-root" th:hx-push-url="|/view/collection/${collection.displayName}|"
