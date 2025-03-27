@@ -40,7 +40,7 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="p-4 md:p-5 text-center">
-                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
@@ -88,163 +88,206 @@
     </div>
 </div>
 
-<div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::panel(~{::form#add-content})}">
-    <form id="add-content"
-          th:hx-post="|/entries/${collection}/|" hx-target="#entry-view"
-          hx-on::after-request="if(event.detail.successful) this.reset()">
-        <label>
-            <select id="typeSelect" name="concept" hx-trigger="change" hx-get="/create/">
-                <option disabled selected value> -- select a type -- </option>
-                <optgroup label="Actions">
-                    <option value="semcal:concept:action">Action</option>
-                    <option value="semcal:concept:action">Agenda</option>
-                    <option value="semcal:concept:action">Milestone</option>
-                    <option value="semcal:concept:action">Project</option>
-                    <option value="semcal:concept:action">Review</option>
-                    <option value="semcal:concept:action">Task</option>
-                </optgroup>
-                <optgroup label="Availability">
-                    <option value="semcal:concept:availability">Availability</option>
-                    <option value="semcal:concept:availability">Offer</option>
-                    <option value="semcal:concept:availability">Office Hours</option>
-                    <option value="semcal:concept:availability">Out Of Office</option>
-                </optgroup>
-                <optgroup label="Events">
-                    <option value="semcal:concept:event">Appointment</option>
-                    <option value="semcal:concept:event">Conference</option>
-                    <option value="semcal:concept:event">Event</option>
-                    <option value="semcal:concept:event">Fixture</option>
-                    <option value="semcal:concept:event">Meeting</option>
-                    <option value="semcal:concept:event">Performance</option>
-                    <option value="semcal:concept:event">Seminar</option>
-                </optgroup>
-                <optgroup label="Issues">
-                    <option value="semcal:concept:issue">Improvement</option>
-                    <option value="semcal:concept:issue">Incident</option>
-                    <option value="semcal:concept:issue">Issue</option>
-                    <option value="semcal:concept:issue">Risk</option>
-                </optgroup>
-                <optgroup label="Notes">
-                    <option value="semcal:concept:note">Assumption</option>
-                    <option value="semcal:concept:note">Comment</option>
-                    <option value="semcal:concept:note">Decision</option>
-                    <option value="semcal:concept:note">DefinedTerms</option>
-                    <option value="semcal:concept:note">Note</option>
-                    <option value="semcal:concept:note">Objective</option>
-                </optgroup>
-                <optgroup label="Observances">
-                    <option value="semcal:concept:observance">Anniversary</option>
-                    <option value="semcal:concept:observance">Observance</option>
-                    <option value="semcal:concept:observance">Reservation</option>
-                    <option value="semcal:concept:observance">Sprint</option>
-                    <option value="semcal:concept:observance">Subscription</option>
-                </optgroup>
-                <optgroup label="Reports">
-                    <option value="semcal:concept:report">Attendance</option>
-                    <option value="semcal:concept:report">Budget</option>
-                    <option value="semcal:concept:report">Expense</option>
-                    <option value="semcal:concept:report">Report</option>
-                    <option value="semcal:concept:report">Timesheet</option>
-                </optgroup>
-                <optgroup label="Requests">
-                    <option value="semcal:concept:request">Approval</option>
-                    <option value="semcal:concept:request">Fault</option>
-                    <option value="semcal:concept:request">Order</option>
-                    <option value="semcal:concept:request">Request</option>
-                </optgroup>
-                <optgroup label="Resources">
-                    <option value="semcal:concept:resources">Application</option>
-                    <option value="semcal:concept:resources">Book</option>
-                    <option value="semcal:concept:resources">Collection</option>
-                    <option value="semcal:concept:resources">ConfigurationItem</option>
-                    <option value="semcal:concept:resources">Property</option>
-                    <option value="semcal:concept:resources">Resource</option>
-                    <option value="semcal:concept:resources">WebSite</option>
-                </optgroup>
-            </select>
-            <script>
-                function toggleInputs() {
-                    if (['semcal:concept:event','semcal:concept:observance','semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('startDate').style.display = 'inline';
-                    } else {
-                        document.getElementById('startDate').style.display = 'none';
-                    }
+<div th:fragment="addContent(collection)" th:replace="~{fragments/ui/container::panel(~{::div#add-content})}">
+    <div id="add-content">
 
-                    if (['semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('endDate').style.display = 'inline';
-                    } else {
-                        document.getElementById('endDate').style.display = 'none';
-                    }
+        <div th:fragment="default" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px" hx-target="#create-form" hx-swap="outerHTML">
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:action|">Action</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:availability|">Availability</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:event|">Event</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" hx-get="|/create/${collection}?concept=semcal:concept:issue|">Issue</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:note|">Note</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:observance|">Observance</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:report|">Report</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:request|">Request</a>
+                </li>
+                <li class="me-2">
+                    <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                       hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:resource|">Resource</a>
+                </li>
+            </ul>
+        </div>
 
-                    if (['semcal:concept:event'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('duration').style.display = 'inline';
-                    } else {
-                        document.getElementById('duration').style.display = 'none';
-                    }
+        <form id="create-form" th:hx-post="|/entries/${collection}/|" hx-target="#entry-view"
+              hx-on::after-request="if(event.detail.successful) this.reset()">
+<!--            <label>-->
+<!--                <select id="typeSelect" name="concept" hx-trigger="change" hx-get="/create/">-->
+<!--                    <option disabled selected value> &#45;&#45; select a type &#45;&#45; </option>-->
+<!--                    <optgroup label="Actions">-->
+<!--                        <option value="semcal:concept:action">Action</option>-->
+<!--                        <option value="semcal:concept:action">Agenda</option>-->
+<!--                        <option value="semcal:concept:action">Milestone</option>-->
+<!--                        <option value="semcal:concept:action">Project</option>-->
+<!--                        <option value="semcal:concept:action">Review</option>-->
+<!--                        <option value="semcal:concept:action">Task</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Availability">-->
+<!--                        <option value="semcal:concept:availability">Availability</option>-->
+<!--                        <option value="semcal:concept:availability">Offer</option>-->
+<!--                        <option value="semcal:concept:availability">Office Hours</option>-->
+<!--                        <option value="semcal:concept:availability">Out Of Office</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Events">-->
+<!--                        <option value="semcal:concept:event">Appointment</option>-->
+<!--                        <option value="semcal:concept:event">Conference</option>-->
+<!--                        <option value="semcal:concept:event">Event</option>-->
+<!--                        <option value="semcal:concept:event">Fixture</option>-->
+<!--                        <option value="semcal:concept:event">Meeting</option>-->
+<!--                        <option value="semcal:concept:event">Performance</option>-->
+<!--                        <option value="semcal:concept:event">Seminar</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Issues">-->
+<!--                        <option value="semcal:concept:issue">Improvement</option>-->
+<!--                        <option value="semcal:concept:issue">Incident</option>-->
+<!--                        <option value="semcal:concept:issue">Issue</option>-->
+<!--                        <option value="semcal:concept:issue">Risk</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Notes">-->
+<!--                        <option value="semcal:concept:note">Assumption</option>-->
+<!--                        <option value="semcal:concept:note">Comment</option>-->
+<!--                        <option value="semcal:concept:note">Decision</option>-->
+<!--                        <option value="semcal:concept:note">DefinedTerms</option>-->
+<!--                        <option value="semcal:concept:note">Note</option>-->
+<!--                        <option value="semcal:concept:note">Objective</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Observances">-->
+<!--                        <option value="semcal:concept:observance">Anniversary</option>-->
+<!--                        <option value="semcal:concept:observance">Observance</option>-->
+<!--                        <option value="semcal:concept:observance">Reservation</option>-->
+<!--                        <option value="semcal:concept:observance">Sprint</option>-->
+<!--                        <option value="semcal:concept:observance">Subscription</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Reports">-->
+<!--                        <option value="semcal:concept:report">Attendance</option>-->
+<!--                        <option value="semcal:concept:report">Budget</option>-->
+<!--                        <option value="semcal:concept:report">Expense</option>-->
+<!--                        <option value="semcal:concept:report">Report</option>-->
+<!--                        <option value="semcal:concept:report">Timesheet</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Requests">-->
+<!--                        <option value="semcal:concept:request">Approval</option>-->
+<!--                        <option value="semcal:concept:request">Fault</option>-->
+<!--                        <option value="semcal:concept:request">Order</option>-->
+<!--                        <option value="semcal:concept:request">Request</option>-->
+<!--                    </optgroup>-->
+<!--                    <optgroup label="Resources">-->
+<!--                        <option value="semcal:concept:resources">Application</option>-->
+<!--                        <option value="semcal:concept:resources">Book</option>-->
+<!--                        <option value="semcal:concept:resources">Collection</option>-->
+<!--                        <option value="semcal:concept:resources">ConfigurationItem</option>-->
+<!--                        <option value="semcal:concept:resources">Property</option>-->
+<!--                        <option value="semcal:concept:resources">Resource</option>-->
+<!--                        <option value="semcal:concept:resources">WebSite</option>-->
+<!--                    </optgroup>-->
+<!--                </select>-->
+<!--                <script>-->
+<!--                    function toggleInputs() {-->
+<!--                        if (['semcal:concept:event','semcal:concept:observance','semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('startDate').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('startDate').style.display = 'none';-->
+<!--                        }-->
 
-                    if (['semcal:concept:action'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('due').style.display = 'inline';
-                    } else {
-                        document.getElementById('due').style.display = 'none';
-                    }
+<!--                        if (['semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('endDate').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('endDate').style.display = 'none';-->
+<!--                        }-->
 
-                    if (['semcal:concept:event','semcal:concept:observance','semcal:concept:report',
-                        'semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('repeats').style.display = 'inline';
-                    } else {
-                        document.getElementById('repeats').style.display = 'none';
-                    }
+<!--                        if (['semcal:concept:event'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('duration').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('duration').style.display = 'none';-->
+<!--                        }-->
 
-                    if (['semcal:concept:note','semcal:concept:resources'].includes(document.getElementById('typeSelect').value)) {
-                        document.getElementById('link').style.display = 'inline';
-                    } else {
-                        document.getElementById('link').style.display = 'none';
-                    }
-                }
-            </script>
-        </label>
-        <label>
-            <input name="summary" placeholder="Summary.." size="64" required>
-        </label>
-        <button type="submit" th:replace="~{fragments/ui/button::submit('Add')}">Add</button>
-        <a href="#">More..</a>
-        <br/>
-        <label id="startDate">
-            Start
-            <input type="date" name="dtstart">
-        </label>
-        <label id="endDate">
-            End
-            <input type="date" name="dtend">
-        </label>
-        <label id="duration">
-            <select name="duration">
-                <option disabled selected value>Select duration..</option>
-                <option value="PT30M">30m</option>
-                <option value="PT1H">1h</option>
-                <option value="PT1H30M">1.5h</option>
-                <option value="PT2H">2h</option>
-            </select>
-        </label>
-        <label id="due">
-            Due
-            <input type="datetime-local" name="due">
-        </label>
-        <label id="repeats">
-            Repeats
-            <select name="rrule">
-                <option disabled selected value>Select recurrence..</option>
-                <option value="FREQ=DAILY">Daily</option>
-                <option value="FREQ=WEEKLY">Weekly</option>
-                <option value="FREQ=WEEKLY;INTERVAL=2">Fortnightly</option>
-                <option value="FREQ=MONTHLY">Monthly</option>
-                <option value="FREQ=YEARLY">Annually</option>
-            </select>
-        </label>
-        <label id="link">
-            <input type="url" name="link[value:uri]" placeholder="Link.." size="64">
-        </label>
-    </form>
+<!--                        if (['semcal:concept:action'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('due').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('due').style.display = 'none';-->
+<!--                        }-->
+
+<!--                        if (['semcal:concept:event','semcal:concept:observance','semcal:concept:report',-->
+<!--                            'semcal:concept:availability'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('repeats').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('repeats').style.display = 'none';-->
+<!--                        }-->
+
+<!--                        if (['semcal:concept:note','semcal:concept:resources'].includes(document.getElementById('typeSelect').value)) {-->
+<!--                            document.getElementById('link').style.display = 'inline';-->
+<!--                        } else {-->
+<!--                            document.getElementById('link').style.display = 'none';-->
+<!--                        }-->
+<!--                    }-->
+<!--                </script>-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                <input name="summary" placeholder="Summary.." size="64" required>-->
+<!--            </label>-->
+<!--            <button type="submit" th:replace="~{fragments/ui/button::submit('Add')}">Add</button>-->
+<!--            <a href="#">More..</a>-->
+<!--            <br/>-->
+<!--            <label id="startDate">-->
+<!--                Start-->
+<!--                <input type="date" name="dtstart">-->
+<!--            </label>-->
+<!--            <label id="endDate">-->
+<!--                End-->
+<!--                <input type="date" name="dtend">-->
+<!--            </label>-->
+<!--            <label id="duration">-->
+<!--                <select name="duration">-->
+<!--                    <option disabled selected value>Select duration..</option>-->
+<!--                    <option value="PT30M">30m</option>-->
+<!--                    <option value="PT1H">1h</option>-->
+<!--                    <option value="PT1H30M">1.5h</option>-->
+<!--                    <option value="PT2H">2h</option>-->
+<!--                </select>-->
+<!--            </label>-->
+<!--            <label id="due">-->
+<!--                Due-->
+<!--                <input type="datetime-local" name="due">-->
+<!--            </label>-->
+<!--            <label id="repeats">-->
+<!--                Repeats-->
+<!--                <select name="rrule">-->
+<!--                    <option disabled selected value>Select recurrence..</option>-->
+<!--                    <option value="FREQ=DAILY">Daily</option>-->
+<!--                    <option value="FREQ=WEEKLY">Weekly</option>-->
+<!--                    <option value="FREQ=WEEKLY;INTERVAL=2">Fortnightly</option>-->
+<!--                    <option value="FREQ=MONTHLY">Monthly</option>-->
+<!--                    <option value="FREQ=YEARLY">Annually</option>-->
+<!--                </select>-->
+<!--            </label>-->
+<!--            <label id="link">-->
+<!--                <input type="url" name="link[value:uri]" placeholder="Link.." size="64">-->
+<!--            </label>-->
+        </form>
+    </div>
 </div>
 
 <div th:fragment="renderContent(entry)" class="flex">
