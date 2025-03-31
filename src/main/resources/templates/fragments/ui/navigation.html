@@ -38,6 +38,10 @@
                 <th:block th:replace="~{fragments/ui/icon::chevron}" th:classappend="hover:text-white"></th:block>
             </button>
         </div>
+        <div>
+            <input type="text" placeholder="Search..."
+                   class="w-24 focus:w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        </div>
         <div class="flex">
             <div class="p-2">
                 <th:block th:replace="~{fragments/ui/clock::clock}"></th:block>
