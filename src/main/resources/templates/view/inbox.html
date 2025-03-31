@@ -21,8 +21,9 @@
 
 <body>
 <main layout:fragment="content">
-    <nav th:replace="~{fragments/ui/breadcrumb::inbox}"></nav>
-    <th:block th:replace="~{fragments/inbox::overview}"></th:block>
+    <div th:replace="~{fragments/inbox::ribbon}"></div>
+    <!--    <nav th:replace="~{fragments/ui/breadcrumb::inbox}"></nav>-->
+<!--    <th:block th:replace="~{fragments/inbox::overview}"></th:block>-->
 </main>
 </body>
 </html>

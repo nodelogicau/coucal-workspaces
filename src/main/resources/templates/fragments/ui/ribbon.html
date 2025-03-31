@@ -15,13 +15,16 @@
 -->
 
 <!doctype html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 <body>
-<main layout:fragment="content">
-    <div th:replace="~{fragments/entity/entities::ribbon}"></div>
-</main>
+
+<div th:fragment="ribbon(fragment)"
+     class="block p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <th:block th:replace="${fragment}">Panel Content</th:block>
+</div>
+
 </body>
 </html>
