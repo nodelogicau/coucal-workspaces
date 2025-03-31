@@ -25,7 +25,8 @@
     <link rel="shortcut icon" href="/images/favicon.ico" sizes="16x16 32x32 48x48">
 <!--    <script src="https://cdn.tailwindcss.com"></script>-->
     <link rel="stylesheet" href="/main.css">
-<!--    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />-->
+<!--    <link th:href="@{/webjars/flowbite/dist/flowbite.min.css}"-->
+<!--           href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />-->
 <!--    <style>-->
 <!--        body {-->
 <!--            display: grid;-->
@@ -46,7 +47,7 @@
 </head>
 
 <body>
-<div class="antialiased bg-gray-50 dark:bg-gray-900">
+<div class="antialiased text-gray-400 dark:text-white bg-gray-50 dark:bg-gray-900">
     <nav th:replace="~{fragments/ui/navigation :: navbar}">
         [NAVBAR]
     </nav>
