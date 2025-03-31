@@ -64,7 +64,7 @@ public class FeedController extends AbstractLayoutController {
         List<FeedItem> feedItems = feedItemRepository.findAllByOrderByPublishedDate();
         Collections.reverse(feedItems);
         model.addAttribute("feedItems", feedItems);
-        return "feeds/list";
+        return "feeds/index";
     }
 
     @PostMapping("/")

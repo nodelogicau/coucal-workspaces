@@ -68,7 +68,7 @@ public class EntriesController {
         }
         model.addAttribute("collection", collection);
         model.addAttribute("dateFormatter", new PrettyTime());
-        return "entries/list";
+        return "entries/index";
     }
 
     /**
@@ -97,9 +97,10 @@ public class EntriesController {
                 break;
             case "semcal:concept:note":
             case "semcal:concept:report":
-                VJournal note = mapper.convertValue(data, VJournal.class);
-                note.add(new RandomUidGenerator().generateUid());
-                collection.add(Calendars.wrap(note));
+            case "semcal:concept:resource":
+                VJournal journal = mapper.convertValue(data, VJournal.class);
+                journal.add(new RandomUidGenerator().generateUid());
+                collection.add(Calendars.wrap(journal));
                 break;
             case "semcal:concept:availability":
                 VAvailability availability = mapper.convertValue(data, VAvailability.class);

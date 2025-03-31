@@ -44,7 +44,7 @@ public class FeedItemController {
         }
         model.addAttribute("dateFormatter", new PrettyTime());
         model.addAttribute("feedItems", feedItems);
-        return "feedItems/list";
+        return "feedItems/index";
     }
 
     @GetMapping("/{filter}")
@@ -75,7 +75,7 @@ public class FeedItemController {
         };
         model.addAttribute("dateFormatter", new PrettyTime());
         model.addAttribute("feedItems", feedItems);
-        return "feedItems/list";
+        return "feedItems/index";
     }
 
     @GetMapping("/{feedUri}/{feedItemUri}")

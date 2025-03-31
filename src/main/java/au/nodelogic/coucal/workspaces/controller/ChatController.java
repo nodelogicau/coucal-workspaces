@@ -30,7 +30,6 @@ public class ChatController extends AbstractLayoutController {
     @GetMapping("/")
     public String listTopics(Model model) throws IOException {
         populateModelForLayout("Coucal Chat", model);
-//        model.addAttribute("feeds", feedRepository.findAll());
-        return "chat/list";
+        return "chat/index";
     }
 }
