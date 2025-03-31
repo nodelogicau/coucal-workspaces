@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class FeedConsumer implements Consumer<SyndFeed> {
@@ -56,16 +57,21 @@ public class FeedConsumer implements Consumer<SyndFeed> {
         }
         List<FeedItem> feedItems = new ArrayList<>();
         syndFeed.getEntries().forEach(entry -> {
-            FeedItem item = new FeedItem();
-            item.setUri(entry.getUri());
-            item.setTitle(entry.getTitle());
-            item.setLink(entry.getLink());
-            if (entry.getDescription() != null) {
-                item.setDescription(htmlSanitizerPolicy.sanitize(entry.getDescription().getValue()));
+            try {
+                FeedItem item = new FeedItem();
+                //identity field is mandatory..
+                item.setUri(Objects.requireNonNull(entry.getUri()));
+                item.setTitle(entry.getTitle());
+                item.setLink(entry.getLink());
+                if (entry.getDescription() != null) {
+                    item.setDescription(htmlSanitizerPolicy.sanitize(entry.getDescription().getValue()));
+                }
+                item.setPublishedDate(entry.getPublishedDate());
+                item.setFeed(feed);
+                feedItems.add(item);
+            } catch (Exception e) {
+                LOGGER.warn("Invalid feed entry {}", entry.getUri());
             }
-            item.setPublishedDate(entry.getPublishedDate());
-            item.setFeed(feed);
-            feedItems.add(item);
         });
         feedRepository.save(feed);
         feedItemRepository.saveAll(feedItems);
