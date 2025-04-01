@@ -21,25 +21,19 @@
 </head>
 <body>
 
-<div th:fragment="default" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
-    <ul class="flex flex-wrap -mb-px">
+<div th:fragment="default">
+    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <li class="me-2">
-            <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
-                <span>Filter</span>
-            </a>
+            <a href="#" aria-current="page" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">Calendar</a>
         </li>
         <li class="me-2">
-            <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
-                <span>View</span>
-            </a>
+            <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Planner</a>
         </li>
         <li class="me-2">
-            <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                <th:block th:replace="~{fragments/ui/icon::settings}"></th:block>
-                <span>Options</span>
-            </a>
+            <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Journal</a>
+        </li>
+        <li class="me-2">
+            <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Tracker</a>
         </li>
     </ul>
 </div>
