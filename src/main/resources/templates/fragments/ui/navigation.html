@@ -32,16 +32,17 @@
                 <th:block th:replace="~{fragments/ui/icon::chevron-left}"></th:block>
             </button>
             <a href="/" title="Home">
-                <span th:text="${title}" class="self-center hidden md:inline text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
+                <span th:text="${title}" class="line-through decoration-6 decoration-black dark:decoration-gray-800 self-center hidden md:inline text-3xl font-light whitespace-nowrap text-gray-100">Coucal Workspaces</span>
             </a>
             <button onclick="history.forward()" title="Forward" class="text-gray-400 hover:text-white">
                 <th:block th:replace="~{fragments/ui/icon::chevron}" th:classappend="hover:text-white"></th:block>
             </button>
         </div>
-        <div>
-            <input type="text" placeholder="Search..."
-                   class="w-24 focus:w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-        </div>
+        <div th:replace="~{fragments/ui/search::searchbar}"></div>
+<!--        <div>-->
+<!--            <input type="text" placeholder="Search..."-->
+<!--                   class="w-24 focus:w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />-->
+<!--        </div>-->
         <div class="flex">
             <div class="p-2">
                 <th:block th:replace="~{fragments/ui/clock::clock}"></th:block>
