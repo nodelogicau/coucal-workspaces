@@ -27,8 +27,8 @@
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
         <ul class="flex flex-wrap -mb-px">
             <li class="me-2">
-                <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                    <th:block th:replace="~{fragments/ui/icon::hashtag}"></th:block>
+                <a href="#" class="font-bold flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page"
+                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/collection|">
                     <span>Collection</span>
                 </a>
             </li>
@@ -69,67 +69,52 @@
 <!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:resource|">Resource</a>-->
 <!--            </li>-->
             <li class="me-2">
-                <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                    <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
+                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/edit|">
                     <span>Edit</span>
                 </a>
             </li>
             <li class="me-2">
-                <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                    <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
+                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/filter|">
                     <span>Filter</span>
                 </a>
             </li>
             <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
+                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/view|">
                     <span>View</span>
                 </a>
             </li>
             <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <th:block th:replace="~{fragments/ui/icon::settings}"></th:block>
+                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/options|">
                     <span>Options</span>
                 </a>
             </li>
         </ul>
-    </div>
 
-    <div class="sm:hidden">
-        <label for="concept" class="sr-only">Select type</label>
-        <select id="concept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option>Action</option>
-            <option>Event</option>
-            <option>Issue</option>
-            <option>Note</option>
-        </select>
+        <table>
+            <tbody>
+            <tr>
+                <td class="border-r">Action</td>
+                <td class="border-r">Event</td>
+                <td class="border-r">Issue</td>
+                <td class="border-r">Note</td>
+                <td>Reminder</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <th class="border-r">Action</th>
+                <th class="border-r">Event</th>
+                <th class="border-r">Issue</th>
+                <th class="border-r">Note</th>
+                <th>Reminder</th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
-    <ul class="text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm sm:flex dark:divide-gray-700 dark:text-gray-400">
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" aria-current="page">Action</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Availability</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Event</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Issue</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Note</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Reminder</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-r border-gray-200 dark:border-gray-700 hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Report</a>
-        </li>
-        <li class="w-full focus-within:z-10">
-            <a href="#" class="inline-block w-full p-4 bg-white border-s-0 border-gray-200 dark:border-gray-700 rounded-e-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">Resource</a>
-        </li>
-    </ul>
 </div>
 
 <div th:fragment="listContent" id="entry-list">

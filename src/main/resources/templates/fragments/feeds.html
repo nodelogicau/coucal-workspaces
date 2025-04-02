@@ -23,41 +23,52 @@
 
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs">
-        <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
+        <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px">
                 <li class="me-2">
-                    <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                        <th:block th:replace="~{fragments/ui/icon::add}"></th:block>
+                    <a href="#" class="font-bold flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
                         <span>Feed</span>
                     </a>
                 </li>
                 <li class="me-2">
                     <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                        <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
                         <span>Edit</span>
                     </a>
                 </li>
                 <li class="me-2">
-                    <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                        <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
+                    <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
                         <span>Filter</span>
                     </a>
                 </li>
                 <li class="me-2">
                     <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                        <th:block th:replace="~{fragments/ui/icon::list}"></th:block>
                         <span>View</span>
                     </a>
                 </li>
                 <li class="me-2">
                     <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                        <th:block th:replace="~{fragments/ui/icon::settings}"></th:block>
                         <span>Options</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div th:replace="~{::addFeed}"></div>
+
+        <table>
+            <tbody>
+            <tr>
+                <td class="border-r">
+                    <div th:replace="~{::addFeed}"></div>
+                </td>
+                <td>Unsubscribe/Pause</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <th class="border-r">New</th>
+                <th>Selected</th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 
@@ -148,8 +159,7 @@
 
 <div th:fragment="addFeed">
     <form id="add-feed" hx-post="/feeds/">
-        <h3>Add Feed</h3>
-        <input type="url" name="feedUrl" placeholder="URL">
+        <input type="url" name="feedUrl" placeholder="Web Address">
     </form>
 </div>
 
