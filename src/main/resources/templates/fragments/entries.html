@@ -28,8 +28,8 @@
         <ul class="flex flex-wrap -mb-px">
             <li class="me-2">
                 <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                    <th:block th:replace="~{fragments/ui/icon::add}"></th:block>
-                    <span>Create</span>
+                    <th:block th:replace="~{fragments/ui/icon::hashtag}"></th:block>
+                    <span>Collection</span>
                 </a>
             </li>
 <!--            <li class="me-2">-->
@@ -71,6 +71,12 @@
             <li class="me-2">
                 <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
                     <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
+                    <span>Edit</span>
+                </a>
+            </li>
+            <li class="me-2">
+                <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
+                    <th:block th:replace="~{fragments/ui/icon::filter}"></th:block>
                     <span>Filter</span>
                 </a>
             </li>
@@ -98,7 +104,7 @@
             <option>Note</option>
         </select>
     </div>
-    <ul class="hidden text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm sm:flex dark:divide-gray-700 dark:text-gray-400">
+    <ul class="text-sm font-medium text-center text-gray-500 rounded-lg shadow-sm sm:flex dark:divide-gray-700 dark:text-gray-400">
         <li class="w-full focus-within:z-10">
             <a href="#" class="inline-block w-full p-4 text-gray-900 bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-s-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white" aria-current="page">Action</a>
         </li>
