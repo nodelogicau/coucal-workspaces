@@ -97,11 +97,56 @@
         <table>
             <tbody>
             <tr>
-                <td class="border-r">Action</td>
-                <td class="border-r">Event</td>
-                <td class="border-r">Issue</td>
-                <td class="border-r">Note</td>
-                <td>Reminder</td>
+                <td class="border-r border-gray-200 p-2">
+                    <select>
+                        <option>Action</option>
+                        <option>Task</option>
+                        <option>Agenda</option>
+                        <option>Milestone</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                    <label class="text-xs p-2">
+                        <input type="checkbox">
+                        Due
+                        <input type="date"  class="text-xs border border-gray-300 rounded-md p-2">
+                    </label>
+                </td>
+                <td class="border-r border-gray-200">
+                    <select>
+                        <option>Meeting</option>
+                        <option>Appointment</option>
+                        <option>Seminar</option>
+                        <option>Conference</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
+                <td class="border-r border-gray-200">
+                    <select>
+                        <option>Issue</option>
+                        <option>Risk</option>
+                        <option>Improvement</option>
+                        <option>Incident</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
+                <td class="border-r border-gray-200">
+                    <select>
+                        <option>Note</option>
+                        <option>Objective</option>
+                        <option>Decision</option>
+                        <option>Assumption</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
+                <td>
+                    <select>
+                        <option>Reminder</option>
+                        <option>Anniversary</option>
+                        <option>Observance</option>
+                        <option>Subscription</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
             </tr>
             </tbody>
             <tfoot>
@@ -152,30 +197,33 @@
 <!--                <tr th:each="node : ${content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">-->
                 <tr th:each="node : ${content}">
 <!--                    <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
+                    <td class="w-4 px-2 py-1">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <td>
+                        [ORGANIZER]
+                    </td>
                     <th scope="row">
                         <a href="#" th:href="|/view/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|">
                             <span th:replace="~{::renderContent(${node})}">Node 1</span>
                         </a>
                     </th>
                     <td>
-                        Hotspur Way
-                    </td>
-                    <td>
                         <span th:replace="~{/fragments/ui/badge::default('Lifestyle')}"></span>
                     </td>
                     <td th:text="${dateFormatter.format(node.components[0].propertyList.getRequired('DTSTAMP').date)}">
                         Today
                     </td>
-                    <td>
-                        <span th:replace="~{/fragments/ui/badge::default('Tentative')}"></span>
-                    </td>
-                    <td class="text-right" nowrap>
-                        <a th:href="|/edit/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|"
-                           href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                        <button
-                                data-modal-target="delete-modal" data-modal-toggle="delete-modal"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
-                    </td>
+<!--                    <td class="text-right" nowrap>-->
+<!--                        <a th:href="|/edit/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|"-->
+<!--                           href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |-->
+<!--                        <button-->
+<!--                                data-modal-target="delete-modal" data-modal-toggle="delete-modal"-->
+<!--                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>-->
+<!--                    </td>-->
                 </tr>
             </tbody>
         </table>
