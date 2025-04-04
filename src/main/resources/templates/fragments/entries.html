@@ -97,6 +97,24 @@
         <table>
             <tbody>
             <tr>
+                <td class="border-r border-gray-200">
+                    <select>
+                        <option>Meeting</option>
+                        <option>Appointment</option>
+                        <option>Seminar</option>
+                        <option>Conference</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
+                <td>
+                    <select>
+                        <option>Reminder</option>
+                        <option>Anniversary</option>
+                        <option>Observance</option>
+                        <option>Subscription</option>
+                    </select><br/>
+                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                </td>
                 <td class="border-r border-gray-200 p-2">
                     <select>
                         <option>Action</option>
@@ -113,10 +131,10 @@
                 </td>
                 <td class="border-r border-gray-200">
                     <select>
-                        <option>Meeting</option>
-                        <option>Appointment</option>
-                        <option>Seminar</option>
-                        <option>Conference</option>
+                        <option>Note</option>
+                        <option>Objective</option>
+                        <option>Decision</option>
+                        <option>Assumption</option>
                     </select><br/>
                     <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
                 </td>
@@ -129,33 +147,15 @@
                     </select><br/>
                     <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
                 </td>
-                <td class="border-r border-gray-200">
-                    <select>
-                        <option>Note</option>
-                        <option>Objective</option>
-                        <option>Decision</option>
-                        <option>Assumption</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
-                <td>
-                    <select>
-                        <option>Reminder</option>
-                        <option>Anniversary</option>
-                        <option>Observance</option>
-                        <option>Subscription</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
             </tr>
             </tbody>
             <tfoot>
             <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <th class="border-r">Action</th>
                 <th class="border-r">Event</th>
-                <th class="border-r">Issue</th>
+                <th class="border-r">Reminder</th>
+                <th class="border-r">Action</th>
                 <th class="border-r">Note</th>
-                <th>Reminder</th>
+                <th>Issue</th>
             </tr>
             </tfoot>
         </table>
