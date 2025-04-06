@@ -22,6 +22,9 @@
 
 <body>
 
+<div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon}">
+</div>
+
 <ul th:fragment="listEntities" id="entity-list" hx-get="/entities" hx-trigger="entitiesRefresh from:body">
     <li th:each="entity : ${entities}">
         <a th:hx-get="|/entities/${entity.fn}|" hx-trigger="click"
@@ -29,6 +32,16 @@
            th:text="${entity.fn}">Entity 1</a>
     </li>
 </ul>
+
+<div th:fragment="addEntity(kind)">
+    <form id="add-entity"
+          th:hx-post="|/entities/${kind}/|" hx-target="#entity-list"
+          hx-on::after-request="if(event.detail.successful) this.reset()">
+        <label id="url">
+            <input type="url" name="url" placeholder="URL" size="64">
+        </label>
+    </form>
+</div>
 
 <div th:fragment="editIndividual(entity)">
     <h3>Individual</h3>
@@ -64,7 +77,7 @@
         </label>
         <br/>
         <label>
-            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
+            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
         </label>
 
     </form>
@@ -102,7 +115,7 @@
         </label>
         <br/>
         <label>
-            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
+            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
         </label>
     </form>
 </div>
@@ -138,7 +151,7 @@
         </label>
         <br/>
         <label>
-            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
+            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"placeholder="Notes.."></textarea>
         </label>
     </form>
 </div>
@@ -163,7 +176,7 @@
         </label>
         <br/>
         <label>
-            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Notes.."></textarea>
+            <textarea name="note" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Notes.."></textarea>
         </label>
     </form>
 </div>
