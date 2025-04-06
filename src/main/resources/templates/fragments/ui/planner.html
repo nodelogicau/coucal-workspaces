@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div th:fragment="month">
+    <table class="w-full">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th nowrap>Action 1</th>
+        </tr>
+        <tr>
+            <th nowrap>Action 2</th>
+        </tr>
+        <tr>
+            <th nowrap>Action 3</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="day">
+    <table class="w-full">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Day 1</th>
+            <th>Day 2</th>
+            <th>Day 3</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th nowrap>Action 1</th>
+        </tr>
+        <tr>
+            <th nowrap>Action 2</th>
+        </tr>
+        <tr>
+            <th nowrap>Action 3</th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
