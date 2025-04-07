@@ -1,0 +1,19 @@
+{
+  "short_name": "Coucal",
+  "id": "https://nodelogic.au/coucal/v1",
+  "name": "Coucal Workspaces - The ultimate productivity tool",
+  "icons": [
+    {
+      "src": "/images/coucal-logo-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/coucal-logo-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
