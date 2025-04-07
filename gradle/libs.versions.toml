@@ -10,6 +10,7 @@ spring-boot-data-jpa = { module = "org.springframework.boot:spring-boot-starter-
 spring-boot-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot"}
 spring-boot-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "spring-boot"}
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "spring-boot"}
+spring-boot-security = { module = "org.springframework.boot:spring-boot-starter-security", version.ref = "spring-boot"}
 
 thymeleaf-layout = { group = "nz.net.ultraq.thymeleaf", name = "thymeleaf-layout-dialect", version = "3.3.0" }
 

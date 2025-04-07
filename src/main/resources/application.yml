@@ -45,6 +45,14 @@ server:
     include-stacktrace: always
   address: localhost
   port: ${PORT:8080}
+#  port: ${PORT:3443}
+#  ssl:
+#    key-store-type: PKCS12
+#    key-store: classpath:keystore/coucal.p12
+#    key-store-password: changeme
+#    key-alias: coucal
+#    enabled: true
+
 logging:
   pattern:
     console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
