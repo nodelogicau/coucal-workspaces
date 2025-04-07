@@ -15,5 +15,14 @@
     }
   ],
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "screenshots": [
+    {
+      "src": "/screenshots/coucal-workspaces.png",
+      "sizes": "1378x807",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home screen showing main navigation and featured content"
+    }
+  ]
 }
