@@ -147,6 +147,10 @@
                     </select><br/>
                     <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
                 </td>
+                <td>
+                    <button th:replace="~{fragments/ui/button :: default('Import')}">Import</button>
+                    <button th:replace="~{fragments/ui/button :: default('Export')}">Export</button>
+                </td>
             </tr>
             </tbody>
             <tfoot>

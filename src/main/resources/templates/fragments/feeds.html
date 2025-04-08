@@ -59,13 +59,21 @@
                 <td class="border-r p-2">
                     <div th:replace="~{::addFeed}"></div>
                 </td>
-                <td>Unsubscribe/Pause</td>
+                <td>
+                    <button th:replace="~{fragments/ui/button :: default('Unsubscribe')}">Unsubscribe</button>
+                    <button th:replace="~{fragments/ui/button :: default('Pause')}">Pause</button>
+                </td>
+                <td>
+                    <button th:replace="~{fragments/ui/button :: default('Import')}">Import</button>
+                    <button th:replace="~{fragments/ui/button :: default('Export')}">Export</button>
+                </td>
             </tr>
             </tbody>
             <tfoot>
             <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <th class="border-r border-gray-200">New</th>
-                <th>Selected</th>
+                <th class="border-r border-gray-200">Selected</th>
+                <th>Import/Export</th>
             </tr>
             </tfoot>
         </table>

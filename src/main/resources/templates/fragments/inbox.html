@@ -55,7 +55,11 @@
             <tbody>
             <tr>
                 <td class="border-r border-gray-200 p-2">New Message</td>
-                <td>Reply/Reply All/Forward</td>
+                <td>
+                    <button th:replace="~{fragments/ui/button :: default('Reply')}">Reply</button>
+                    <button th:replace="~{fragments/ui/button :: default('Reply All')}">Reply All</button>
+                    <button th:replace="~{fragments/ui/button :: default('Forward')}">Forward</button>
+                </td>
             </tr>
             </tbody>
             <tfoot>
