@@ -24,13 +24,43 @@
 
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
-            <li th:replace="~{fragments/ui/tabs :: minimal-tab-bold('Chat')}"></li>
-            <li th:replace="~{fragments/ui/tabs :: minimal-tab-active('Edit')}"></li>
-            <li th:replace="~{fragments/ui/tabs :: minimal-tab('Filter')}"></li>
-            <li th:replace="~{fragments/ui/tabs :: minimal-tab('View')}"></li>
-            <li th:replace="~{fragments/ui/tabs :: minimal-tab('Options')}"></li>
-        </ul>
+        <th:block th:switch="${tab}">
+            <ul th:case="'edit'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('chat/chat', 'Chat')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('chat/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'filter'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('chat/chat', 'Chat')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('chat/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'view'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('chat/chat', 'Chat')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('chat/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'options'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('chat/chat', 'Chat')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('chat/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="*" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('chat/chat', 'Chat')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/options', 'Options')}"></li>
+            </ul>
+        </th:block>
 
         <table>
             <tbody>

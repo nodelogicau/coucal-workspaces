@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<div th:fragment="ribbon(fragment)"
+<div id="ribbon" th:fragment="ribbon(fragment)"
      class="block p-2 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <th:block th:replace="${fragment}">Panel Content</th:block>
 </div>
