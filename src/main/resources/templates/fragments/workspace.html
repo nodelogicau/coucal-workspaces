@@ -22,30 +22,42 @@
 
     <div id="tabs">
         <th:block th:switch="${tab}">
-            <ul th:case="'planner'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/planner', 'Planner')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
-            </ul>
-            <ul th:case="'journal'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/journal', 'Journal')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
-            </ul>
-            <ul th:case="'tracker'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/tracker', 'Tracker')}"></li>
-            </ul>
-            <ul th:case="*" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/calendar', 'Calendar')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
-            </ul>
+            <th:block th:case="'planner'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/planner', 'Planner')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/planner :: month}"></th:block>
+            </th:block>
+            <th:block th:case="'journal'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/journal', 'Journal')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/journal :: gallery}"></th:block>
+            </th:block>
+            <th:block th:case="'tracker'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/calendar', 'Calendar')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/tracker', 'Tracker')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/tracker :: kanban}"></th:block>
+            </th:block>
+            <th:block th:case="*">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: default-tab-active('workspace/calendar', 'Calendar')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/planner', 'Planner')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/journal', 'Journal')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: default-tab('workspace/tracker', 'Tracker')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/calendar :: month}"></th:block>
+            </th:block>
         </th:block>
 
         <!--        <h1 class="text-2xl">Home</h1>-->

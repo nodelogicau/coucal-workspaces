@@ -51,4 +51,28 @@ public class IndexController extends AbstractLayoutController {
         populateModelForLayout(model);
         return "view/workspace";
     }
+
+    @GetMapping("/calendar")
+    public String calendar(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "workspace/calendar";
+    }
+
+    @GetMapping("/planner")
+    public String planner(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "workspace/planner";
+    }
+
+    @GetMapping("/journal")
+    public String journal(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "workspace/journal";
+    }
+
+    @GetMapping("/tracker")
+    public String tracker(Model model) throws IOException {
+        populateModelForLayout(model);
+        return "workspace/tracker";
+    }
 }
