@@ -23,33 +23,43 @@
 
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
-            <li class="me-2">
-                <a href="#" class="font-bold flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <span>Message</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <span>Edit</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page">
-                    <span>Filter</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <span>View</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
-                    <span>Options</span>
-                </a>
-            </li>
-        </ul>
+        <th:block th:switch="${tab}">
+            <ul th:case="'edit'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('inbox/message', 'Message')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('inbox/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'filter'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('inbox/message', 'Message')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('inbox/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'view'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('inbox/message', 'Message')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('inbox/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'options'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('inbox/message', 'Message')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('inbox/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="*" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('inbox/message', 'Message')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
+            </ul>
+        </th:block>
 
         <table>
             <tbody>

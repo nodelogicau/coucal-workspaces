@@ -25,74 +25,43 @@
 
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px">
-            <li class="me-2">
-                <a href="#" class="font-bold flex items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page"
-                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/collection|">
-                    <span>File</span>
-                </a>
-            </li>
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:action|">Action</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:availability|">Availability</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:event|">Event</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" hx-get="|/create/${collection}?concept=semcal:concept:issue|">Issue</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:note|">Note</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:observance|">Reminder</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:report|">Report</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:request|">Request</a>-->
-<!--            </li>-->
-<!--            <li class="me-2">-->
-<!--                <a href="#" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"-->
-<!--                   hx-trigger="click" th:hx-get="|/create/${collection}?concept=semcal:concept:resource|">Resource</a>-->
-<!--            </li>-->
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/edit|">
-                    <span>Edit</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/filter|">
-                    <span>Filter</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/view|">
-                    <span>View</span>
-                </a>
-            </li>
-            <li class="me-2">
-                <a href="#" class="flex items-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                   hx-trigger="click" th:hx-get="|/ribbon/${collection}/options|">
-                    <span>Options</span>
-                </a>
-            </li>
-        </ul>
+        <th:block th:switch="${tab}">
+            <ul th:case="'edit'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'filter'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'view'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="'options'" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/options', 'Options')}"></li>
+            </ul>
+            <ul th:case="*" class="flex flex-wrap -mb-px">
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/file', 'File')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+            </ul>
+        </th:block>
 
         <table>
             <tbody>
@@ -435,6 +404,34 @@
 <!--            </label>-->
         </form>
     </div>
+</div>
+
+<div th:fragment="quick-add">
+    <form>
+        <label>
+            <input name="summary" placeholder="Summary.." size="64" required>
+        </label>
+        <div id="date-range-picker" date-rangepicker class="flex items-center">
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
+                </div>
+                <input id="datepicker-range-start" name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+            </div>
+            <span class="mx-4 text-gray-500">to</span>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
+                </div>
+                <input id="datepicker-range-end" name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+            </div>
+        </div>
+        <button type="submit" th:replace="~{fragments/ui/button::submit('Add')}">Add</button>
+    </form>
 </div>
 
 <div th:fragment="renderContent(entry)" class="flex">
