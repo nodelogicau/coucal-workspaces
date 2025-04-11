@@ -117,8 +117,18 @@
                     <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
                 </td>
                 <td>
-                    <button th:replace="~{fragments/ui/button :: default('Import')}">Import</button>
-                    <button th:replace="~{fragments/ui/button :: default('Export')}">Export</button>
+                    <button th:replace="~{fragments/ui/button :: medium(~{::#import-button})}">
+                        <th:block id="import-button">
+                            <th:block th:replace="~{fragments/ui/icon :: file-import}"></th:block>
+                            Import
+                        </th:block>
+                    </button>
+                    <button th:replace="~{fragments/ui/button :: medium(~{::#export-button})}">
+                        <th:block id="export-button">
+                            <th:block th:replace="~{fragments/ui/icon :: file-export}"></th:block>
+                            Export
+                        </th:block>
+                    </button>
                 </td>
             </tr>
             </tbody>
