@@ -26,5 +26,225 @@
     <th:block th:replace="${fragment}">Panel Content</th:block>
 </div>
 
+<div th:fragment="file-controls">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r border-gray-200">
+                <select>
+                    <option>Meeting</option>
+                    <option>Appointment</option>
+                    <option>Seminar</option>
+                    <option>Conference</option>
+                </select><br/>
+                <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+            </td>
+            <td>
+                <select>
+                    <option>Reminder</option>
+                    <option>Anniversary</option>
+                    <option>Observance</option>
+                    <option>Subscription</option>
+                </select><br/>
+                <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+            </td>
+            <td class="border-r border-gray-200 p-2">
+                <select>
+                    <option>Action</option>
+                    <option>Task</option>
+                    <option>Agenda</option>
+                    <option>Milestone</option>
+                </select><br/>
+                <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+                <label class="text-xs p-2">
+                    <input type="checkbox">
+                    Due
+                    <input type="date"  class="text-xs border border-gray-300 rounded-md p-2">
+                </label>
+            </td>
+            <td class="border-r border-gray-200">
+                <select>
+                    <option>Note</option>
+                    <option>Objective</option>
+                    <option>Decision</option>
+                    <option>Assumption</option>
+                </select><br/>
+                <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+            </td>
+            <td class="border-r border-gray-200">
+                <select>
+                    <option>Issue</option>
+                    <option>Risk</option>
+                    <option>Improvement</option>
+                    <option>Incident</option>
+                </select><br/>
+                <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
+            </td>
+            <td>
+                <button th:replace="~{fragments/ui/button :: medium(~{::#import-button})}">
+                    <th:block id="import-button">
+                        <th:block th:replace="~{fragments/ui/icon :: file-import}"></th:block>
+                        Import
+                    </th:block>
+                </button>
+                <button th:replace="~{fragments/ui/button :: medium(~{::#export-button})}">
+                    <th:block id="export-button">
+                        <th:block th:replace="~{fragments/ui/icon :: file-export}"></th:block>
+                        Export
+                    </th:block>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">Event</th>
+            <th class="border-r border-gray-200">Reminder</th>
+            <th class="border-r border-gray-200">Action</th>
+            <th class="border-r border-gray-200">Note</th>
+            <th class="border-r border-gray-200">Issue</th>
+            <th class="border-r border-gray-200">Import/Export</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="edit-controls(context)">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">New Topic</td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">Selected</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="filter-controls(context)">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">New Topic</td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">Show/Hide</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="view-controls(context)">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">New Topic</td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">List</th>
+            <th class="border-r border-gray-200">Grid</th>
+            <th class="border-r border-gray-200">Graph</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="options-controls(context)">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">New Topic</td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">Preferences</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="message-controls">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r border-gray-200 p-2">
+                <button th:replace="~{fragments/ui/button :: default('New Message')}">Reply</button>
+            </td>
+            <td>
+                <button th:replace="~{fragments/ui/button :: default('Reply')}">Reply</button>
+                <button th:replace="~{fragments/ui/button :: default('Reply All')}">Reply All</button>
+                <button th:replace="~{fragments/ui/button :: default('Forward')}">Forward</button>
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">Compose</th>
+            <th class="border-r border-gray-200">Selected</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="feed-controls">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">
+                <div th:replace="~{::addFeed}"></div>
+            </td>
+            <td>
+                <button th:replace="~{fragments/ui/button :: default('Unsubscribe')}">Unsubscribe</button>
+                <button th:replace="~{fragments/ui/button :: default('Pause')}">Pause</button>
+            </td>
+            <td>
+                <button th:replace="~{fragments/ui/button :: default('Import')}">Import</button>
+                <button th:replace="~{fragments/ui/button :: default('Export')}">Export</button>
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">New</th>
+            <th class="border-r border-gray-200">Selected</th>
+            <th>Import/Export</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
+<div th:fragment="chat-controls">
+    <table>
+    <tbody>
+        <tr>
+            <td class="border-r p-2">
+                <button th:replace="~{fragments/ui/button :: default('New Chat')}">New Chat</button>
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <th class="border-r border-gray-200">New</th>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+
 </body>
 </html>

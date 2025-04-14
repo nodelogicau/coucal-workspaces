@@ -26,123 +26,57 @@
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
         <th:block th:switch="${tab}">
-            <ul th:case="'edit'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'filter'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'view'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'options'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="*" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/file', 'File')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
-            </ul>
+            <th:block th:case="'edit'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('collection')}"></th:block>
+            </th:block>
+            <th:block th:case="'filter'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: filter-controls('collection')}"></th:block>
+            </th:block>
+            <th:block th:case="'view'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: view-controls('collection')}"></th:block>
+            </th:block>
+            <th:block th:case="'options'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('entries/file', 'File')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: options-controls('collection')}"></th:block>
+            </th:block>
+            <th:block th:case="*">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('entries/file', 'File')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('entries/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: file-controls}"></th:block>
+            </th:block>
         </th:block>
-
-        <table>
-            <tbody>
-            <tr>
-                <td class="border-r border-gray-200">
-                    <select>
-                        <option>Meeting</option>
-                        <option>Appointment</option>
-                        <option>Seminar</option>
-                        <option>Conference</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
-                <td>
-                    <select>
-                        <option>Reminder</option>
-                        <option>Anniversary</option>
-                        <option>Observance</option>
-                        <option>Subscription</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
-                <td class="border-r border-gray-200 p-2">
-                    <select>
-                        <option>Action</option>
-                        <option>Task</option>
-                        <option>Agenda</option>
-                        <option>Milestone</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                    <label class="text-xs p-2">
-                        <input type="checkbox">
-                        Due
-                        <input type="date"  class="text-xs border border-gray-300 rounded-md p-2">
-                    </label>
-                </td>
-                <td class="border-r border-gray-200">
-                    <select>
-                        <option>Note</option>
-                        <option>Objective</option>
-                        <option>Decision</option>
-                        <option>Assumption</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
-                <td class="border-r border-gray-200">
-                    <select>
-                        <option>Issue</option>
-                        <option>Risk</option>
-                        <option>Improvement</option>
-                        <option>Incident</option>
-                    </select><br/>
-                    <input placeholder="Summary" type="text" class="w-24 focus:w-80 text-xs border border-gray-300 rounded-md p-2" /><br/>
-                </td>
-                <td>
-                    <button th:replace="~{fragments/ui/button :: medium(~{::#import-button})}">
-                        <th:block id="import-button">
-                            <th:block th:replace="~{fragments/ui/icon :: file-import}"></th:block>
-                            Import
-                        </th:block>
-                    </button>
-                    <button th:replace="~{fragments/ui/button :: medium(~{::#export-button})}">
-                        <th:block id="export-button">
-                            <th:block th:replace="~{fragments/ui/icon :: file-export}"></th:block>
-                            Export
-                        </th:block>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <th class="border-r">Event</th>
-                <th class="border-r">Reminder</th>
-                <th class="border-r">Action</th>
-                <th class="border-r">Note</th>
-                <th class="border-r">Issue</th>
-                <th>Import/Export</th>
-            </tr>
-            </tfoot>
-        </table>
     </div>
 </div>
 

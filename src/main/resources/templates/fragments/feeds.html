@@ -24,67 +24,57 @@
 <div th:fragment="ribbon" th:replace="~{fragments/ui/ribbon :: ribbon(~{::#tabs})}">
     <div id="tabs" class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-white dark:border-gray-700">
         <th:block th:switch="${tab}">
-            <ul th:case="'edit'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'filter'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'view'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="'options'" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/options', 'Options')}"></li>
-            </ul>
-            <ul th:case="*" class="flex flex-wrap -mb-px">
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/feed', 'Feed')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
-                <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
-            </ul>
+            <th:block th:case="'edit'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('feeds')}"></th:block>
+            </th:block>
+            <th:block th:case="'filter'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: filter-controls('feeds')}"></th:block>
+            </th:block>
+            <th:block th:case="'view'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: view-controls('feeds')}"></th:block>
+            </th:block>
+            <th:block th:case="'options'">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-bold('feedItems/feed', 'Feed')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: options-controls('feeds')}"></th:block>
+            </th:block>
+            <th:block th:case="*">
+                <ul class="flex flex-wrap -mb-px">
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab-active('feedItems/feed', 'Feed')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/edit', 'Edit')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/filter', 'Filter')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
+                    <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
+                </ul>
+                <th:block th:replace="~{fragments/ui/ribbon :: feed-controls}"></th:block>
+            </th:block>
         </th:block>
-
-        <table>
-            <tbody>
-            <tr>
-                <td class="border-r p-2">
-                    <div th:replace="~{::addFeed}"></div>
-                </td>
-                <td>
-                    <button th:replace="~{fragments/ui/button :: default('Unsubscribe')}">Unsubscribe</button>
-                    <button th:replace="~{fragments/ui/button :: default('Pause')}">Pause</button>
-                </td>
-                <td>
-                    <button th:replace="~{fragments/ui/button :: default('Import')}">Import</button>
-                    <button th:replace="~{fragments/ui/button :: default('Export')}">Export</button>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <th class="border-r border-gray-200">New</th>
-                <th class="border-r border-gray-200">Selected</th>
-                <th>Import/Export</th>
-            </tr>
-            </tfoot>
-        </table>
     </div>
 </div>
 
