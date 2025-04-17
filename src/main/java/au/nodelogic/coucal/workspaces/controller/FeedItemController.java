@@ -3,6 +3,7 @@ package au.nodelogic.coucal.workspaces.controller;
 import au.nodelogic.coucal.workspaces.data.Feed;
 import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
+import au.nodelogic.coucal.workspaces.workflow.FeedUpdater;
 import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -27,13 +28,22 @@ public class FeedItemController {
 
     private final FeedItemRepository feedItemRepository;
 
-    public FeedItemController(@Autowired FeedItemRepository feedItemRepository) {
+    private final FeedUpdater feedUpdater;
+
+    public FeedItemController(@Autowired FeedItemRepository feedItemRepository, @Autowired FeedUpdater feedUpdater) {
         this.feedItemRepository = feedItemRepository;
+        this.feedUpdater = feedUpdater;
     }
 
     @GetMapping("/")
     public String listFeedItems(@RequestParam(name = "feed", required = false) String feedUri,
-                                Model model) throws IOException {
+                                @RequestParam(name = "refresh", required = false) Boolean refreshFeeds,
+                                Model model) {
+
+        if (refreshFeeds != null && refreshFeeds) {
+            feedUpdater.refreshFeeds();
+        }
+
         List<FeedItem> feedItems;
         if (feedUri != null) {
             feedItems = feedItemRepository.findAll(Example.of(
@@ -50,7 +60,13 @@ public class FeedItemController {
     @GetMapping("/{filter}")
     public String listFeedItemsFiltered(@PathVariable(value = "filter") String filter,
                                         @RequestParam(name = "feed", required = false) String feedUri,
-                                Model model) throws IOException {
+                                        @RequestParam(name = "refresh", required = false) Boolean refreshFeeds,
+                                Model model) {
+
+        if (refreshFeeds != null && refreshFeeds) {
+            feedUpdater.refreshFeeds();
+        }
+
         List<FeedItem> feedItems;
         LocalDate today, yesterday;
         feedItems = switch (filter) {
