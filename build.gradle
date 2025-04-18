@@ -49,13 +49,15 @@ test {
 
 application {
     mainClass = 'au.nodelogic.coucal.workspaces.WorkspacesMain'
-
-    applicationDefaultJvmArgs = ['-Djava.awt.headless=false']
 }
 
 startScripts {
     applicationName = 'coucal'
     classpath = files('lib/*')
+    defaultJvmOpts = [
+            '-Djava.awt.headless=false',
+            '-Dapple.awt.UIElement=true',
+    ]
 }
 
 license {
