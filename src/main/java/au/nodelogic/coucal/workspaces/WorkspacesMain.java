@@ -16,6 +16,7 @@
 
 package au.nodelogic.coucal.workspaces;
 
+import au.nodelogic.coucal.workspaces.util.Filesystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +31,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import javax.sql.DataSource;
 import java.io.File;
 import java.util.Objects;
+import java.util.Properties;
 
 @SpringBootApplication
 @EnableCaching
@@ -55,9 +57,14 @@ public class WorkspacesMain {
     }
 
     public static void main(String[] args) {
-        if (new File(System.getProperty("user.dir"), "build/collections").mkdirs()) {
-            
-        }
-        SpringApplication.run(WorkspacesMain.class, args);
+//        if (new File(System.getProperty("user.dir"), "build/collections").mkdirs()) {
+//
+//        }
+//        SpringApplication.run(WorkspacesMain.class, args);
+        Properties props = new Properties();
+        props.put("logging.file.path", Filesystem.getDataDirectory() + "/Coucal/logs");
+        SpringApplication application = new SpringApplication(WorkspacesMain.class);
+        application.setDefaultProperties(props);
+        application.run(args);
     }
 }

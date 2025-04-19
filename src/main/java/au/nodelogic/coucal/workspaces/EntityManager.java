@@ -16,6 +16,7 @@
 
 package au.nodelogic.coucal.workspaces;
 
+import au.nodelogic.coucal.workspaces.util.Filesystem;
 import org.ical4j.connector.CardCollection;
 import org.ical4j.connector.local.LocalCardCollection;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ import java.io.IOException;
 public class EntityManager extends AbstractWorkspaceManager {
 
     public EntityManager() {
-        this(new File(System.getProperty("user.dir"), "build/collections"));
+        this(new File(Filesystem.getDataDirectory(), "Coucal/workspaces/default"));
     }
 
     public EntityManager(File workspaceRoot) {

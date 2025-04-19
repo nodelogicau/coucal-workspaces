@@ -16,6 +16,7 @@
 
 package au.nodelogic.coucal.workspaces;
 
+import au.nodelogic.coucal.workspaces.util.Filesystem;
 import org.ical4j.connector.CalendarCollection;
 import org.ical4j.connector.local.LocalCalendarCollection;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class InboxManager extends AbstractWorkspaceManager {
     private final CalendarCollection inboxCollection;
 
     public InboxManager() throws IOException {
-        this(new File(System.getProperty("user.dir"), "build/collections"));
+        this(new File(Filesystem.getDataDirectory(), "Coucal/workspaces/default"));
     }
 
     public InboxManager(File workspaceRoot) throws IOException {

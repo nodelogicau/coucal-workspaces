@@ -16,6 +16,7 @@
 
 package au.nodelogic.coucal.workspaces;
 
+import au.nodelogic.coucal.workspaces.util.Filesystem;
 import com.github.slugify.Slugify;
 import org.ical4j.connector.ObjectCollection;
 import org.ical4j.connector.ObjectStoreException;
@@ -32,10 +33,10 @@ import java.util.stream.Collectors;
 @Service
 public class CollectionManager extends AbstractWorkspaceManager {
 
-    private static final List<String> IGNORE_DIRS = Arrays.asList(".DStore");
+    private static final List<String> IGNORE_DIRS = List.of(".DStore", "entities", "inbox");
 
     public CollectionManager() {
-        this(new File(System.getProperty("user.home"), ".coucal/workspaces/default"));
+        this(new File(Filesystem.getDataDirectory(), "Coucal/workspaces/default"));
     }
 
     public CollectionManager(File workspaceRoot) {
