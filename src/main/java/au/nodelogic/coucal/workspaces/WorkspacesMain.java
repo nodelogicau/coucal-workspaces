@@ -62,6 +62,7 @@ public class WorkspacesMain {
 //        }
 //        SpringApplication.run(WorkspacesMain.class, args);
         Properties props = new Properties();
+        props.put("spring.datasource.url", "jdbc:sqlite:" + Filesystem.getDataDirectory() + "/Coucal/coucal.db");
         props.put("logging.file.path", Filesystem.getDataDirectory() + "/Coucal/logs");
         SpringApplication application = new SpringApplication(WorkspacesMain.class);
         application.setDefaultProperties(props);

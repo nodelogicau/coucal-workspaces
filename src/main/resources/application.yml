@@ -33,8 +33,7 @@ spring:
       show_sql: true
   datasource:
     driver-class-name: org.sqlite.JDBC
-#    url: jdbc:sqlite:memory:myDb?cache=shared
-    url: jdbc:sqlite:coucal.db
+#    url: jdbc:sqlite:coucal.db
     username: sa
     password: sa
 
