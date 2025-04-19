@@ -10,6 +10,10 @@ whether it be at work, home or anywhere in between.
 Use Coucal to create events, actions, notes, and much more. The implicit ability to establish links
 between related entities and activities makes the tool even more powerful the more you add to it.
 
+## Prerequisites
+
+This application requires [Java](https://adoptium.net/temurin/releases/).
+
 ## Collections
 
 TBD.
