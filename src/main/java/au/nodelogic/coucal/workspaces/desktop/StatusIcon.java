@@ -2,6 +2,7 @@ package au.nodelogic.coucal.workspaces.desktop;
 
 import au.nodelogic.coucal.workspaces.util.Filesystem;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -48,6 +49,16 @@ public class StatusIcon extends TrayIcon {
             });
             add(logs);
             addSeparator();
+            MenuItem aboutItem = new MenuItem("About Coucal", new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar('a')));
+            aboutItem.addActionListener(event -> {
+//                new AboutDialog().setVisible(true);
+                JDialog dialog = new JDialog();
+                dialog.setAlwaysOnTop(true);
+                JOptionPane.showMessageDialog(dialog, "Coucal Workspaces is running",
+                        "Coucal Workspaces",  JOptionPane.INFORMATION_MESSAGE);
+                dialog.dispose();
+            });
+            add(aboutItem);
             MenuItem exitItem = new MenuItem("Quit",
                     new MenuShortcut(KeyEvent.getExtendedKeyCodeForChar('q')));
             exitItem.addActionListener(event -> System.exit(0));
