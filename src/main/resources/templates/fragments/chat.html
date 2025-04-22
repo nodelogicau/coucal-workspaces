@@ -33,7 +33,7 @@
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/view', 'View')}"></li>
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('chat/options', 'Options')}"></li>
                 </ul>
-                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('chat')}"></th:block>
+                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('chat', ${selection})}"></th:block>
             </th:block>
             <th:block th:case="'filter'">
                 <ul class="flex flex-wrap -mb-px">

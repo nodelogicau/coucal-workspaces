@@ -21,6 +21,168 @@
 </head>
 <body>
 
+<table>
+    <thead>
+    <tr>
+        <th>Table</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>
+            <table th:fragment="inbox"
+                   class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <tbody>
+                <tr th:each="message : ${inbox}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="w-4 px-2 py-1">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <td class="px-3 py-2">
+                        <th:block th:text="${message.sender.personal}"></th:block>
+                    </td>
+                    <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th:block th:text="${#strings.abbreviate(message.subject, 64)}"></th:block>
+                    </th>
+                    <td th:text="${dateFormatter.format(message.receivedDate)}" class="px-6 py-4">
+                        Today
+                    </td>
+                    <td class="px-3 py-2 text-right" nowrap>
+                        <button
+                                data-modal-target="delete-modal" data-modal-toggle="delete-modal"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>Inbox</td>
+    </tr>
+    <tr>
+        <td>
+            <table th:fragment="feed-items"
+                   id="items" class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <tbody>
+                <tr class="bg-white dark:bg-gray-800" th:each="feedItem, iStat : ${feedItems}" draggable="true">
+                    <td class="w-4 px-2 py-1">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <img src="#" th:src="${feedItem.feed.icon}" class="inline size-8">
+                        <span th:text="${#strings.abbreviate(feedItem.feed.title, 14)}">Feed Name</span>
+                    </th>
+                    <td class="px-2 py-1">
+                        <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feed-item${iStat.index}|"
+                           th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-placement="right"></a>
+                    </td>
+                    <td class="px-2 py-1">
+                        <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-2 py-1 text-nowrap">
+                            Published Date
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>Feed Items</td>
+    </tr>
+    <tr>
+        <td>
+            <table th:fragment="collections"
+                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Description
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Timezone
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="collection : ${collections}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <a href="#" th:href="|/view/collection/${collection.displayName}|">
+                            <span th:text="${collection.displayName}">Collection 1</span>
+                        </a>
+                    </th>
+                    <td class="px-6 py-4">
+                        -
+                    </td>
+                    <td class="px-6 py-4">
+                        Australia/Melbourne
+                    </td>
+                    <td class="px-6 py-4 text-right" nowrap>
+                        <a th:href="|/edit/collection/${collection.displayName}|"
+                           href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
+                        <button
+                                data-modal-target="delete-modal" data-modal-toggle="delete-modal"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Archive</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>Collections</td>
+    </tr>
+    <tr>
+        <td>
+            <table th:fragment="collection-entries"
+                    class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <tbody>
+                <!--                <tr th:each="node : ${content}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">-->
+                <tr th:each="node : ${content}">
+                    <!--                    <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">-->
+                    <td class="w-4 px-2 py-1">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                        </div>
+                    </td>
+                    <td>
+                        [ORGANIZER]
+                    </td>
+                    <th scope="row">
+                        <a href="#" th:href="|/view/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|">
+                            <span th:replace="~{::renderContent(${node})}">Node 1</span>
+                        </a>
+                    </th>
+                    <td>
+                        <span th:replace="~{/fragments/ui/badge::default('Lifestyle')}"></span>
+                    </td>
+                    <td th:text="${dateFormatter.format(node.components[0].propertyList.getRequired('DTSTAMP').date)}">
+                        Today
+                    </td>
+                    <!--                    <td class="text-right" nowrap>-->
+                    <!--                        <a th:href="|/edit/${node.components[0].propertyList.getRequired('CONCEPT').value}/${node.uid.value}|"-->
+                    <!--                           href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |-->
+                    <!--                        <button-->
+                    <!--                                data-modal-target="delete-modal" data-modal-toggle="delete-modal"-->
+                    <!--                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>-->
+                    <!--                    </td>-->
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>Collection Entries</td>
+    </tr>
+    </tbody>
+</table>
+
 <div th:fragment="default(id, rows)">
     <table th:id="|table-${id}|" class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead>

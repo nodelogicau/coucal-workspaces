@@ -21,6 +21,227 @@
 </head>
 <body>
 
+<table>
+<thead>
+    <tr>
+        <th>Button</th>
+        <th>Description</th>
+    </tr>
+</thead>
+
+<tbody>
+<tr>
+    <td>
+        <button th:fragment="publish-collection(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Publish
+        </button>
+    </td>
+    <td>Publish Collection</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-event(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Event
+        </button>
+    </td>
+    <td>New Event</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-reminder(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Reminder
+        </button>
+    </td>
+    <td>New Reminder</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-action(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Action
+        </button>
+    </td>
+    <td>New Action</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-issue(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Issue
+        </button>
+    </td>
+    <td>New Issue</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-note(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Note
+        </button>
+    </td>
+    <td>New Note</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="import-calendar(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <th:block th:replace="~{fragments/ui/icon :: file-import}"></th:block>
+            Import
+        </button>
+    </td>
+    <td>Import Calendar</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="export-calendar(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <th:block th:replace="~{fragments/ui/icon :: file-export}"></th:block>
+            Export
+        </button>
+    </td>
+    <td>Export Calendar</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="select-all(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Select All
+        </button>
+    </td>
+    <td>Select All</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="select-none(context)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Select None
+        </button>
+    </td>
+    <td>Select None</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="copy(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Copy
+        </button>
+    </td>
+    <td>Copy</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="move(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Move
+        </button>
+    </td>
+    <td>Move</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="delete(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Delete
+        </button>
+    </td>
+    <td>Delete</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="new-message"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            New Message
+        </button>
+    </td>
+    <td>New Message</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="message-reply(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Reply
+        </button>
+    </td>
+    <td>Reply</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="message-reply-all(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Reply All
+        </button>
+    </td>
+    <td>Reply All</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="message-forward(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Forward
+        </button>
+    </td>
+    <td>Forward</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="feed-unsubscribe(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Unbsubscribe
+        </button>
+    </td>
+    <td>Feed Unsubscribe</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="feed-pause(selection)"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Pause
+        </button>
+    </td>
+    <td>Feed Pause</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="feed-import"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Import
+        </button>
+    </td>
+    <td>Feed Import</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="feed-export"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Export
+        </button>
+    </td>
+    <td>Feed Export</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="feed-refresh"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Refresh
+        </button>
+    </td>
+    <td>Feed Refresh</td>
+</tr>
+<tr>
+    <td>
+        <button th:fragment="chat-new"
+                class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm max-sm:text-xs text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            New Chat
+        </button>
+    </td>
+    <td>New Chat</td>
+</tr>
+</tbody>
+</table>
+
 <button th:fragment="medium(fragment)"
         class="text-white bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm text-center inline-flex items-center px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
     <th:block th:replace="${fragment}">Button</th:block>

@@ -16,4 +16,4 @@
 <title th:text="${collection.displayName}">Collection</title>
 
 <th:block th:replace="~{fragments/entries::ribbon}"></th:block>
-<th:block th:replace="~{fragments/entries::listContent}"></th:block>
+<table th:replace="~{fragments/ui/table :: collection-entries}"></table>

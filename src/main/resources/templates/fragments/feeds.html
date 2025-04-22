@@ -32,7 +32,7 @@
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
                 </ul>
-                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('feeds')}"></th:block>
+                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('feeds', ${selection})}"></th:block>
             </th:block>
             <th:block th:case="'filter'">
                 <ul class="flex flex-wrap -mb-px">
@@ -72,7 +72,7 @@
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/view', 'View')}"></li>
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('feedItems/options', 'Options')}"></li>
                 </ul>
-                <th:block th:replace="~{fragments/ui/ribbon :: feed-controls}"></th:block>
+                <th:block th:replace="~{fragments/ui/ribbon :: feed-controls(${selection})}"></th:block>
             </th:block>
         </th:block>
     </div>
@@ -92,82 +92,6 @@
         </a>
     </li>
 </ul>
-
-<div th:fragment="overview">
-<!--    <h1 class="text-2xl">Feeds</h1>-->
-
-    <div th:replace="~{fragments/ui/accordion::flush('feed-items', ~{::#items})}">
-        <th:block id="items">
-            <h2 th:replace="~{fragments/ui/accordion::aheading(id = 'feed-today', fragment = ~{::span#title}, expanded = 'true')}">
-                <span id="title">Today</span>
-            </h2>
-            <div th:replace="~{fragments/ui/accordion::abody('feed-today', ~{::table#items})}">
-                <table id="items" class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <tbody>
-                    <tr class="bg-white dark:bg-gray-800" th:each="feedItem, iStat : ${feedItems}" draggable="true">
-                        <td class="w-4 px-2 py-1">
-                            <div class="flex items-center">
-                                <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" class="px-2 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <img src="#" th:src="${feedItem.feed.icon}" class="inline size-8">
-                            <span th:text="${#strings.abbreviate(feedItem.feed.title, 14)}">Feed Name</span>
-                        </th>
-                        <td class="px-2 py-1">
-                            <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feed-item${iStat.index}|"
-                               th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-placement="right"></a>
-                        </td>
-                        <td class="px-2 py-1">
-                        <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-2 py-1 text-nowrap">
-                            Published Date
-                        </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-<!--                <ul id="items">-->
-<!--                    <li th:each="feedItem, iStat : ${feedItems}">-->
-<!--                        <img src="#" th:src="${feedItem.feed.icon}" class="inline size-8">-->
-<!--                        <span th:text="${#strings.abbreviate(feedItem.feed.title, 14)}"></span>-->
-<!--                        - -->
-<!--                        <a th:href="${feedItem.link}" target="_blank" th:text="${feedItem.title}" th:id="|feed-item${iStat.index}|"-->
-<!--                           th:data-popover-target="|popover-feed-item${iStat.index}|" data-popover-placement="right"></a>-->
-<!--                        <span th:text="${dateFormatter.format(feedItem.publishedDate)}" class="px-6 py-4">-->
-<!--                            Today-->
-<!--                        </span>-->
-
-<!--                        <div data-popover th:id="|popover-feed-item${iStat.index}|" role="tooltip"-->
-<!--                             class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">-->
-<!--                            <div class="p-3">-->
-<!--                                <th:block th:utext="${feedItem.description}"></th:block>-->
-<!--                            </div>-->
-<!--                            <div data-popper-arrow></div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
-            </div>
-            <h2 th:replace="~{fragments/ui/accordion::aheading('feed-yesterday', ~{::span#title-yesterday})}">
-                <span id="title-yesterday">Yesterday</span>
-            </h2>
-            <div id="accordion-body-feed-yesterday">
-                
-            </div>
-            <h2 th:replace="~{fragments/ui/accordion::aheading('feed-older', ~{::span#title-older})}">
-                <span id="title-older">Older Items</span>
-            </h2>
-            <div id="accordion-body-feed-older"></div>
-        </th:block>
-    </div>
-    <script>initFlowbite();</script>
-</div>
-
-<div th:fragment="addFeed">
-    <form id="add-feed" hx-post="/feeds/">
-        <input type="url" name="feedUrl" placeholder="Web Address">
-    </form>
-</div>
 
 </body>
 </html>

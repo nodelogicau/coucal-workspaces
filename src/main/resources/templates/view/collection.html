@@ -24,7 +24,7 @@
 </head>
 <body>
 <main layout:fragment="content">
-    <div th:replace="~{fragments/collection::ribbon}"></div>
+    <div th:replace="~{fragments/entries :: ribbon}"></div>
 
     <nav th:replace="~{fragments/ui/breadcrumb::default}"></nav>
     <div th:replace="~{fragments/entries::addContent(${collection.displayName})}"></div>
@@ -34,11 +34,7 @@
         <div th:replace="~{fragments/ui/button-group::default}"></div>
     </div>
 
-    <ul th:replace="~{fragments/entries::listContent}">
-        <li>
-            <a href="#">Node 1</a>
-        </li>
-    </ul>
+    <table th:replace="~{fragments/ui/table :: collection-entries}"></table>
 </main>
 </body>
 </html>

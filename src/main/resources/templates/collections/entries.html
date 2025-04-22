@@ -35,11 +35,5 @@
         </div>
     </div>
 
-    <ul th:replace="~{fragments/entries::listContent}">
-        <li>
-            <a href="#">Progress Meeting (Series)</a>
-            <a href="#" title="Edit">Edit</a>
-            <a href="#" title="Cancel">Cancel</a>
-        </li>
-    </ul>
+    <table th:replace="~{fragments/ui/table :: collection-entries}"></table>
 </div>

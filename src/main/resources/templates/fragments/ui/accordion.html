@@ -8,6 +8,106 @@
 </head>
 <body>
 
+<table>
+    <thead>
+    <tr>
+        <th>Accordion</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>
+            <div th:fragment="inbox"
+                 id="inbox" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                <h2 id="inbox-today-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#inbox-today-body" aria-expanded="true" aria-controls="inbox-today-body">
+                        <span>Today</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="inbox-today-body" class="hidden" aria-labelledby="inbox-today-heading">
+                    <table th:replace="~{fragments/ui/table :: inbox}"></table>
+                </div>
+                <h2 id="inbox-yesterday-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#inbox-yesterday-body" aria-expanded="false" aria-controls="inbox-yesterday-body">
+                        <span>Yesterday</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="inbox-yesterday-body" class="hidden" aria-labelledby="inbox-yesterday-heading">
+                    <table th:replace="~{fragments/ui/table :: inbox}"></table>
+                </div>
+                <h2 id="inbox-older-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#inbox-older-body" aria-expanded="false" aria-controls="inbox-older-body">
+                        <span>Older</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="inbox-older-body" class="hidden" aria-labelledby="inbox-older-heading">
+                    <table th:replace="~{fragments/ui/table :: inbox}"></table>
+                </div>
+            </div>
+        </td>
+        <td>Inbox</td>
+    </tr>
+    <tr>
+        <td>
+            <div th:fragment="feed-items"
+                 id="feed-items" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                <h2 id="feed-items-today-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#feed-items-today-body" aria-expanded="true" aria-controls="feed-items-today-body">
+                        <span>Today</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="feed-items-today-body" class="hidden" aria-labelledby="feed-items-today-heading">
+                    <table th:replace="~{fragments/ui/table :: feed-items}"></table>
+                </div>
+                <h2 id="feed-items-yesterday-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#feed-items-yesterday-body" aria-expanded="false" aria-controls="feed-items-yesterday-body">
+                        <span>Yesterday</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="feed-items-yesterday-body" class="hidden" aria-labelledby="feed-items-yesterday-heading">
+                    <table th:replace="~{fragments/ui/table :: feed-items}"></table>
+                </div>
+                <h2 id="feed-items-older-heading">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
+                            data-accordion-target="#feed-items-older-body" aria-expanded="false" aria-controls="feed-items-older-body">
+                        <span>Older</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="feed-items-older-body" class="hidden" aria-labelledby="feed-items-older-heading">
+                    <table th:replace="~{fragments/ui/table :: feed-items}"></table>
+                </div>
+            </div>
+        </td>
+        <td>Feed Items</td>
+    </tr>
+    </tbody>
+</table>
+
 <div th:fragment="flush(id, fragment)" th:id="|accordion-${id}|" data-accordion="collapse"
      data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
      data-inactive-classes="text-gray-500 dark:text-gray-400">

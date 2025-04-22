@@ -32,7 +32,7 @@
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
                 </ul>
-                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('inbox')}"></th:block>
+                <th:block th:replace="~{fragments/ui/ribbon :: edit-controls('inbox', ${selection})}"></th:block>
             </th:block>
             <th:block th:case="'filter'">
                 <ul class="flex flex-wrap -mb-px">
@@ -72,7 +72,7 @@
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/view', 'View')}"></li>
                     <li th:replace="~{fragments/ui/tabs :: ribbon-tab('inbox/options', 'Options')}"></li>
                 </ul>
-                <th:block th:replace="~{fragments/ui/ribbon :: message-controls}"></th:block>
+                <th:block th:replace="~{fragments/ui/ribbon :: message-controls(${selection})}"></th:block>
             </th:block>
         </th:block>
     </div>
@@ -92,38 +92,6 @@
         </a>
     </li>
 </ul>
-
-<div th:fragment="overview">
-    <h1 class="text-2xl">Inbox</h1>
-
-    <table th:replace="~{fragments/ui/table::default('entries', ~{::tbody#rows})}">
-        <tbody id="rows">
-            <tr th:each="message : ${inbox}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="w-4 px-2 py-1">
-                    <div class="flex items-center">
-                        <input id="checkbox-table-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
-                    </div>
-                </td>
-                <td class="px-3 py-2">
-                    <th:block th:text="${message.sender.personal}"></th:block>
-                </td>
-                <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <th:block th:text="${#strings.abbreviate(message.subject, 64)}"></th:block>
-                </th>
-                <td th:text="${dateFormatter.format(message.receivedDate)}" class="px-6 py-4">
-                    Today
-                </td>
-                <td class="px-3 py-2 text-right" nowrap>
-                    <button
-                            data-modal-target="delete-modal" data-modal-toggle="delete-modal"
-                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
 
 </body>
 </html>
