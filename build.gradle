@@ -25,7 +25,7 @@ dependencies {
             libs.sqlite, libs.hibernate.community.dialects, libs.spring.boot.data.jpa,
             libs.rome, libs.jsoup,
             libs.smack, libs.smack.extensions, libs.smack.im, libs.smack.tcp,
-            libs.html.sanitizer
+            libs.html.sanitizer, libs.swing.flatlaf
 
     implementation(libs.ical4j) {
         capabilities {

@@ -1,5 +1,6 @@
 package au.nodelogic.coucal.workspaces.desktop;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class DesktopIntegration implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        FlatLightLaf.setup();
+
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
                 Desktop.getDesktop().browse(new URI("http://localhost:8080"));

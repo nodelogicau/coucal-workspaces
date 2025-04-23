@@ -47,3 +47,5 @@ spock-bom = { module = "org.spockframework:spock-bom", version.ref = "spock"}
 spock-core = { module = "org.spockframework:spock-core", version.ref = "spock"}
 
 html-sanitizer = {group = 'com.googlecode.owasp-java-html-sanitizer', name = 'owasp-java-html-sanitizer', version = '20240325.1'}
+
+swing-flatlaf = {group = 'com.formdev', name = 'flatlaf', version = '3.6'}
