@@ -79,6 +79,9 @@ public class FeedService {
                     LOGGER.warn("Unable to load icon: {}", feed.getLink());
                 }
             }
+        } else if (feed.getIcon().getUrl().equals("https://www.redditstatic.com/icon.png/")) {
+            //HACK: fix invalid URL..
+            feed.getIcon().setUrl("https://www.redditstatic.com/icon.png");
         }
         return feed;
     }
