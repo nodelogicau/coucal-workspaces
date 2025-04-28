@@ -16,8 +16,6 @@
 
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.InboxManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,26 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/inbox")
-public class InboxController extends AbstractLayoutController {
-
-//    IMAPService imapService;
-    private  final InboxManager inboxManager;
-
-    public InboxController(@Autowired InboxManager inboxManager) {
-        this.inboxManager = inboxManager;
-    }
+@RequestMapping("/calls")
+public class CallsController extends AbstractLayoutController {
 
     @GetMapping("/")
-    public String listInbox(Model model) throws IOException {
-        populateModelForLayout("Coucal Inbox", model);
-        model.addAttribute("inboxMessages", inboxManager.getInboxCollection().getAll());
-        return "inbox/index";
-    }
-
-    @GetMapping("/compose")
-    public String newMessage(Model model) throws IOException {
-        populateModelForLayout("Coucal Inbox", model);
-        return "inbox/newMessage";
+    public String listCalls(Model model) throws IOException {
+        populateModelForLayout("Coucal Chat", model);
+        return "calls/index";
     }
 }

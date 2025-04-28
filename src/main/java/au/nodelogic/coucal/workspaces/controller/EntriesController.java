@@ -71,6 +71,15 @@ public class EntriesController {
         return "entries/index";
     }
 
+    public String listEntries(@PathVariable(name = "collectionId") String collectionId, Model model) throws IOException {
+        ObjectCollection<Calendar> collection = manager.getCollection(collectionId);
+        model.addAttribute("content",
+                collection.getAll(collection.listObjectUIDs().toArray(new String[0])));
+        model.addAttribute("collection", collection);
+        model.addAttribute("dateFormatter", new PrettyTime());
+        return "entries/list";
+    }
+
     /**
      * Save new content.
      * @return
@@ -111,7 +120,7 @@ public class EntriesController {
         // apply strategy
 //        event = new Meeting().withPrototype(event).get();
         response.addHeader("HX-Trigger", "entitiesRefresh");
-        return listEntries(collectionId, null, model);
+        return listEntries(collectionId, model);
     }
 
     /**

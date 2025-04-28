@@ -23,6 +23,6 @@ public class EntityController {
     @GetMapping("/{kind}")
     public String listEntities(@PathVariable(name = "kind") String kind, Model model) throws IOException {
         model.addAttribute("entities", entityManager.getEntityCollection().getAll());
-        return "entities/list";
+        return "entities/" + kind;
     }
 }

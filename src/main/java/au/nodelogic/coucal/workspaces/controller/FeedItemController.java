@@ -1,6 +1,5 @@
 package au.nodelogic.coucal.workspaces.controller;
 
-import au.nodelogic.coucal.workspaces.data.Feed;
 import au.nodelogic.coucal.workspaces.data.FeedItem;
 import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
 import au.nodelogic.coucal.workspaces.workflow.FeedUpdater;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -44,16 +42,16 @@ public class FeedItemController {
             feedUpdater.refreshFeeds();
         }
 
-        List<FeedItem> feedItems;
-        if (feedUri != null) {
-            feedItems = feedItemRepository.findAll(Example.of(
-                    new FeedItem().withFeed(new Feed().withUri(feedUri))));
-            Collections.reverse(feedItems);
-        } else {
-            feedItems = feedItemRepository.findAllByOrderByPublishedDate();
-        }
+//        List<FeedItem> feedItems;
+//        if (feedUri != null) {
+//            feedItems = feedItemRepository.findAll(Example.of(
+//                    new FeedItem().withFeed(new Feed().withUri(feedUri))));
+//            Collections.reverse(feedItems);
+//        } else {
+//            feedItems = feedItemRepository.findAllByOrderByPublishedDate();
+//        }
         model.addAttribute("dateFormatter", new PrettyTime());
-        model.addAttribute("feedItems", feedItems);
+//        model.addAttribute("feedItems", feedItems);
         return "feedItems/index";
     }
 
@@ -84,14 +82,14 @@ public class FeedItemController {
             }
             case "beforeYesterday" -> {
                 yesterday = LocalDate.now().minusDays(1);
-                yield feedItemRepository.findByPublishedDateBefore(
+                yield feedItemRepository.findByPublishedDateBeforeOrderByPublishedDateDesc(
                         Date.from(yesterday.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             }
             default -> feedItemRepository.findAll(Sort.by(Sort.Order.desc("publishedDate")));
         };
         model.addAttribute("dateFormatter", new PrettyTime());
         model.addAttribute("feedItems", feedItems);
-        return "feedItems/index";
+        return "feedItems/list";
     }
 
     @GetMapping("/{feedUri}/{feedItemUri}")
