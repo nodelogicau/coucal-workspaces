@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -63,7 +64,9 @@ public class FeedService {
     }
 
     private SyndFeed getFeed(URL url) throws IOException, FeedException {
-        SyndFeed feed = new SyndFeedInput().build(new XmlReader(url.openStream()));
+        URLConnection uc = url.openConnection();
+        uc.setRequestProperty("User-Agent", HtmlParser.USER_AGENT);
+        SyndFeed feed = new SyndFeedInput().build(new XmlReader(uc.getInputStream()));
         if (feed.getIcon() == null) {
             SyndImage icon = new SyndImageImpl();
             try {
