@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/collections")
@@ -51,8 +52,16 @@ public class CollectionsController {
      * @return
      */
     @GetMapping("/")
-    public String listCollections(Model model) {
-        model.addAttribute("collections", manager.getCollections());
+    public String listCollections(@RequestParam(name = "filter", required = false) String filter, Model model) {
+        List<ObjectCollection<?>> collectionList = manager.getCollections();
+        if (filter != null) {
+            model.addAttribute("collections",
+                    collectionList.stream().filter(collection ->
+                            collection.getDisplayName().contains(filter)).toList());
+            model.addAttribute("createCollection", filter);
+        } else {
+            model.addAttribute("collections", manager.getCollections());
+        }
         return "collections/list";
     }
 
@@ -84,7 +93,7 @@ public class CollectionsController {
     @ResponseStatus(HttpStatus.CREATED)
     public String addCollection(@ModelAttribute("displayName") String collection, Model model) throws IOException {
         manager.addCollection(collection);
-        return listCollections(model);
+        return listCollections(null, model);
     }
 
 //    @GetMapping("/{id}")
@@ -103,7 +112,7 @@ public class CollectionsController {
     @PostMapping("/{id}")
     public String updateCollection(Model model, HttpServletResponse response, @PathVariable String id) {
         response.addHeader("HX-Trigger", "collectionsRefresh");
-        return listCollections(model);
+        return listCollections(null, model);
     }
 
     /**
@@ -115,6 +124,6 @@ public class CollectionsController {
     public String deleteCollection(@PathVariable(value="id") String collectionId, Model model) throws ObjectStoreException,
             IOException {
         manager.removeCollection(collectionId);
-        return listCollections(model);
+        return listCollections(null, model);
     }
 }
