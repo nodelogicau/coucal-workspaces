@@ -2,8 +2,6 @@ package au.nodelogic.coucal.workspaces.workflow;
 
 import au.nodelogic.coucal.workspaces.data.Feed;
 import au.nodelogic.coucal.workspaces.data.FeedItem;
-import au.nodelogic.coucal.workspaces.data.FeedItemRepository;
-import au.nodelogic.coucal.workspaces.data.FeedRepository;
 import com.rometools.rome.feed.synd.SyndFeed;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
@@ -12,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -21,18 +18,15 @@ public class FeedConsumer implements Consumer<SyndFeed> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeedConsumer.class);
 
-    private Feed feed;
+    private final Feed feed;
 
-    private final FeedRepository feedRepository;
-
-    private final FeedItemRepository feedItemRepository;
+    private final List<FeedItem> feedItems;
 
     private final PolicyFactory htmlSanitizerPolicy;
 
-    public FeedConsumer(Feed feed, FeedRepository feedRepository, FeedItemRepository feedItemRepository) {
+    public FeedConsumer(Feed feed, List<FeedItem> feedItems) {
         this.feed = feed;
-        this.feedRepository = feedRepository;
-        this.feedItemRepository = feedItemRepository;
+        this.feedItems = feedItems;
         this.htmlSanitizerPolicy = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
     }
 
@@ -55,7 +49,6 @@ public class FeedConsumer implements Consumer<SyndFeed> {
                 LOGGER.warn("Invalid icon link {}", syndFeed.getIcon().getUrl());
             }
         }
-        List<FeedItem> feedItems = new ArrayList<>();
         syndFeed.getEntries().forEach(entry -> {
             try {
                 FeedItem item = new FeedItem();
@@ -73,7 +66,5 @@ public class FeedConsumer implements Consumer<SyndFeed> {
                 LOGGER.warn("Invalid feed entry {}", entry.getUri());
             }
         });
-        feedRepository.save(feed);
-        feedItemRepository.saveAll(feedItems);
     }
 }

@@ -72,19 +72,20 @@ public class FeedController extends AbstractLayoutController {
     public String addFeed(@ModelAttribute("feedUrl") String url, Model model) throws IOException {
         List<String> feedUrls = feedService.resolveFeeds(url);
         List<Feed> feeds = new ArrayList<>();
+        List<FeedItem> feedItems = new ArrayList<>();
         feedUrls.forEach(feedUrl -> {
             try {
                 URL source = URI.create(feedUrl).toURL();
                 Feed feed = new Feed();
                 feed.setUri(feedUrl);
                 feed.setSource(source);
-                feedService.refreshFeed(source,
-                        new FeedConsumer(feed, feedRepository, feedItemRepository));
+                feedService.refreshFeed(source, new FeedConsumer(feed, feedItems));
             } catch (FeedException | IOException e) {
                 throw new RuntimeException(e);
             }
         });
         feedRepository.saveAll(feeds);
+        feedItemRepository.saveAll(feedItems);
         return listFeeds(model);
     }
 }
