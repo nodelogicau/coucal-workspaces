@@ -26,7 +26,7 @@ public class FeedPruner {
     /**
      * Prune feeds evey 12 hours.
      */
-    @Scheduled(fixedRate = 60 * 60 * 1000 * 12)
+    @Scheduled(fixedDelay = 60 * 60 * 1000 * 12)
     public void pruneFeeds() {
         List<FeedItem> prunedFeeds = new ArrayList<>();
         List<FeedItem> feedItems = feedItemRepository.findAll();
