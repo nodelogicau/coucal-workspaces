@@ -20,6 +20,7 @@ htmx = { group = "org.webjars.npm", name="htmx.org", version = "2.0.4"}
 flowbite = { group = "org.webjars.npm", name="flowbite", version = "3.1.2"}
 tiptap = { group = "org.webjars.npm", name="tiptap", version = "1.32.2"}
 simple-datatables = { group = "org.webjars.npm", name="simple-datatables", version = "9.1.0"}
+alpine = { group = "org.webjars.npm", name="alpinejs", version = "3.14.9"}
 
 ical4j = { group = "org.mnode.ical4j", name = "ical4j", version = "4.1.0"}
 ical4j-connector = { group = "org.ical4j", name = "ical4j-connector-api", version = "2.0.0-alpha6"}
