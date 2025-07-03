@@ -36,6 +36,6 @@ public class EntityManager extends AbstractWorkspaceManager {
     }
 
     public CardCollection getEntityCollection() throws IOException {
-        return (CardCollection) new LocalCardCollection(new File(getWorkspaceRoot(), "entities"));
+        return new LocalCardCollection(new File(getWorkspaceRoot(), "entities"));
     }
 }

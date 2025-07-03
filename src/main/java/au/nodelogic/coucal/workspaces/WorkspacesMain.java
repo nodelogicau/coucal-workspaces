@@ -29,7 +29,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.util.Objects;
 import java.util.Properties;
 
