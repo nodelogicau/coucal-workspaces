@@ -1,6 +1,8 @@
 package au.nodelogic.coucal.workspaces.desktop;
 
 import au.nodelogic.coucal.workspaces.util.Filesystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +14,8 @@ import java.net.URISyntaxException;
 
 public class StatusIcon extends TrayIcon {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StatusIcon.class);
+
     public StatusIcon() {
         super(getDefaultImage());
         setToolTip("Coucal Workspaces is running");
@@ -19,7 +23,7 @@ public class StatusIcon extends TrayIcon {
     }
 
     private static Image getDefaultImage() {
-        return Toolkit.getDefaultToolkit().getImage(StatusIcon.class.getResource("/public/images/favicon-16x16.png"));
+        return Toolkit.getDefaultToolkit().getImage(StatusIcon.class.getResource("/public/images/coucal-icon.png"));
     }
 
     static class PopupMenu extends java.awt.PopupMenu {
@@ -32,7 +36,7 @@ public class StatusIcon extends TrayIcon {
                     try {
                         Desktop.getDesktop().browse(new URI("http://localhost:8080"));
                     } catch (IOException | URISyntaxException e) {
-                        throw new RuntimeException(e);
+                        LOGGER.error("Failed to open browser", e);
                     }
                 }
             });
@@ -43,7 +47,7 @@ public class StatusIcon extends TrayIcon {
                     try {
                         Desktop.getDesktop().open(new File(Filesystem.getDataDirectory() + "/Coucal/logs"));
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        LOGGER.error("Failed to open location", e);
                     }
                 }
             });

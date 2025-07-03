@@ -16,6 +16,8 @@ import java.net.URISyntaxException;
 @Component
 public class DesktopIntegration implements ApplicationListener<ContextRefreshedEvent> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DesktopIntegration.class);
+
     private static final Logger log = LoggerFactory.getLogger(DesktopIntegration.class);
 
     private StatusIcon statusIcon;
@@ -28,7 +30,7 @@ public class DesktopIntegration implements ApplicationListener<ContextRefreshedE
             try {
                 Desktop.getDesktop().browse(new URI("http://localhost:8080"));
             } catch (IOException | URISyntaxException e) {
-                throw new RuntimeException(e);
+                LOGGER.error("Failed to open browser", e);
             }
         }
 
