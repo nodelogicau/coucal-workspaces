@@ -14,7 +14,7 @@ public class FeedCredentials {
 
     private String username;
 
-    private char[] password;
+    private String password;
 
     public String getUsername() {
         return username;
