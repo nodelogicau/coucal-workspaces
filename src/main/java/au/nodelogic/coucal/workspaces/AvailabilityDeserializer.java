@@ -20,6 +20,10 @@ import net.fortuna.ical4j.model.component.VAvailability;
 import org.mnode.ical4j.serializer.jotn.ContentMapper;
 import org.springframework.boot.jackson.JsonComponent;
 
+/**
+ * AvailabilityDeserializer is a custom deserializer for VAvailability components.
+ * It extends ContentMapper to provide a way to deserialize JSON content into VAvailability objects.
+ */
 @JsonComponent
 public class AvailabilityDeserializer extends ContentMapper<VAvailability> {
 

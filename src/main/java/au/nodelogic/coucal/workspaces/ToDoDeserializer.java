@@ -20,6 +20,10 @@ import net.fortuna.ical4j.model.component.VToDo;
 import org.mnode.ical4j.serializer.jotn.ContentMapper;
 import org.springframework.boot.jackson.JsonComponent;
 
+/**
+ * ToDoDeserializer is a custom deserializer for VToDo components.
+ * It extends ContentMapper to provide a way to deserialize JSON content into VToDo objects.
+ */
 @JsonComponent
 public class ToDoDeserializer extends ContentMapper<VToDo> {
 

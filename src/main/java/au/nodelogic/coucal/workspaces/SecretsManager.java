@@ -30,7 +30,7 @@ import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 
 /**
- * Provides access to secrets storage for channel configurations, etc.
+ * SecretsManager is responsible for managing sensitive information such as passwords and keys.
  */
 @Service
 public class SecretsManager {

@@ -23,6 +23,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * WorkspaceManager is responsible for managing workspaces in the application.
+ * It provides methods to retrieve all workspaces and a specific workspace by its ID.
+ * The class uses a WorkspaceRepository to interact with the underlying data store.
+ */
 @Component
 public class WorkspaceManager {
 

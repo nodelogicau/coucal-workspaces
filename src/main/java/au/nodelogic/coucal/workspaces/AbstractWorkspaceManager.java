@@ -18,6 +18,11 @@ package au.nodelogic.coucal.workspaces;
 
 import java.io.File;
 
+/**
+ * AbstractWorkspaceManager is an abstract class that provides a base implementation for managing workspaces.
+ * It initializes the workspace root directory and provides access to it.
+ * Subclasses can extend this class to implement specific workspace management functionalities.
+ */
 public abstract class AbstractWorkspaceManager {
 
     private final File workspaceRoot;

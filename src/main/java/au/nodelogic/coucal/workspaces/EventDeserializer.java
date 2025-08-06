@@ -20,6 +20,10 @@ import net.fortuna.ical4j.model.component.VEvent;
 import org.mnode.ical4j.serializer.jotn.ContentMapper;
 import org.springframework.boot.jackson.JsonComponent;
 
+/**
+ * EventDeserializer is a custom deserializer for VEvent components.
+ * It extends ContentMapper to provide a way to deserialize JSON content into VEvent objects.
+ */
 @JsonComponent
 public class EventDeserializer extends ContentMapper<VEvent> {
 

@@ -24,6 +24,11 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * InboxManager is responsible for managing the inbox calendar collection within a workspace.
+ * It extends AbstractWorkspaceManager to provide access to the workspace root directory
+ * and initializes the inbox collection.
+ */
 @Service
 public class InboxManager extends AbstractWorkspaceManager {
 

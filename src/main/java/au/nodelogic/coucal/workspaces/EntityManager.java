@@ -24,6 +24,11 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * EntityManager is responsible for managing the entity collection within a workspace.
+ * It extends AbstractWorkspaceManager to provide access to the workspace root directory
+ * and initializes the entity collection.
+ */
 @Service
 public class EntityManager extends AbstractWorkspaceManager {
 

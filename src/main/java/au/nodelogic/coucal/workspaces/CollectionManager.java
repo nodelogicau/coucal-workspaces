@@ -30,6 +30,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * CollectionManager is responsible for managing calendar collections within a workspace.
+ * It provides methods to retrieve, add, and remove collections, as well as to get a collection by its display name or UID.
+ */
 @Service
 public class CollectionManager extends AbstractWorkspaceManager {
 

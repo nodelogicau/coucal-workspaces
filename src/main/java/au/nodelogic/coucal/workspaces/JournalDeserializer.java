@@ -20,6 +20,10 @@ import net.fortuna.ical4j.model.component.VJournal;
 import org.mnode.ical4j.serializer.jotn.ContentMapper;
 import org.springframework.boot.jackson.JsonComponent;
 
+/**
+ * JournalDeserializer is a custom deserializer for VJournal components.
+ * It extends ContentMapper to provide a way to deserialize JSON content into VJournal objects.
+ */
 @JsonComponent
 public class JournalDeserializer extends ContentMapper<VJournal> {
 

@@ -32,6 +32,16 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Main application class for Coucal Workspaces.
+ * This class sets up the Spring Boot application, configures the data source,
+ * and initializes the application with the necessary properties.
+ * It also enables caching, asynchronous processing, and scheduling.
+ * The data source is configured using properties defined in the application properties file.
+ * The application uses SQLite as the database, and the database file is stored in the Coucal data directory.
+ * Logs are stored in the Coucal logs directory.
+ * The main method runs the Spring Boot application with the specified properties.
+ */
 @SpringBootApplication
 @EnableCaching
 @EnableAsync
@@ -56,10 +66,6 @@ public class WorkspacesMain {
     }
 
     public static void main(String[] args) {
-//        if (new File(System.getProperty("user.dir"), "build/collections").mkdirs()) {
-//
-//        }
-//        SpringApplication.run(WorkspacesMain.class, args);
         Properties props = new Properties();
         props.put("spring.datasource.url", "jdbc:sqlite:" + Filesystem.getDataDirectory() + "/Coucal/coucal.db");
         props.put("logging.file.path", Filesystem.getDataDirectory() + "/Coucal/logs");

@@ -23,6 +23,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * FilterManager is responsible for managing filters within the application.
+ * It provides methods to retrieve all filters from the repository.
+ * The class uses a FilterRepository to interact with the underlying data store.
+ */
 @Component
 public class FilterManager {
 
