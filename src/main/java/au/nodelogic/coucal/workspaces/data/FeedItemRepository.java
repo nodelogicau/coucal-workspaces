@@ -31,7 +31,7 @@ public interface FeedItemRepository extends JpaRepository<FeedItem, String> {
     List<FeedItem> findByPublishedDateBetweenOrderByPublishedDateDesc(@Param("start") Date start,
                                                                       @Param("end") Date end);
 
-    List<FeedItem> findByPublishedDateBefore(@Param("date") Date date);
+    List<FeedItem> findByPublishedDateBeforeOrderByPublishedDateDesc(@Param("date") Date date);
     
     List<FeedItem> findByReadOrderByPublishedDateDesc(@Param("read") Boolean read);
 }
