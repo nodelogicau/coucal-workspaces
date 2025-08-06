@@ -21,6 +21,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+/**
+ * Filter represents a filter entity in the workspace.
+ * It contains a name, an expression, and a reference to the workspace it belongs to.
+ * The class is annotated with JPA annotations to define its persistence behavior.
+ */
 @Entity
 public class Filter {
 

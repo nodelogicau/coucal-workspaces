@@ -21,6 +21,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * Workspace is an entity class representing a workspace in the application.
+ * It contains fields for the workspace's ID, name, description, and icon.
+ * The class is annotated with JPA annotations to map it to a database table.
+ */
 @Entity
 public class Workspace {
 

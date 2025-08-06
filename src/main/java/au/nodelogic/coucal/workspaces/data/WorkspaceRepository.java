@@ -19,6 +19,10 @@ package au.nodelogic.coucal.workspaces.data;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * WorkspaceRepository is a Spring Data JPA repository interface for managing Workspace entities.
+ * It extends JpaRepository to provide CRUD operations and query methods for Workspace entities.
+ */
 @Repository
 public interface WorkspaceRepository extends JpaRepository<Workspace, Integer> {
 }
