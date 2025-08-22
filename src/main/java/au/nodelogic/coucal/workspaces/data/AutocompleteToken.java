@@ -2,7 +2,6 @@ package au.nodelogic.coucal.workspaces.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 /**
@@ -16,7 +15,7 @@ import jakarta.persistence.Id;
  * * RELATED-TO
  * * ACTION
  * * REFID (RFC9253)
- * * LOCATION-TYPE (RFC9073)
+ * * LOCATION-TYPE (RFC9073)`
  * * RESOURCE-TYPE (RFC9073)
  * * FEATURE (RFC7986)
  * * LABEL (RFC7986)
@@ -27,8 +26,8 @@ import jakarta.persistence.Id;
 public class AutocompleteToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String fieldName;
 
