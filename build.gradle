@@ -27,6 +27,10 @@ dependencies {
             libs.smack, libs.smack.extensions, libs.smack.im, libs.smack.tcp,
             libs.html.sanitizer, libs.swing.flatlaf
 
+    implementation(libs.springdoc.boot.starter) {
+        exclude group: 'org.jboss.logging', module: 'jboss-logging'
+    }
+
     implementation(libs.ical4j) {
         capabilities {
             requireCapability("org.mnode.ical4j:ical4j-filter-expressions")
@@ -38,7 +42,7 @@ dependencies {
             libs.spring.boot.devtools, libs.webjars, libs.htmx, libs.alpine,
             libs.flowbite, libs.tiptap, libs.simple.datatables, libs.ical4j.template
 
-    testImplementation platform(libs.spock.bom), libs.spock.core, libs.spring.boot.test
+    testImplementation platform(libs.spock.bom), libs.spock.core, libs.spock.spring, libs.spring.boot.test, libs.h2
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
