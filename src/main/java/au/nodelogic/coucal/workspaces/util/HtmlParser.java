@@ -17,10 +17,8 @@ public interface HtmlParser {
     static List<String> getFeeds(String url) throws IOException {
         List<String> feeds = new ArrayList<>();
         Document doc = Jsoup.connect(url).userAgent(USER_AGENT).followRedirects(true).get();
-        doc.select("link[type=application/rss+xml], link[type=application/atom+xml]").forEach(element -> {
-            feeds.add(URI.create(url).resolve(
-                    Objects.requireNonNull(element.attribute("href")).getValue()).toString());
-        });
+        doc.select("link[type=application/rss+xml], link[type=application/atom+xml]").forEach(element ->
+                feeds.add(URI.create(url).resolve(Objects.requireNonNull(element.attribute("href")).getValue()).toString()));
         return feeds;
     }
 
@@ -43,9 +41,8 @@ public interface HtmlParser {
     static Map<String, String> getProperties(String url) throws IOException {
         Map<String, String> properties = new HashMap<>();
         Document doc = Jsoup.connect(url).userAgent(USER_AGENT).followRedirects(true).get();
-        doc.select("meta[property^=og:]").forEach(element -> {
-            properties.put(element.attr("property"), element.attr("content"));
-        });
+        doc.select("meta[property^=og:]").forEach(element ->
+                properties.put(element.attr("property"), element.attr("content")));
         return properties;
     }
 }
