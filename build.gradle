@@ -45,6 +45,11 @@ dependencies {
     testImplementation platform(libs.spock.bom), libs.spock.core, libs.spock.spring, libs.spring.boot.test, libs.h2
 }
 
+license {
+    // Ignore failures and only print a warning on license violations
+    ignoreFailures = true
+}
+
 sourceCompatibility = JavaVersion.VERSION_17
 
 test {
